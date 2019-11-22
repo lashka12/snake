@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SysData {
 
 	private ArrayList<Game> gamesHistory;
-	private ArrayList<Questions> questions;
+	private ArrayList<Question> questionsss;
 
 
 	public ArrayList<Game> getGamesHistory() {
