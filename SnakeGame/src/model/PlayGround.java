@@ -69,7 +69,6 @@ public class PlayGround extends Pane {
 
 		getChildren().add(segment); // logicly
 		segments.add(segment); // visualy
-		System.out.println(snake.getBody().size());
 
 	}
 

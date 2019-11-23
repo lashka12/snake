@@ -4,12 +4,10 @@ import model.Fruit;
 import model.Mouse;
 import model.Segment;
 import model.Snake;
-import utilities.Constants;
 import utilities.Direction;
 import utilities.FruiteType;
-import javafx.scene.image.Image;
 
-public class tests {
+public class AcceptenceTests1 {
 
 	public static void runTests() {
 
@@ -40,10 +38,8 @@ public class tests {
 		System.out.println("test " + i++ + " result is : " + (fruit.getType().equals(fruitTypeChange)));
 
 		// testing the methods in class Segment
-		int oldPosX = -1, oldPosY = -1;
 		int SegX = 25, SegY = 25;
 		Direction dir = Direction.LEFT;
-		Image headImage = Constants.SNAKE_HEAD_IMAGE;
 		Segment segment = new Segment(SegX, SegY, null);
 		segment.setDirection(dir);
 		System.out.println("test " + i++ + " result is : " + ((segment.getDirection().equals(dir))));

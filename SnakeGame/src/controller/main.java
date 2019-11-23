@@ -41,8 +41,8 @@ public class main extends Application {
 		root.getChildren().add(playGround);
 		root.setPadding(new Insets(10));
 		Scene scene = new Scene(root); // will be changed to the main frame scene
-		ps.initStyle(StageStyle.TRANSPARENT);
-		scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+		//ps.initStyle(StageStyle.TRANSPARENT);
+		//scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
 
 		scene.setOnKeyPressed(e -> { // i can move this part the the mainFram controller to control the main scene
 
@@ -66,7 +66,7 @@ public class main extends Application {
 	public static void main(String[] args) { // will be moved to the main frame controller
 		
 		// activate the next code line to run tests
-		// AcceptenceTests1.runTests();
+		 AcceptenceTests1.runTests();
 		launch(args); // start method will be called
 	}
 
