@@ -64,6 +64,7 @@ public class main extends Application {
 	}
 
 	public static void main(String[] args) { // will be moved to the main frame controller
+		
 		launch(args); // start method will be called
 	}
 
