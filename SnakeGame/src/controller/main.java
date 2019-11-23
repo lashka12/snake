@@ -24,12 +24,11 @@ public class main extends Application {
 		// comment for you george
 		
 		
-		
 		VBox root = new VBox(6); // the main view with 10px padding between elements
-
 		PlayGround playGround = new PlayGround(Constants.GAME_WIDTH, Constants.GAME_HIGHT); // new play ground
 		playGround.addSnake(new Snake(Constants.SNAKE_LENGTH)); // adding snake
 
+		
 		timer = new AnimationTimer() { // the game frame updater timer
 			@Override
 			public void handle(long now) {
