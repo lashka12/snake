@@ -139,7 +139,7 @@ public class Mouse extends Block {
 
 	// ---------------------------------------Control-----------------------------------
 
-	private void moveUp() {
+	public void moveUp() {
 
 		if (getPosY() > 4) {
 			setPosY(getPosY() - 1);
@@ -148,7 +148,7 @@ public class Mouse extends Block {
 
 	}
 
-	private void moveDown() {
+	public void moveDown() {
 
 		if (getPosY() < Constants.GAME_HIGHT - 9) {
 			setPosY(getPosY() + 1);
@@ -157,7 +157,7 @@ public class Mouse extends Block {
 
 	}
 
-	private void moveLeft() {
+	public void moveLeft() {
 
 		if (getPosX() > 4) {
 			setPosX(getPosX() - 1);
@@ -167,7 +167,7 @@ public class Mouse extends Block {
 
 	}
 
-	private void moveRight() {
+	public void moveRight() {
 
 		if (getPosX() < Constants.GAME_WIDTH - 9) {
 			setPosX(getPosX() + 1);
