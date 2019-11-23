@@ -21,7 +21,7 @@ public class main extends Application {
 	@Override
 	public void start(Stage ps) {
 
-		VBox root = new VBox(5); // the main view with 10px padding between elements
+		VBox root = new VBox(6); // the main view with 10px padding between elements
 
 		PlayGround playGround = new PlayGround(Constants.GAME_WIDTH, Constants.GAME_HIGHT); // new play ground
 		playGround.addSnake(new Snake(Constants.SNAKE_LENGTH)); // adding snake
