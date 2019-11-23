@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.PlayGround;
 import model.Snake;
+import test.AcceptenceTests1;
 import utilities.Constants;
 import utilities.Direction;
 
@@ -20,12 +21,11 @@ public class main extends Application {
 
 	@Override
 	public void start(Stage ps) {
-		
+
 		VBox root = new VBox(10); // the main view with 10px padding between elements
 		PlayGround playGround = new PlayGround(Constants.GAME_WIDTH, Constants.GAME_HIGHT); // new play ground
 		playGround.addSnake(new Snake(Constants.SNAKE_LENGTH)); // adding snake
 
-		
 		timer = new AnimationTimer() { // the game frame updater timer
 			@Override
 			public void handle(long now) {
@@ -65,6 +65,8 @@ public class main extends Application {
 
 	public static void main(String[] args) { // will be moved to the main frame controller
 		
+		// activate the next code line to run tests
+		// AcceptenceTests1.runTests();
 		launch(args); // start method will be called
 	}
 
