@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.PlayGround;
 import model.Snake;
+import test.AcceptenceTests1;
 import utilities.Constants;
 //import utilities.Direction;
 
@@ -22,11 +23,7 @@ public class main extends Application {
 	public void start(Stage ps) {
 
 
-		
-		VBox root = new VBox(66); // the main view with 10px padding between elements
-
-		
-
+		VBox root = new VBox(14); // the main view with 10px padding between elements
 		PlayGround playGround = new PlayGround(Constants.GAME_WIDTH, Constants.GAME_HIGHT); // new play ground
 		playGround.addSnake(new Snake(Constants.SNAKE_LENGTH)); // adding snake
 
@@ -45,8 +42,8 @@ public class main extends Application {
 		root.getChildren().add(playGround);
 		root.setPadding(new Insets(10));
 		Scene scene = new Scene(root); // will be changed to the main frame scene
-		ps.initStyle(StageStyle.TRANSPARENT);
-		scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+		//ps.initStyle(StageStyle.TRANSPARENT);
+		//scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
 
 		scene.setOnKeyPressed(e -> { // i can move this part the the mainFram controller to control the main scene
 
@@ -68,6 +65,9 @@ public class main extends Application {
 	}
 
 	public static void main(String[] args) { // will be moved to the main frame controller
+		
+		// activate the next code line to run tests
+		 //AcceptenceTests1.runTests();
 		launch(args); // start method will be called
 	}
 
