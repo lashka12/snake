@@ -23,6 +23,7 @@ public class main extends Application {
 	@Override
 	public void start(Stage ps) {
 		//comment from george
+		//hi george i saw your massage
 
 
 		VBox root = new VBox(14); // the main view with 10px padding between elements
