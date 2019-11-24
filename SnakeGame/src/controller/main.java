@@ -66,7 +66,7 @@ public class main extends Application {
 	public static void main(String[] args) { // will be moved to the main frame controller
 		
 		// activate the next code line to run tests
-		 AcceptenceTests1.runTests();
+		 //AcceptenceTests1.runTests();
 		launch(args); // start method will be called
 	}
 
