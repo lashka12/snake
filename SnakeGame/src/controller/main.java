@@ -12,11 +12,10 @@ import model.PlayGround;
 import model.Snake;
 import test.AcceptenceTests1;
 import utilities.Constants;
+import utilities.Direction;
 //import utilities.Direction;
 
 public class main extends Application {
-	
-	//comment for george
 
 	private long then = System.nanoTime(); // now time seconds
 	public static AnimationTimer timer;
@@ -49,14 +48,14 @@ public class main extends Application {
 
 		scene.setOnKeyPressed(e -> { // i can move this part the the mainFram controller to control the main scene
 
-//			if (e.getCode().equals(KeyCode.UP) && playGround.getSnake().getDirection() != Direction.DOWN)
-//				playGround.getSnake().setDirection(Direction.UP);
-//			if (e.getCode().equals(KeyCode.DOWN) && playGround.getSnake().getDirection() != Direction.UP)
-//				playGround.getSnake().setDirection(Direction.DOWN);
-//			if (e.getCode().equals(KeyCode.LEFT) && playGround.getSnake().getDirection() != Direction.RIGHT)
-//				playGround.getSnake().setDirection(Direction.LEFT);
-//			if (e.getCode().equals(KeyCode.RIGHT) && playGround.getSnake().getDirection() != Direction.LEFT)
-//				playGround.getSnake().setDirection(Direction.RIGHT);
+			if (e.getCode().equals(KeyCode.UP) && playGround.getSnake().getDirection() != Direction.DOWN)
+				playGround.getSnake().setDirection(Direction.UP);
+			if (e.getCode().equals(KeyCode.DOWN) && playGround.getSnake().getDirection() != Direction.UP)
+				playGround.getSnake().setDirection(Direction.DOWN);
+			if (e.getCode().equals(KeyCode.LEFT) && playGround.getSnake().getDirection() != Direction.RIGHT)
+				playGround.getSnake().setDirection(Direction.LEFT);
+			if (e.getCode().equals(KeyCode.RIGHT) && playGround.getSnake().getDirection() != Direction.LEFT)
+				playGround.getSnake().setDirection(Direction.RIGHT);
 
 		});
 
