@@ -29,7 +29,7 @@ public class main extends Application {
 		playGround.addSnake(new Snake(Constants.SNAKE_LENGTH)); // adding snake
 
 		timer = new AnimationTimer() { // the game frame updater timer
-			@Override
+			@Override 
 			public void handle(long now) {
 				if (now - then > 1000000000 / 50) {
 					playGround.update(); // update the hole game pane
