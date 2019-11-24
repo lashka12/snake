@@ -15,6 +15,8 @@ import utilities.Constants;
 //import utilities.Direction;
 
 public class main extends Application {
+	
+	//comment for george
 
 	private long then = System.nanoTime(); // now time seconds
 	public static AnimationTimer timer;
