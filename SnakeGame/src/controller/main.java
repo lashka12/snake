@@ -12,7 +12,7 @@ import model.PlayGround;
 import model.Snake;
 import test.AcceptenceTests1;
 import utilities.Constants;
-import utilities.Direction;
+//import utilities.Direction;
 
 public class main extends Application {
 
@@ -21,6 +21,7 @@ public class main extends Application {
 
 	@Override
 	public void start(Stage ps) {
+
 
 		VBox root = new VBox(14); // the main view with 10px padding between elements
 		PlayGround playGround = new PlayGround(Constants.GAME_WIDTH, Constants.GAME_HIGHT); // new play ground
@@ -46,14 +47,14 @@ public class main extends Application {
 
 		scene.setOnKeyPressed(e -> { // i can move this part the the mainFram controller to control the main scene
 
-			if (e.getCode().equals(KeyCode.UP) && playGround.getSnake().getDirection() != Direction.DOWN)
-				playGround.getSnake().setDirection(Direction.UP);
-			if (e.getCode().equals(KeyCode.DOWN) && playGround.getSnake().getDirection() != Direction.UP)
-				playGround.getSnake().setDirection(Direction.DOWN);
-			if (e.getCode().equals(KeyCode.LEFT) && playGround.getSnake().getDirection() != Direction.RIGHT)
-				playGround.getSnake().setDirection(Direction.LEFT);
-			if (e.getCode().equals(KeyCode.RIGHT) && playGround.getSnake().getDirection() != Direction.LEFT)
-				playGround.getSnake().setDirection(Direction.RIGHT);
+//			if (e.getCode().equals(KeyCode.UP) && playGround.getSnake().getDirection() != Direction.DOWN)
+//				playGround.getSnake().setDirection(Direction.UP);
+//			if (e.getCode().equals(KeyCode.DOWN) && playGround.getSnake().getDirection() != Direction.UP)
+//				playGround.getSnake().setDirection(Direction.DOWN);
+//			if (e.getCode().equals(KeyCode.LEFT) && playGround.getSnake().getDirection() != Direction.RIGHT)
+//				playGround.getSnake().setDirection(Direction.LEFT);
+//			if (e.getCode().equals(KeyCode.RIGHT) && playGround.getSnake().getDirection() != Direction.LEFT)
+//				playGround.getSnake().setDirection(Direction.RIGHT);
 
 		});
 
