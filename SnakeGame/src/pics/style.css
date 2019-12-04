@@ -1,0 +1,7 @@
+#pane{
+    -fx-background-image: url("bg3.jpg");
+     
+    -fx-background-size: 955 560;
+    -fx-background-position: center center;
+    
+}

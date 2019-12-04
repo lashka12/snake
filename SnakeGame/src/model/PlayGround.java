@@ -1,13 +1,13 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
-
+import controller.MainPageController;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import utilities.Constants;
 import utilities.FruiteType;
 
@@ -20,6 +20,7 @@ public class PlayGround extends Pane {
 	private Fruit apple;
 	private Fruit banana;
 	private Fruit pear;
+	private int score;
 
 	private static PlayGround instance = null;
 
@@ -41,9 +42,9 @@ public class PlayGround extends Pane {
 		h = height;
 
 		setMinSize(w * Constants.BLOCK_SIZE, h * Constants.BLOCK_SIZE);
-		setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		// setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		ImageView backGround = new ImageView();
-		backGround.setImage(Constants.DIRT_BACKGROUND_IMAGE);
+		// backGround.setImage(Constants.DIRT_BACKGROUND_IMAGE);
 		backGround.fitWidthProperty().bind(widthProperty());
 		backGround.setPreserveRatio(true);
 		getChildren().add(backGround);
@@ -79,8 +80,12 @@ public class PlayGround extends Pane {
 
 		}
 
-		if (mouseWasEaten()) {
 
+		if (mouseWasEaten()) {
+			String path = "src/audio/bubble.mp3";
+			Media media = new Media(new File(path).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			mediaPlayer.setAutoPlay(true);
 			getChildren().remove(mouse);
 			Fire fire = new Fire(mouse.getPosX(), mouse.getPosY());
 
@@ -101,16 +106,28 @@ public class PlayGround extends Pane {
 				}
 			});
 			thread.start();
-			System.out.println("+Mouse ");
+			addToScore(20);
+			MainPageController.getInstance().updateScore(score);
 
 		}
 
 		if (isEaten(apple)) {
+			
+			
+
+			String path = "src/audio/bubble.mp3";
+			Media media = new Media(new File(path).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			mediaPlayer.setAutoPlay(true);
+
 			getChildren().remove(apple);
+
 			apple = new Fruit(-100, -100, FruiteType.APPLE);
+
 			Thread thread = new Thread(() -> {
 				try {
-					Thread.sleep(5 * 1000);
+
+					Thread.sleep(apple.getType().getSecondsDelay() * 1000);
 					Platform.runLater(() -> addApple());
 
 				} catch (Exception exc) {
@@ -121,16 +138,24 @@ public class PlayGround extends Pane {
 
 			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
-			System.out.println("+Apple " + apple);
+			addToScore(apple.getType().getPoints());
+			MainPageController.getInstance().updateScore(score);
 
 		}
 		if (isEaten(banana)) {
+			String path = "src/audio/bubble.mp3";
+			Media media = new Media(new File(path).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+     		mediaPlayer.setAutoPlay(true);
+
 			getChildren().remove(banana);
 			banana = new Fruit(-100, -100, FruiteType.APPLE);
 
 			Thread thread = new Thread(() -> {
+
 				try {
-					Thread.sleep(10 * 1000);
+
+					Thread.sleep(banana.getType().getSecondsDelay() * 1000);
 					Platform.runLater(() -> addBanana());
 
 				} catch (Exception exc) {
@@ -138,20 +163,42 @@ public class PlayGround extends Pane {
 				}
 			});
 			thread.start();
-			System.out.println("+Banana " + banana);
-			snake.addSegment(); // should fix
+			addToScore(banana.getType().getPoints());
+			MainPageController.getInstance().updateScore(score);
+
+			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
 
 		}
 
 		if (isEaten(pear)) {
+			
+
+			String path = "src/audio/bubble.mp3";
+			Media media = new Media(new File(path).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			mediaPlayer.setAutoPlay(true);
+
 			getChildren().remove(pear);
-			addPear();
 
-			System.out.println("+pear " + pear);
-			snake.addSegment(); // should fix
+			pear = new Fruit(-100, -100, FruiteType.PEAR);
+
+			Thread thread = new Thread(() -> {
+				try {
+
+					Thread.sleep(pear.getType().getSecondsDelay() * 1000);
+					Platform.runLater(() -> addPear());
+
+				} catch (Exception exc) {
+					throw new Error("Unexpected interruption");
+				}
+			});
+			thread.start();
+
+			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
-
+			addToScore(pear.getType().getPoints());
+			MainPageController.getInstance().updateScore(score);
 		}
 
 		mouse.update();
@@ -194,6 +241,20 @@ public class PlayGround extends Pane {
 
 		pear = new Fruit(randX, randY, FruiteType.PEAR);
 		getChildren().add(pear);
+
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	private void addToScore(int pointsToAdd) {
+
+		this.score = this.score + pointsToAdd;
 
 	}
 
