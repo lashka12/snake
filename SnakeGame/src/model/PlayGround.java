@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import controller.GameEngine;
 import controller.MainPageController;
@@ -53,6 +54,7 @@ public class PlayGround extends Pane {
 		addBanana();
 		addPear();
 		addMouse();
+		addQuestion();
 
 		Thread thread = new Thread(() -> {
 			try {
@@ -296,31 +298,52 @@ public class PlayGround extends Pane {
 
 	public void addApple() {
 
-		int randX = (int) (Math.random() * w);
-		int randY = (int) (Math.random() * h);
-
-		apple = new Fruit(randX, randY, FruiteType.APPLE);
+		Point p = getEmptyPoint();
+		apple = new Fruit(p.x, p.y, FruiteType.APPLE);
 		getChildren().addAll(apple);
+
+	}
+
+	public void addQuestion() {
+
+		Question q = SysData.popRandomQuestion();
+		Point p = getEmptyPoint();
+		q.setLayoutX(p.x * Constants.BLOCK_SIZE);
+		q.setLayoutY(p.y * Constants.BLOCK_SIZE);
+		getChildren().add(q);
 
 	}
 
 	public void addBanana() {
 
-		int randX = (int) (Math.random() * w);
-		int randY = (int) (Math.random() * h);
-
-		banana = new Fruit(randX, randY, FruiteType.BANANA);
+		Point p = getEmptyPoint();
+		banana = new Fruit(p.x, p.y, FruiteType.BANANA);
 		getChildren().add(banana);
 
 	}
 
 	public void addPear() {
 
-		int randX = (int) (Math.random() * w);
-		int randY = (int) (Math.random() * h);
-
-		pear = new Fruit(randX, randY, FruiteType.PEAR);
+		Point p = getEmptyPoint();
+		pear = new Fruit((int) p.getX(), (int) p.getY(), FruiteType.PEAR);
 		getChildren().add(pear);
+
+	}
+
+	/**
+	 * this method must return a random point on the board make sure this point ia
+	 * not on top/under another object on the board
+	 * 
+	 * @return
+	 */
+	public Point getEmptyPoint() {
+
+		Point p = new Point((int) (Math.random() * w), (int) (Math.random() * h));
+
+		// if point is not empty
+		// loop to till finding an empty point
+
+		return p;
 
 	}
 

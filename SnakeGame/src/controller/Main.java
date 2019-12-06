@@ -1,21 +1,12 @@
 package controller;
 
-import java.io.File;
-
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
-import utilities.Constants;
+import model.SysData;
 import utilities.SoundEffects;
 
 public class Main extends Application {
@@ -23,8 +14,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("/view/MainPage.fxml"));
-		primaryStage.setTitle("Registration Form FXML Application");
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainPage.fxml"));
 		Scene scene = new Scene(root);
 		GameEngine ge = new GameEngine(scene);
 		primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -34,6 +24,9 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
+		
+		@SuppressWarnings("unused")
+		SysData data=new SysData();
 
 		SoundEffects.playStartSound();
 		launch(args);

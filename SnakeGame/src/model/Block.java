@@ -13,11 +13,14 @@ public abstract class Block extends ImageView {
 		super(image); // setting the image according to the object
 		this.posX = x;
 		this.posY = y;
-		setTranslateX(posX * Constants.BLOCK_SIZE); // setting x position on screen
-		setTranslateY(posY * Constants.BLOCK_SIZE); // setting y position on screen
+		ViewOnScreen();
 
 	}
-	
+
+	public void ViewOnScreen() {
+		setTranslateX(posX * Constants.BLOCK_SIZE);
+		setTranslateY(posY * Constants.BLOCK_SIZE);
+	}
 
 	public int getPosX() {
 		return posX;
