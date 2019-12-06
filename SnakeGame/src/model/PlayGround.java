@@ -310,7 +310,10 @@ public class PlayGround extends Pane {
 		Point p = getEmptyPoint();
 		q.setLayoutX(p.x * Constants.BLOCK_SIZE);
 		q.setLayoutY(p.y * Constants.BLOCK_SIZE);
+		System.out.println(getChildren().size());
 		getChildren().add(q);
+		System.out.println(getChildren().size());
+
 
 	}
 
