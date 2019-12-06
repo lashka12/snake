@@ -25,6 +25,17 @@ public class Constants {
 	public static final Image FIRE_IMAGE = new Image(new File("src/pics/bum.gif").toURI().toString());
 	public static final Image GRASS_IMAGE = new Image(new File("src/pics/wl.png").toURI().toString());
 	public static final Image SPLASH_IMAGE = new Image(new File("src/pics/splash.gif").toURI().toString());
+	public static final Image POINTS20_IMAGE = new Image(new File("src/pics/20.png").toURI().toString());
+	public static final Image POINTS15_IMAGE = new Image(new File("src/pics/15.png").toURI().toString());
+	public static final Image POINTS10_IMAGE = new Image(new File("src/pics/10.png").toURI().toString());
+	public static final Image READY_IMAGE = new Image(new File("src/pics/Ready.png").toURI().toString());
+	public static final Image GO_IMAGE = new Image(new File("src/pics/GO.png").toURI().toString());
+
+	public static final String GAME_SOUND = "src/audio/funny.mp3";
+	public static final String BUBBLE_SOUND = "src/audio/Bubble.mp3";
+	public static final String BUTTON_SOUND = "src/audio/buttonClick.mp3";
+	public static final String CHIME_SOUND = "src/audio/chime.mp3";
+	public static final String START_SOUND = "src/audio/start.mp3";
 
 	public static int getGAME_HIGHT() {
 		return GAME_HIGHT;

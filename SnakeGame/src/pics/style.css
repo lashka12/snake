@@ -1,7 +1,20 @@
-#pane{
+.pane{
     -fx-background-image: url("bg3.jpg");
-     
     -fx-background-size: 955 560;
     -fx-background-position: center center;
     
+}
+
+.tab-pane {
+    -fx-tab-max-height: 0 ;
+    
+} 
+.tab-pane .tab-header-area {
+    visibility: hidden ;
+}
+
+#transparent{
+	
+	-fx-background-color: rgba(50, 50, 50, 0.5); 
+	
 }

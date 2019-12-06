@@ -1,15 +1,18 @@
 package model;
 
-import java.io.File;
 import java.util.ArrayList;
+import controller.GameEngine;
 import controller.MainPageController;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import utilities.Constants;
 import utilities.FruiteType;
+import utilities.SoundEffects;
 
 public class PlayGround extends Pane {
 
@@ -34,7 +37,6 @@ public class PlayGround extends Pane {
 
 		if (instance == null) {
 			instance = this;
-
 		}
 
 		segments = new ArrayList<Segment>();
@@ -42,9 +44,7 @@ public class PlayGround extends Pane {
 		h = height;
 
 		setMinSize(w * Constants.BLOCK_SIZE, h * Constants.BLOCK_SIZE);
-		// setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		ImageView backGround = new ImageView();
-		// backGround.setImage(Constants.DIRT_BACKGROUND_IMAGE);
 		backGround.fitWidthProperty().bind(widthProperty());
 		backGround.setPreserveRatio(true);
 		getChildren().add(backGround);
@@ -53,6 +53,52 @@ public class PlayGround extends Pane {
 		addBanana();
 		addPear();
 		addMouse();
+
+		Thread thread = new Thread(() -> {
+			try {
+				Thread.sleep(800);
+				Platform.runLater(() -> {
+					ImageView Ready = new ImageView(Constants.READY_IMAGE);
+					getChildren().add(Ready);
+					Ready.setTranslateX((Constants.GAME_WIDTH * Constants.BLOCK_SIZE) - 650);
+					Ready.setTranslateY((Constants.GAME_HIGHT * Constants.BLOCK_SIZE) - 300);
+					ScaleTransition st = new ScaleTransition(Duration.millis(1000), Ready);
+					st.setFromX(0.1);
+					st.setFromY(0.1);
+					st.setToX(2);
+					st.setToY(2);
+					st.play();
+					FadeTransition ft = new FadeTransition(Duration.millis(1000), Ready);
+					ft.setFromValue(1.0);
+					ft.setToValue(0.0);
+					ft.play();
+				});
+
+				Thread.sleep(1700);
+				Platform.runLater(() -> {
+					ImageView Go = new ImageView(Constants.GO_IMAGE);
+					getChildren().add(Go);
+					Go.setTranslateX((Constants.GAME_WIDTH * Constants.BLOCK_SIZE) - 550);
+					Go.setTranslateY((Constants.GAME_HIGHT * Constants.BLOCK_SIZE) - 300);
+					ScaleTransition st2 = new ScaleTransition(Duration.millis(800), Go);
+					st2.setFromX(0.1);
+					st2.setFromY(0.1);
+					st2.setToX(2);
+					st2.setToY(2);
+					st2.play();
+
+					FadeTransition ft2 = new FadeTransition(Duration.millis(1000), Go);
+					ft2.setFromValue(1.0);
+					ft2.setToValue(0.0);
+					ft2.play();
+				});
+				Thread.sleep(700);
+				Platform.runLater(() -> GameEngine.getInstance().resumeGame());
+			} catch (Exception exc) {
+				throw new Error("Unexpected interruption");
+			}
+		});
+		thread.start();
 
 	}
 
@@ -80,15 +126,11 @@ public class PlayGround extends Pane {
 
 		}
 
-
 		if (mouseWasEaten()) {
-			String path = "src/audio/bubble.mp3";
-			Media media = new Media(new File(path).toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			mediaPlayer.setAutoPlay(true);
+
+			SoundEffects.playBubbleSound();
 			getChildren().remove(mouse);
 			Fire fire = new Fire(mouse.getPosX(), mouse.getPosY());
-
 			getChildren().add(fire);
 			mouse = new Mouse(-100, -100);
 
@@ -112,18 +154,12 @@ public class PlayGround extends Pane {
 		}
 
 		if (isEaten(apple)) {
-			
-			
 
-			String path = "src/audio/bubble.mp3";
-			Media media = new Media(new File(path).toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			mediaPlayer.setAutoPlay(true);
+			popPoints(apple);
 
+			SoundEffects.playBubbleSound();
 			getChildren().remove(apple);
-
 			apple = new Fruit(-100, -100, FruiteType.APPLE);
-
 			Thread thread = new Thread(() -> {
 				try {
 
@@ -143,11 +179,9 @@ public class PlayGround extends Pane {
 
 		}
 		if (isEaten(banana)) {
-			String path = "src/audio/bubble.mp3";
-			Media media = new Media(new File(path).toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-     		mediaPlayer.setAutoPlay(true);
 
+			popPoints(banana);
+			SoundEffects.playBubbleSound();
 			getChildren().remove(banana);
 			banana = new Fruit(-100, -100, FruiteType.APPLE);
 
@@ -172,12 +206,9 @@ public class PlayGround extends Pane {
 		}
 
 		if (isEaten(pear)) {
-			
 
-			String path = "src/audio/bubble.mp3";
-			Media media = new Media(new File(path).toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			mediaPlayer.setAutoPlay(true);
+			popPoints(pear);
+			SoundEffects.playBubbleSound();
 
 			getChildren().remove(pear);
 
@@ -202,6 +233,55 @@ public class PlayGround extends Pane {
 		}
 
 		mouse.update();
+
+	}
+
+	private void popPoints(Fruit fruit) {
+
+		Image image = null;
+		switch (fruit.getType().getPoints()) {
+		case 10:
+			image = Constants.POINTS10_IMAGE;
+			break;
+		case 15:
+			image = Constants.POINTS15_IMAGE;
+			break;
+		case 20:
+			image = Constants.POINTS20_IMAGE;
+			break;
+		}
+
+		final ImageView iv = new ImageView(image);
+
+		Thread thread = new Thread(() -> {
+			try {
+
+				Platform.runLater(() -> {
+					iv.setTranslateX(fruit.getPosX() * Constants.BLOCK_SIZE);
+					iv.setTranslateY(fruit.getPosY() * Constants.BLOCK_SIZE);
+					ScaleTransition st = new ScaleTransition(Duration.millis(500), iv);
+					st.setFromX(0.1);
+					st.setFromY(0.1);
+					st.setToX(2);
+					st.setToY(2);
+					st.play();
+					FadeTransition ft = new FadeTransition(Duration.millis(500), iv);
+					ft.setFromValue(1.0);
+					ft.setToValue(0.0);
+					ft.play();
+					getChildren().add(iv);
+				});
+
+				Thread.sleep(500);
+				Platform.runLater(() -> {
+					getChildren().remove(iv);
+				});
+
+			} catch (Exception exc) {
+				throw new Error("Unexpected interruption");
+			}
+		});
+		thread.start();
 
 	}
 

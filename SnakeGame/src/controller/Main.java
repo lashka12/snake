@@ -1,14 +1,22 @@
 package controller;
 
 import java.io.File;
+
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import utilities.Constants;
+import utilities.SoundEffects;
 
 public class Main extends Application {
 
@@ -18,6 +26,7 @@ public class Main extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/view/MainPage.fxml"));
 		primaryStage.setTitle("Registration Form FXML Application");
 		Scene scene = new Scene(root);
+		GameEngine ge = new GameEngine(scene);
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -25,10 +34,8 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		String path = "src/audio/start.mp3";
-		Media media = new Media(new File(path).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setAutoPlay(true);
+
+		SoundEffects.playStartSound();
 		launch(args);
 
 	}

@@ -8,14 +8,23 @@ import utilities.Direction;
 
 public class GameEngine {
 
+	private static GameEngine instance;
 	private long then = System.nanoTime();
 	public static AnimationTimer timer;
 
 	public GameEngine(Scene scene) {
 
+		if (instance == null) {
+
+			instance = this;
+		}
 		setUpGameTimer();
 		setKeyBoardControllers(scene);
 
+	}
+
+	public static GameEngine getInstance() {
+		return instance;
 	}
 
 	private void setUpGameTimer() {
@@ -29,11 +38,15 @@ public class GameEngine {
 
 			}
 		};
-		timer.start();
+		
 	}
 
-	public void stopTimer() {
+	public void stopGame() {
 		timer.stop();
+	}
+
+	public void resumeGame() {
+		timer.start();
 	}
 
 	private void setKeyBoardControllers(Scene scene) {
@@ -49,8 +62,10 @@ public class GameEngine {
 			if (e.getCode().equals(KeyCode.RIGHT)
 					&& PlayGround.getInstance().getSnake().getDirection() != Direction.LEFT)
 				PlayGround.getInstance().getSnake().setDirection(Direction.RIGHT);
-			if (e.getCode().equals(KeyCode.P))timer.stop();
-			if (e.getCode().equals(KeyCode.R))timer.start();
+			if (e.getCode().equals(KeyCode.P))
+				stopGame();
+			if (e.getCode().equals(KeyCode.R))
+				resumeGame();
 
 		});
 	}

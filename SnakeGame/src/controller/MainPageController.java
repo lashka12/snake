@@ -1,26 +1,36 @@
 package controller;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.PlayGround;
 import model.Snake;
 import utilities.Constants;
+import utilities.SoundEffects;
 
 public class MainPageController implements Initializable {
 
 	private static MainPageController instance;
 
 	@FXML
-	private AnchorPane pane;
+	private AnchorPane gamePane;
+	@FXML
+	private AnchorPane homePane;
 
 	@FXML
 	private VBox mainVBox;
@@ -35,32 +45,6 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	void startGame() {
-
-		String path1 = "src/audio/bl.mp3";
-		Media media1 = new Media(new File(path1).toURI().toString());
-		MediaPlayer mediaPlayer1 = new MediaPlayer(media1);
-		mediaPlayer1.setAutoPlay(true);
-
-		String path = "src/audio/funny.mp3";
-		Media media = new Media(new File(path).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setAutoPlay(true);
-		mediaPlayer.setOnEndOfMedia(new Runnable() {
-			public void run() {
-				mediaPlayer.seek(Duration.ZERO);
-			}
-		});
-		mediaPlayer.play();
-
-		Constants.setGAME_HIGHT((int) playGroundPane.getHeight() / Constants.BLOCK_SIZE);
-		Constants.setGAME_WIDTH((int) playGroundPane.getWidth() / Constants.BLOCK_SIZE);
-
-		PlayGround playGround = new PlayGround(Constants.GAME_WIDTH, Constants.GAME_HIGHT); // new play ground
-		playGround.addSnake(new Snake(Constants.SNAKE_LENGTH)); // adding snake // maybe to move to playground class
-		PlayGround.getInstance().setStyle("-fx-background-color: rgba(50, 50, 50, 0.5);  ");
-
-		playGroundPane.getChildren().add(PlayGround.getInstance());
-		GameEngine ge = new GameEngine(playGround.getScene());
 
 	}
 
@@ -78,8 +62,80 @@ public class MainPageController implements Initializable {
 
 	}
 
+	public void openGamePane() {
+
+		FadeTransition ft = new FadeTransition(Duration.millis(1000), homePane);
+		ft.setFromValue(1.0);
+		ft.setToValue(0.0);
+		ft.play();
+
+		ft = new FadeTransition(Duration.millis(1000), gamePane);
+		ft.setFromValue(0.0);
+		ft.setToValue(1.0);
+		ft.play();
+		gamePane.toFront();
+		SoundEffects.playGameBoardMusic();
+		Constants.setGAME_HIGHT((int) playGroundPane.getHeight() / Constants.BLOCK_SIZE);
+		Constants.setGAME_WIDTH((int) playGroundPane.getWidth() / Constants.BLOCK_SIZE);
+		PlayGround playGround = new PlayGround(Constants.GAME_WIDTH, Constants.GAME_HIGHT); // new play ground
+		playGround.addSnake(new Snake(Constants.SNAKE_LENGTH)); // adding snake // maybe to move to playground class
+		PlayGround.getInstance().setStyle("-fx-background-color: rgba(50, 50, 50, 0.5);  ");
+		playGroundPane.getChildren().add(PlayGround.getInstance());
+
+	}
+
+	@FXML
+	void openHomePane() {
+
+		FadeTransition ft = new FadeTransition(Duration.millis(1000), gamePane);
+		ft.setFromValue(1.0);
+		ft.setToValue(0.0);
+		ft.play();
+
+		ft = new FadeTransition(Duration.millis(1000), homePane);
+		ft.setFromValue(0.0);
+		ft.setToValue(1.0);
+		ft.play();
+		homePane.toFront();
+
+	}
+
 	public static MainPageController getInstance() {
 		return instance;
+	}
+
+	@FXML
+	void openUserInputPage() {
+		Thread thread = new Thread(() -> {
+			try {
+
+				Platform.runLater(() -> {
+
+					SoundEffects.playButtonSound();
+					try {
+						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/UserInputPage.fxml"));
+						Parent root1 = (Parent) fxmlLoader.load();
+						Stage stage = new Stage();
+						stage.initModality(Modality.APPLICATION_MODAL);
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setTitle("ABC");
+						Scene scene = new Scene(root1);
+						stage.setScene(scene);
+						stage.initStyle(StageStyle.TRANSPARENT);
+						scene.setFill(Color.TRANSPARENT);
+						stage.show();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				});
+
+			} catch (Exception exc) {
+				throw new Error("Unexpected interruption");
+			}
+		});
+		thread.start();
+
 	}
 
 }
