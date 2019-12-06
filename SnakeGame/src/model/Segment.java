@@ -51,7 +51,7 @@ public class Segment extends Block {
 		setPosY(getPosY() - 1);
 
 		if (getPosY() < 0) {// it means snake hit a wall must change
-			setPosY(Constants.GAME_HIGHT - 1);
+			setPosY(Constants.GAME_HIGHT - 2);
 		}
 
 	}
@@ -59,7 +59,7 @@ public class Segment extends Block {
 	private void moveDown() {
 		setPosY(getPosY() + 1);
 
-		if (getPosY() >= Constants.GAME_HIGHT) { // it means snake hit a wall must change
+		if (getPosY() >= Constants.GAME_HIGHT-1) { // it means snake hit a wall must change
 			setPosY(0);
 		}
 
@@ -69,14 +69,14 @@ public class Segment extends Block {
 
 		setPosX(getPosX() - 1);
 		if (getPosX() < 0) {// it means snake hit a wall must change
-			setPosX(Constants.GAME_WIDTH - 1);
+			setPosX(Constants.GAME_WIDTH - 2);
 		}
 	}
 
 	private void moveRight() {
 		setPosX(getPosX() + 1);
 
-		if (getPosX() >= Constants.GAME_WIDTH) {// it means snake hit a wall must change
+		if (getPosX() >= Constants.GAME_WIDTH-1) {// it means snake hit a wall must change
 			setPosX(0);
 		}
 	}
