@@ -13,7 +13,7 @@ import model.SysData;
 import utilities.JsonReader;
 import utilities.Level;
 
-public class AcceptenceTest2And3 {
+public class AcceptenceTests2And3 {
 
 	@Rule
 	public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
