@@ -10,6 +10,7 @@ public class Game {
 	private double duration;
 	
 	
+	
 	public Game(String nickName, Date date, int score, double duration) {
 		this.nickName = nickName;
 		this.date = date;
