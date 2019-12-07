@@ -2,6 +2,6 @@ package controller;
 
 public class gitTest {
 	
-   int x=7;
+   int x=8;
    //test
 }
