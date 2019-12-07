@@ -356,7 +356,7 @@ public class PlayGround extends Pane {
 		this.score = score;
 	}
 
-	private void addToScore(int pointsToAdd) {
+	public void addToScore(int pointsToAdd) {
 
 		this.score = this.score + pointsToAdd;
 
