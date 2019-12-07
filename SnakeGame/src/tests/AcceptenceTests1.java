@@ -1,9 +1,8 @@
 package tests;
 
-
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
-
 import model.Fruit;
 import model.Mouse;
 import model.Segment;
@@ -12,37 +11,12 @@ import utilities.Direction;
 import utilities.FruiteType;
 
 public class AcceptenceTests1 {
-@Test
-	public static void runTests() {
 
-		int  MouseX = 5, MouseY = 5;
-		Mouse mouse = new Mouse(MouseX, MouseY);
-		Direction direction = Direction.DOWN;
-		mouse.setDirection(direction);
-		
-		Assert.assertTrue( mouse.getDirection().equals(direction));
-		mouse.moveUp();
-		Assert.assertTrue((mouse.getPosY() == (MouseY - 1)));
-		MouseY = MouseY - 1;
-		mouse.moveDown();
-		Assert.assertTrue((mouse.getPosY() == (MouseY + 1)));
-		MouseY = MouseY + 1;
-		mouse.moveLeft();
-		Assert.assertTrue((mouse.getPosX() == (MouseX - 1)));
-		mouse.moveRight();
-		Assert.assertTrue((mouse.getPosX() == (MouseX + 1)));
-		MouseX = MouseX + 1;
+	@Rule
+	public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
 
-		// testing the methods in class Fruit
-		FruiteType fruitType = FruiteType.APPLE;
-		int FruitX = 15, FruitY = 15;
-		Fruit fruit = new Fruit(FruitX, FruitY, fruitType);
-		FruiteType fruitTypeChange = FruiteType.BANANA;
-		fruit.setType(fruitTypeChange);
-		Assert.assertTrue((fruit.getType().equals(fruitTypeChange)));
-		
-
-		// testing the methods in class Segment
+	@Test
+	public void SegmentClassTesting() {
 		int SegX = 25, SegY = 25;
 		Direction dir = Direction.LEFT;
 		Segment segment = new Segment(SegX, SegY, null);
@@ -54,13 +28,58 @@ public class AcceptenceTests1 {
 		Assert.assertTrue(((segment.getOldPosX() == SegX)));
 		Assert.assertTrue(((segment.getOldPosY() == SegY)));
 
-		// testing the methods in class Snake
+	}
+
+	@Test
+	public void FruitTypeClassTesting() {
+
+		FruiteType fruitType = FruiteType.APPLE;
+		int FruitX = 15, FruitY = 15;
+		Fruit fruit = new Fruit(FruitX, FruitY, fruitType);
+		FruiteType fruitTypeChange = FruiteType.BANANA;
+		fruit.setType(fruitTypeChange);
+		Assert.assertTrue((fruit.getType().equals(fruitTypeChange)));
+
+	}
+
+	@Test
+	public void SnakeClassTesting() {
+
 		int length = 5;
 		Snake snake = new Snake(length);
 		snake.addSegment();
 		Assert.assertTrue(((snake.getBody().size() == length + 1)));
 		length++;
+	}
 
+	@Test
+	public void MouseClassTesting() {
+
+		int MouseX = 5, MouseY = 5;
+		Mouse mouse = new Mouse(MouseX, MouseY);
+		Direction direction = Direction.DOWN;
+		mouse.setDirection(direction);
+		Assert.assertTrue(mouse.getDirection().equals(direction));
+		direction = Direction.UP;
+		mouse.setDirection(direction);
+		Assert.assertTrue(mouse.getDirection().equals(direction));
+		direction = Direction.LEFT;
+		mouse.setDirection(direction);
+		Assert.assertTrue(mouse.getDirection().equals(direction));
+		direction = Direction.RIGHT;
+		mouse.setDirection(direction);
+		Assert.assertTrue(mouse.getDirection().equals(direction));
+		mouse.moveUp();
+		Assert.assertTrue((mouse.getPosY() == (MouseY - 1)));
+		MouseY = MouseY - 1;
+		mouse.moveDown();
+		Assert.assertTrue((mouse.getPosY() == (MouseY + 1)));
+		MouseY = MouseY + 1;
+		mouse.moveLeft();
+		Assert.assertTrue((mouse.getPosX() == (MouseX - 1)));
+		MouseX = MouseX - 1;
+		mouse.moveRight();
+		Assert.assertTrue((mouse.getPosX() == (MouseX + 1)));
 	}
 
 }

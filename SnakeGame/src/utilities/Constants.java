@@ -10,7 +10,6 @@ public class Constants {
 	public static int GAME_WIDTH = 77;
 	public static final int BLOCK_SIZE = 9;
 	public static int SNAKE_LENGTH = 20;
-	public static final Image DIRT_BACKGROUND_IMAGE = new Image(new File("resources/pics/g4.jpg").toURI().toString());
 	public static final Image SNAKE_BODY_IMAGE = new Image(new File("resources/pics/t.png").toURI().toString());
 	public static final Image SNAKE_HEAD_IMAGE = new Image(new File("resources/pics/bbb.png").toURI().toString());
 	public static final Image APPLE_IMAGE = new Image(new File("resources/pics/apple22.png").toURI().toString());
