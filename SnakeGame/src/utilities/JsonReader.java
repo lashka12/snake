@@ -78,7 +78,7 @@ public class JsonReader {
 					int score = Integer.parseInt(game.get("score").toString());
 					double dur = Double.parseDouble(game.get("duaration").toString());
 					
-					JSONArray history = (JSONArray) game.get("map");
+					JSONArray history = (JSONArray) game.get("history");
 					ArrayList<String> gArray = (ArrayList<String>) history;
 					HashMap<String, Integer> gamesHistory = new HashMap<>();
 					

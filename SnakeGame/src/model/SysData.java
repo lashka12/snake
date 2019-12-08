@@ -2,9 +2,13 @@ package model;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 
 import utilities.JsonReader;
+import utilities.JsonWriter;
 
 public class SysData {
 
@@ -16,13 +20,15 @@ public class SysData {
 		return instance;
 	}
 
-	public SysData() throws ParseException {
+	public SysData() throws ParseException, org.json.simple.parser.ParseException {
 		if (instance == null) {
 			instance = this;
 		}
 
 		questions = JsonReader.readQuestionsFile();
 		gamesHistory=JsonReader.readGamesFile(); 
+	
+//		JsonWriter.writeGameHistory(g);
 		// this code line
 
 	}

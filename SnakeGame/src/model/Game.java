@@ -36,7 +36,7 @@ public class Game {
 
 
 	public Game(String nickName, Date date, int score, double duration, HashMap<String, Integer> eatenObjects) {
-		super();
+//		super();
 		this.nickName = nickName;
 		this.date = date;
 		this.score = score;
