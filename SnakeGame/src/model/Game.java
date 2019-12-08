@@ -51,7 +51,7 @@ public class Game {
 	 * 
 	 * @param eatenObject eaten object on playGround
 	 */
-	
+
 	public void addEatenObject(Block eatenObject) {
 
 		String key = eatenObject.getClass().getSimpleName();
@@ -76,6 +76,7 @@ public class Game {
 			eatenObjects.put(key, eatenObjects.get(key) + 1);
 
 		score = getScore() + toAdd;
+		
 
 	}
 
