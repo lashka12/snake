@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import controller.GameEngine;
 import controller.MainPageController;
 import javafx.animation.FadeTransition;
@@ -25,6 +28,7 @@ public class PlayGround extends Pane {
 	private Fruit banana;
 	private Fruit pear;
 	private int score;
+	private Game currentGame = null;
 
 	private static PlayGround instance = null;
 
@@ -39,7 +43,13 @@ public class PlayGround extends Pane {
 		if (instance == null) {
 			instance = this;
 		}
-
+				
+		// Creating game object
+		Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        // need to get the player name from the UserInputPage and at the end of the game save the game to the list in SysData
+		currentGame = new Game("PlayerName", date);
+		
 		segments = new ArrayList<Segment>();
 		w = width;
 		h = height;
@@ -367,9 +377,10 @@ public class PlayGround extends Pane {
 		if ((Math.abs(mouse.getPosX() - getSnake().getHead().getPosX()) >= 0
 				&& Math.abs(mouse.getPosX() - getSnake().getHead().getPosX()) < 2)
 				&& (Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) >= 0
-						&& Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) < 2))
+						&& Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) < 2)) {
+			currentGame.incrementNumOfMouse();
 			return true;
-
+		}
 		return false;
 
 	}
@@ -381,10 +392,24 @@ public class PlayGround extends Pane {
 		if ((Math.abs(fruit.getPosX() - getSnake().getHead().getPosX()) >= 0
 				&& Math.abs(fruit.getPosX() - getSnake().getHead().getPosX()) < 2)
 				&& (Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) >= 0
-						&& Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) < 2))
+						&& Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) < 2)) {
+		
+					switch (fruit.getType().name()) {
+						case "APPLE":
+							currentGame.incrementNumOfApples();
+							break;
+						case "BANANA":
+							currentGame.incrementNumOfBannanas();
+							break;
+						case "PEAR":
+							currentGame.incrementNumOfPears();
+							break;
+						default:
+							break;
+					}
 
-			return true;
-
+					return true;
+		}
 		return false;
 
 	}

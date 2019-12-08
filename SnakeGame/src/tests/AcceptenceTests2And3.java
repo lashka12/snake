@@ -141,8 +141,6 @@ public class AcceptenceTests2And3 {
 		Assert.assertTrue(bannana.getType().getTailExtension() == 1);
 		Assert.assertTrue(bannana.getType().getImage() != null);
 
-
-
 	}
 	
 
