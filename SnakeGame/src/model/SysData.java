@@ -21,7 +21,7 @@ public class SysData {
 		}
 
 		questions = JsonReader.readQuestionsFile();
-		// gamesHistory=JsonReader.readGamesHistory(); // Hadi must implement&integrate
+		gamesHistory=JsonReader.readGamesFile(); 
 		// this code line
 
 	}
