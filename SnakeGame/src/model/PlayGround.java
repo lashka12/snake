@@ -378,7 +378,7 @@ public class PlayGround extends Pane {
 				&& Math.abs(mouse.getPosX() - getSnake().getHead().getPosX()) < 2)
 				&& (Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) >= 0
 						&& Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) < 2)) {
-			currentGame.incrementNumOfMouse();
+			currentGame.incrementNumOfEatenObjects("MOUSE");
 			return true;
 		}
 		return false;
@@ -394,21 +394,9 @@ public class PlayGround extends Pane {
 				&& (Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) >= 0
 						&& Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) < 2)) {
 		
-					switch (fruit.getType().name()) {
-						case "APPLE":
-							currentGame.incrementNumOfApples();
-							break;
-						case "BANANA":
-							currentGame.incrementNumOfBannanas();
-							break;
-						case "PEAR":
-							currentGame.incrementNumOfPears();
-							break;
-						default:
-							break;
-					}
+						currentGame.incrementNumOfEatenObjects(fruit.getType().name());
+						return true;
 
-					return true;
 		}
 		return false;
 

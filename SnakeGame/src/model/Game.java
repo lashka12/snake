@@ -1,6 +1,10 @@
 package model;
 
 import java.util.Date;
+import java.util.HashMap;
+
+import utilities.Constants;
+import utilities.FruiteType;
 
 public class Game {
 
@@ -8,66 +12,53 @@ public class Game {
 	private Date date;
 	private int score;
 	private double duration;
-	private int numOfApples;
-	private int numOfPears;
-	private int numOfBannanas;
-	private int numOfMouses;
+	private HashMap<String, Integer> eatenObjects;
+
 
 	public Game(String nickName, Date date) {
 		this.nickName = nickName;
 		this.date = date;
 		this.score = 0;
 		this.duration = 0;
-		this.numOfApples = 0;
-		this.numOfBannanas = 0;
-		this.numOfPears = 0;
-		this.numOfMouses = 0;
+		eatenObjects.put("numOfApples", 0);
+		eatenObjects.put("numOfPears", 0);
+		eatenObjects.put("numOfBannanas", 0);
+		eatenObjects.put("numOfMouses", 0);
+	
 	}
 
 	
-	public void incrementNumOfApples() {
-		numOfApples++;
-	}
-	public void incrementNumOfPears() {
-		numOfPears++;
-	}
-	public void incrementNumOfBannanas() {
-		numOfBannanas++;
-	}
-	public void incrementNumOfMouse() {
-		numOfMouses++;
-	}
-	public int getNumOfApples() {
-		return numOfApples;
-	}
-
-	public void setNumOfApples(int numOfApples) {
-		this.numOfApples = numOfApples;
-	}
-
-	public int getNumOfPears() {
-		return numOfPears;
-	}
-
-	public void setNumOfPears(int numOfPears) {
-		this.numOfPears = numOfPears;
-	}
-
-	public int getNumOfBannanas() {
-		return numOfBannanas;
-	}
-
-	public void setNumOfBannanas(int numOfBannanas) {
-		this.numOfBannanas = numOfBannanas;
+	/**
+	 * a method to maintain game data history during the game
+	 * @param name
+	 */
+	public void incrementNumOfEatenObjects(String name) {
+		switch (name) {
+			case "APPLE":
+				String ap = "numOfApples";
+				int numOfApples = eatenObjects.get(ap);
+				eatenObjects.put(ap, numOfApples + 1);
+				break;
+			case "BANANA":
+				String bn = "numOfBannanas";
+				int numOfBannanas = eatenObjects.get(bn);
+				eatenObjects.put(bn, numOfBannanas + 1);
+				break;
+			case "PEAR":
+				String pr = "numOfPears";
+				int numOfPears = eatenObjects.get(pr);
+				eatenObjects.put(pr, numOfPears + 1);
+				break;
+			case "MOUSE":
+				String ms = "numOfMouses";
+				int numOfMouses = eatenObjects.get(ms);
+				eatenObjects.put(ms, numOfMouses + 1);
+				break;
+			default:
+				break;
+		}
 	}
 
-	public int getNumOfMouses() {
-		return numOfMouses;
-	}
-
-	public void setNumOfMouses(int numOfMouses) {
-		this.numOfMouses = numOfMouses;
-	}
 
 	public String getNickName() {
 		return nickName;
