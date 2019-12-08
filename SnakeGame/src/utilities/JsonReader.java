@@ -3,8 +3,11 @@ package utilities;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -56,7 +59,7 @@ public class JsonReader {
 		return questions;
 	}
 
-	public static ArrayList<Game> readGamesFile() {
+	public static ArrayList<Game> readGamesFile() throws java.text.ParseException {
 		ArrayList<Game> games = new ArrayList<Game>();
 		try {
 
@@ -66,12 +69,31 @@ public class JsonReader {
 
 				for (Object o : arr) {
 				
-//					JSONObject game = (JSONObject) o;
-//					String playerName = (String) game.get("nickName");
-//					Date gameDate = (Date) game.get("date");
-				
-	
+					JSONObject game = (JSONObject) o;
+					String playerName =  game.get("playerName").toString();
+					String date =  game.get("date").toString();
+					DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+				    Date gameDate = format.parse(date);
+
+					int score = Integer.parseInt(game.get("score").toString());
+					double dur = Double.parseDouble(game.get("duaration").toString());
 					
+					JSONArray history = (JSONArray) game.get("history");
+					ArrayList<String> gArray = (ArrayList<String>) history;
+					HashMap<String, Integer> gamesHistory = new HashMap<>();
+					
+					for(String str : gArray) {
+						String[] mapValues = str.split("#");
+						Integer val = Integer.parseInt(mapValues[1]);
+						gamesHistory.put(mapValues[0], val);
+					}
+					
+					Game gm = new Game(playerName, gameDate, score, dur, gamesHistory);
+					System.out.println(gm);
+					System.out.println(gm.getEatenObjects().keySet());
+					System.out.println(gm.getEatenObjects().values());
+
+					games.add(gm);
 
 				}
 			} catch (FileNotFoundException e) {

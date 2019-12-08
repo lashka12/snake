@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.ParseException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,7 +38,7 @@ public class Main extends Application {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException, org.json.simple.parser.ParseException {
 
 		@SuppressWarnings("unused")
 		SysData data = new SysData(); // here we create an instance of the System data to use it while game is running

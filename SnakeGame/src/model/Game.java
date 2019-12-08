@@ -20,6 +20,31 @@ public class Game {
 		this.duration = 0;
 
 	}
+	
+	
+
+	public HashMap<String, Integer> getEatenObjects() {
+		return eatenObjects;
+	}
+
+
+
+	public void setEatenObjects(HashMap<String, Integer> eatenObjects) {
+		this.eatenObjects = eatenObjects;
+	}
+
+
+
+	public Game(String nickName, Date date, int score, double duration, HashMap<String, Integer> eatenObjects) {
+//		super();
+		this.nickName = nickName;
+		this.date = date;
+		this.score = score;
+		this.duration = duration;
+		this.eatenObjects = eatenObjects;
+	}
+
+
 
 	/**
 	 * this method adds a eaten object to the game and update the score
