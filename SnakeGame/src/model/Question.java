@@ -1,5 +1,4 @@
 package model;
-
 import java.util.ArrayList;
 import utilities.Constants;
 import utilities.Level;
