@@ -10,6 +10,8 @@ import model.SysData;
 import utilities.SoundEffects;
 
 /**
+ * © 2019 Piranha Team , MIS - Haifa University  Some Rights Reserved
+ * 
  * the main class that runs the application
  * 
  * @author Lawrence
