@@ -6,6 +6,14 @@ import javafx.scene.input.KeyCode;
 import model.PlayGround;
 import utilities.Direction;
 
+/**
+ * this class is responsible for controlling the game and bring it to life, it
+ * runs a timer to update the playground every specific amount of seconds , and
+ * listens to the user's input
+ * 
+ * @author Lawrence
+ *
+ */
 public class GameEngine {
 
 	private static GameEngine instance;
@@ -38,7 +46,7 @@ public class GameEngine {
 
 			}
 		};
-		
+
 	}
 
 	public void stopGame() {

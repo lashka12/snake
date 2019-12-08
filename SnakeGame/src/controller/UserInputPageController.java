@@ -14,6 +14,19 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.SoundEffects;
 
+/**
+ * this class controls the UserInputPage.FXML  , initialize it and handle
+ * it's actions
+ * 
+ * objects with @FXML sign are the graphic components of the FXML file
+ * 
+ * methods with @FXML sign are the methods used to handle actions triggered by
+ * the FXML File
+ * 
+ * @author Lawrence
+ *
+ */
+
 public class UserInputPageController implements Initializable {
 
 	private static UserInputPageController instance;

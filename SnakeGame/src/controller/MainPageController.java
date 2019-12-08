@@ -23,6 +23,19 @@ import model.Snake;
 import utilities.Constants;
 import utilities.SoundEffects;
 
+/**
+ * this class controls the view.MainPage.FXML page , initialize it and handle
+ * it's actions
+ * 
+ * objects with @FXML sign are the graphic components of the FXML file
+ * 
+ * methods with @FXML sign are the methods used to handle actions triggered by
+ * the FXML File
+ * 
+ * @author Lawrence
+ *
+ */
+
 public class MainPageController implements Initializable {
 
 	private static MainPageController instance;

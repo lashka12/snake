@@ -3,14 +3,12 @@ package model;
 import java.util.Date;
 
 public class Game {
-	
+
 	private String nickName;
 	private Date date;
 	private int score;
 	private double duration;
-	
-	
-	
+
 	public Game(String nickName, Date date, int score, double duration) {
 		this.nickName = nickName;
 		this.date = date;
@@ -54,7 +52,5 @@ public class Game {
 	public String toString() {
 		return "Game [nickName=" + nickName + ", date=" + date + ", score=" + score + ", duration=" + duration + "]";
 	}
-	
-	
-	
+
 }

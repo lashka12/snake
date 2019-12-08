@@ -4,6 +4,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utilities.Constants;
 
+/**
+ * this class is the basic view of all the objects on the screen
+ * 
+ * @author Lawrence
+ *
+ */
+
 public abstract class Block extends ImageView {
 
 	private int posX, posY;

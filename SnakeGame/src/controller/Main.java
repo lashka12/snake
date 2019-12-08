@@ -9,6 +9,13 @@ import javafx.stage.StageStyle;
 import model.SysData;
 import utilities.SoundEffects;
 
+/**
+ * the main class that runs the application
+ * 
+ * @author Lawrence
+ *
+ */
+
 public class Main extends Application {
 
 	@Override
@@ -24,10 +31,9 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		
-		@SuppressWarnings("unused")
-		SysData data=new SysData();
 
+		@SuppressWarnings("unused")
+		SysData data = new SysData(); // here we create an instance of the System data to use it while game is running
 		SoundEffects.playStartSound();
 		launch(args);
 
