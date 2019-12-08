@@ -5,11 +5,14 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.Rule;
+
+import model.Fruit;
 import model.Game;
 import model.PlayGround;
 import model.Question;
 import model.Snake;
 import model.SysData;
+import utilities.FruiteType;
 import utilities.JsonReader;
 import utilities.Level;
 
@@ -100,5 +103,47 @@ public class AcceptenceTests2And3 {
 		Assert.assertTrue(playground.getW() == w);
 
 	}
+	
+	@Test
+	public void SnakeClassTest() {
+		
+		Snake snake = new Snake(7);
+		Assert.assertTrue(snake.getHead() != null);
+		Assert.assertTrue(snake.getBody() != null);
+		
+	}
+	
+	
+	@Test
+	public void FruitClassTest() {
+
+		Fruit apple = new Fruit(-100, -100 , FruiteType.APPLE);
+		Assert.assertTrue(apple.getType().equals(FruiteType.APPLE) );
+		Assert.assertTrue(apple.getType().name().equals("APPLE"));
+		Assert.assertTrue(apple.getType().getSecondsDelay() == 5);
+		Assert.assertTrue(apple.getType().getPoints() == 10);
+		Assert.assertTrue(apple.getType().getTailExtension() == 1);
+		Assert.assertTrue(apple.getType().getImage() != null);
+		
+		Fruit pear = new Fruit(-100, -100 , FruiteType.PEAR);
+		Assert.assertTrue(pear.getType().equals(FruiteType.PEAR) );
+		Assert.assertTrue(pear.getType().name().equals("PEAR"));
+		Assert.assertTrue(pear.getType().getSecondsDelay() == 0);
+		Assert.assertTrue(pear.getType().getPoints() == 20);
+		Assert.assertTrue(pear.getType().getTailExtension() == 1);
+		Assert.assertTrue(pear.getType().getImage() != null);
+		
+		Fruit bannana = new Fruit(-100, -100 , FruiteType.BANANA);
+		Assert.assertTrue(bannana.getType().equals(FruiteType.BANANA) );
+		Assert.assertTrue(bannana.getType().name().equals("BANANA"));
+		Assert.assertTrue(bannana.getType().getSecondsDelay() == 10);
+		Assert.assertTrue(bannana.getType().getPoints() == 15);
+		Assert.assertTrue(bannana.getType().getTailExtension() == 1);
+		Assert.assertTrue(bannana.getType().getImage() != null);
+
+
+
+	}
+	
 
 }
