@@ -89,10 +89,6 @@ public class JsonReader {
 					}
 					
 					Game gm = new Game(playerName, gameDate, score, dur, gamesHistory);
-					System.out.println(gm);
-					System.out.println(gm.getEatenObjects().keySet());
-					System.out.println(gm.getEatenObjects().values());
-
 					games.add(gm);
 
 				}
