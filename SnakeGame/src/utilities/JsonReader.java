@@ -4,11 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import model.Game;
 import model.Question;
 
 public class JsonReader {
@@ -53,8 +56,32 @@ public class JsonReader {
 		return questions;
 	}
 
-	public static ArrayList<Question> readGamesFile() {
-		return null;
+	public static ArrayList<Game> readGamesFile() {
+		ArrayList<Game> games = new ArrayList<Game>();
+		try {
+
+			Object obj = new JSONParser().parse(new FileReader("games.json"));
+			JSONObject jo = (JSONObject) obj;
+			JSONArray arr = (JSONArray) jo.get("games");
+
+				for (Object o : arr) {
+				
+//					JSONObject game = (JSONObject) o;
+//					String playerName = (String) game.get("nickName");
+//					Date gameDate = (Date) game.get("date");
+				
+	
+					
+
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		return games;
 	}
 
 }

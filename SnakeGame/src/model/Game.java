@@ -3,8 +3,7 @@ package model;
 import java.util.Date;
 import java.util.HashMap;
 
-import utilities.Constants;
-import utilities.FruiteType;
+
 
 public class Game {
 
@@ -20,11 +19,13 @@ public class Game {
 		this.date = date;
 		this.score = 0;
 		this.duration = 0;
+		eatenObjects = new HashMap<>();
 		eatenObjects.put("numOfApples", 0);
-		eatenObjects.put("numOfPears", 0);
 		eatenObjects.put("numOfBannanas", 0);
+		eatenObjects.put("numOfPears", 0);
 		eatenObjects.put("numOfMouses", 0);
-	
+
+
 	}
 
 	
@@ -32,31 +33,33 @@ public class Game {
 	 * a method to maintain game data history during the game
 	 * @param name
 	 */
-	public void incrementNumOfEatenObjects(String name) {
-		switch (name) {
+	public void incrementNumOfEatenObjects(String objectEaten) {
+		switch (objectEaten) {
 			case "APPLE":
-				String ap = "numOfApples";
-				int numOfApples = eatenObjects.get(ap);
-				eatenObjects.put(ap, numOfApples + 1);
+				Integer numOfApples = eatenObjects.get("numOfApples");
+				eatenObjects.put("numOfApples", numOfApples + 1);
 				break;
 			case "BANANA":
-				String bn = "numOfBannanas";
-				int numOfBannanas = eatenObjects.get(bn);
-				eatenObjects.put(bn, numOfBannanas + 1);
+				Integer numOfBannanas = eatenObjects.get("numOfBannanas");
+				eatenObjects.put("numOfBannanas", numOfBannanas + 1);
 				break;
 			case "PEAR":
-				String pr = "numOfPears";
-				int numOfPears = eatenObjects.get(pr);
-				eatenObjects.put(pr, numOfPears + 1);
+				Integer numOfPears = eatenObjects.get("numOfPears");
+				eatenObjects.put("numOfPears", numOfPears + 1);
 				break;
 			case "MOUSE":
-				String ms = "numOfMouses";
-				int numOfMouses = eatenObjects.get(ms);
-				eatenObjects.put(ms, numOfMouses + 1);
+				Integer numOfMouses = eatenObjects.get("numOfMouses");
+				eatenObjects.put("numOfMouses", numOfMouses + 1);
 				break;
 			default:
 				break;
 		}
+	}
+	
+	
+	public void incrementScore(int pointsToAdd) {
+		
+		this.score = this.score + pointsToAdd;
 	}
 
 

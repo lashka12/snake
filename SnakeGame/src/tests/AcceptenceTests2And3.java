@@ -98,8 +98,6 @@ public class AcceptenceTests2And3 {
 		Assert.assertTrue(playground.getSnake() != null);
 		playground.setScore(score);
 		Assert.assertTrue(playground.getScore() == score);
-		playground.addToScore(5);
-		Assert.assertTrue(playground.getScore() == score + 5);
 		Assert.assertTrue(playground.getH() == h);
 		Assert.assertTrue(playground.getW() == w);
 
