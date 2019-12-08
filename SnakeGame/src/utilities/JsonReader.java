@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -66,12 +67,24 @@ public class JsonReader {
 
 				for (Object o : arr) {
 				
-//					JSONObject game = (JSONObject) o;
-//					String playerName = (String) game.get("nickName");
-//					Date gameDate = (Date) game.get("date");
-				
-	
+					JSONObject game = (JSONObject) o;
+					String playerName =  game.get("playerName").toString();
+					Date gameDate = (Date) game.get("date");
+					int score = Integer.parseInt(game.get("score").toString());
+					double dur = Double.parseDouble(game.get("duaration").toString());
 					
+					JSONArray history = (JSONArray) game.get("map");
+					ArrayList<String> gArray = (ArrayList<String>) history;
+					HashMap<String, Integer> gamesHistory = new HashMap<>();
+					
+					for(String str : gArray) {
+						String[] mapValues = str.split("#");
+						Integer val = Integer.parseInt(mapValues[1]);
+						gamesHistory.put(mapValues[0], val);
+					}
+					
+					Game gm = new Game(playerName, gameDate, score, dur, gamesHistory);
+					games.add(gm);
 
 				}
 			} catch (FileNotFoundException e) {
