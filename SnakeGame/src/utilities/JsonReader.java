@@ -3,6 +3,8 @@ package utilities;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -57,7 +59,7 @@ public class JsonReader {
 		return questions;
 	}
 
-	public static ArrayList<Game> readGamesFile() {
+	public static ArrayList<Game> readGamesFile() throws java.text.ParseException {
 		ArrayList<Game> games = new ArrayList<Game>();
 		try {
 
@@ -69,7 +71,10 @@ public class JsonReader {
 				
 					JSONObject game = (JSONObject) o;
 					String playerName =  game.get("playerName").toString();
-					Date gameDate = (Date) game.get("date");
+					String date =  game.get("date").toString();
+					DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+				    Date gameDate = format.parse(date);
+
 					int score = Integer.parseInt(game.get("score").toString());
 					double dur = Double.parseDouble(game.get("duaration").toString());
 					
@@ -84,6 +89,10 @@ public class JsonReader {
 					}
 					
 					Game gm = new Game(playerName, gameDate, score, dur, gamesHistory);
+					System.out.println(gm);
+					System.out.println(gm.getEatenObjects().keySet());
+					System.out.println(gm.getEatenObjects().values());
+
 					games.add(gm);
 
 				}

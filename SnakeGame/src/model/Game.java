@@ -23,6 +23,18 @@ public class Game {
 	
 	
 
+	public HashMap<String, Integer> getEatenObjects() {
+		return eatenObjects;
+	}
+
+
+
+	public void setEatenObjects(HashMap<String, Integer> eatenObjects) {
+		this.eatenObjects = eatenObjects;
+	}
+
+
+
 	public Game(String nickName, Date date, int score, double duration, HashMap<String, Integer> eatenObjects) {
 		super();
 		this.nickName = nickName;

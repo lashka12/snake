@@ -1,5 +1,6 @@
 package model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,7 +16,7 @@ public class SysData {
 		return instance;
 	}
 
-	public SysData() {
+	public SysData() throws ParseException {
 		if (instance == null) {
 			instance = this;
 		}
