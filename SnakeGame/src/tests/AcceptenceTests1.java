@@ -30,6 +30,7 @@ public class AcceptenceTests1 {
 
 	}
 
+
 	@Test
 	public void FruitTypeClassTesting() {
 

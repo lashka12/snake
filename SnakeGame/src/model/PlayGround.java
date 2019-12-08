@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import controller.GameEngine;
 import controller.MainPageController;
 import javafx.animation.FadeTransition;
@@ -25,6 +28,7 @@ public class PlayGround extends Pane {
 	private Fruit banana;
 	private Fruit pear;
 	private int score;
+	private Game currentGame = null;
 
 	private static PlayGround instance = null;
 
@@ -39,7 +43,9 @@ public class PlayGround extends Pane {
 		if (instance == null) {
 			instance = this;
 		}
+				
 
+		
 		segments = new ArrayList<Segment>();
 		w = width;
 		h = height;
@@ -55,7 +61,9 @@ public class PlayGround extends Pane {
 		addPear();
 		addMouse();
 		addQuestion();
+		addGame();
 
+	
 		Thread thread = new Thread(() -> {
 			try {
 				Thread.sleep(800);
@@ -102,8 +110,21 @@ public class PlayGround extends Pane {
 		});
 		thread.start();
 
+	
 	}
 
+	
+	public void addGame() {
+		
+		// Creating game object
+		Calendar cal = Calendar.getInstance();
+		Date date = cal.getTime();
+		System.out.println(date);
+        // need to get the player name from the UserInputPage and at the end of the game save the game to the list in SysData
+		currentGame = new Game("PlayerName" , date);
+		
+	}
+	
 	public void addSnake(Snake s) {
 
 		setSnake(s);
@@ -150,7 +171,8 @@ public class PlayGround extends Pane {
 				}
 			});
 			thread.start();
-			addToScore(20);
+			currentGame.incrementScore(20);
+			score = currentGame.getScore();
 			MainPageController.getInstance().updateScore(score);
 
 		}
@@ -176,7 +198,8 @@ public class PlayGround extends Pane {
 
 			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
-			addToScore(apple.getType().getPoints());
+			currentGame.incrementScore(apple.getType().getPoints());
+			score = currentGame.getScore();
 			MainPageController.getInstance().updateScore(score);
 
 		}
@@ -185,7 +208,7 @@ public class PlayGround extends Pane {
 			popPoints(banana);
 			SoundEffects.playBubbleSound();
 			getChildren().remove(banana);
-			banana = new Fruit(-100, -100, FruiteType.APPLE);
+			banana = new Fruit(-100, -100, FruiteType.BANANA);
 
 			Thread thread = new Thread(() -> {
 
@@ -199,7 +222,8 @@ public class PlayGround extends Pane {
 				}
 			});
 			thread.start();
-			addToScore(banana.getType().getPoints());
+			currentGame.incrementScore(banana.getType().getPoints());
+			score = currentGame.getScore();
 			MainPageController.getInstance().updateScore(score);
 
 			snake.addSegment();
@@ -230,7 +254,8 @@ public class PlayGround extends Pane {
 
 			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
-			addToScore(pear.getType().getPoints());
+			currentGame.incrementScore(pear.getType().getPoints());
+			score = currentGame.getScore();
 			MainPageController.getInstance().updateScore(score);
 		}
 
@@ -348,28 +373,17 @@ public class PlayGround extends Pane {
 
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-	public void addToScore(int pointsToAdd) {
-
-		this.score = this.score + pointsToAdd;
-
-	}
 
 	public boolean mouseWasEaten() {
 
 		if ((Math.abs(mouse.getPosX() - getSnake().getHead().getPosX()) >= 0
 				&& Math.abs(mouse.getPosX() - getSnake().getHead().getPosX()) < 2)
 				&& (Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) >= 0
-						&& Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) < 2))
-			return true;
-
+						&& Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) < 2)) {
+			
+					currentGame.incrementNumOfEatenObjects("MOUSE");
+					return true;
+		}
 		return false;
 
 	}
@@ -381,10 +395,12 @@ public class PlayGround extends Pane {
 		if ((Math.abs(fruit.getPosX() - getSnake().getHead().getPosX()) >= 0
 				&& Math.abs(fruit.getPosX() - getSnake().getHead().getPosX()) < 2)
 				&& (Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) >= 0
-						&& Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) < 2))
+						&& Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) < 2)) {
+		
+						currentGame.incrementNumOfEatenObjects(fruit.getType().name());
+						return true;
 
-			return true;
-
+		}
 		return false;
 
 	}
@@ -404,5 +420,15 @@ public class PlayGround extends Pane {
 	public void setSnake(Snake snake) {
 		this.snake = snake;
 	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	
 
 }
