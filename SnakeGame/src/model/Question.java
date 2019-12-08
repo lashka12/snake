@@ -1,8 +1,4 @@
 package model;
-/**
- * question class
- */
-
 import java.util.ArrayList;
 import utilities.Constants;
 import utilities.Level;

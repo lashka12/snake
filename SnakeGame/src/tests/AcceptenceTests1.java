@@ -50,6 +50,7 @@ public class AcceptenceTests1 {
 		snake.addSegment();
 		Assert.assertTrue(((snake.getBody().size() == length + 1)));
 		length++;
+		
 	}
 
 	@Test
