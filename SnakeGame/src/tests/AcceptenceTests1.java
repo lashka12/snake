@@ -30,27 +30,6 @@ public class AcceptenceTests1 {
 
 	}
 
-	@Test
-	public void FruitTypeClassTesting() {
-
-		FruiteType fruitType = FruiteType.APPLE;
-		int FruitX = 15, FruitY = 15;
-		Fruit fruit = new Fruit(FruitX, FruitY, fruitType);
-		FruiteType fruitTypeChange = FruiteType.BANANA;
-		fruit.setType(fruitTypeChange);
-		Assert.assertTrue((fruit.getType().equals(fruitTypeChange)));
-
-	}
-
-	@Test
-	public void SnakeClassTesting() {
-
-		int length = 5;
-		Snake snake = new Snake(length);
-		snake.addSegment();
-		Assert.assertTrue(((snake.getBody().size() == length + 1)));
-		length++;
-	}
 
 	@Test
 	public void MouseClassTesting() {

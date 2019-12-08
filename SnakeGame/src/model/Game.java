@@ -8,12 +8,65 @@ public class Game {
 	private Date date;
 	private int score;
 	private double duration;
+	private int numOfApples;
+	private int numOfPears;
+	private int numOfBannanas;
+	private int numOfMouses;
 
-	public Game(String nickName, Date date, int score, double duration) {
+	public Game(String nickName, Date date) {
 		this.nickName = nickName;
 		this.date = date;
-		this.score = score;
-		this.duration = duration;
+		this.score = 0;
+		this.duration = 0;
+		this.numOfApples = 0;
+		this.numOfBannanas = 0;
+		this.numOfPears = 0;
+		this.numOfMouses = 0;
+	}
+
+	
+	public void incrementNumOfApples() {
+		numOfApples++;
+	}
+	public void incrementNumOfPears() {
+		numOfPears++;
+	}
+	public void incrementNumOfBannanas() {
+		numOfBannanas++;
+	}
+	public void incrementNumOfMouse() {
+		numOfMouses++;
+	}
+	public int getNumOfApples() {
+		return numOfApples;
+	}
+
+	public void setNumOfApples(int numOfApples) {
+		this.numOfApples = numOfApples;
+	}
+
+	public int getNumOfPears() {
+		return numOfPears;
+	}
+
+	public void setNumOfPears(int numOfPears) {
+		this.numOfPears = numOfPears;
+	}
+
+	public int getNumOfBannanas() {
+		return numOfBannanas;
+	}
+
+	public void setNumOfBannanas(int numOfBannanas) {
+		this.numOfBannanas = numOfBannanas;
+	}
+
+	public int getNumOfMouses() {
+		return numOfMouses;
+	}
+
+	public void setNumOfMouses(int numOfMouses) {
+		this.numOfMouses = numOfMouses;
 	}
 
 	public String getNickName() {
