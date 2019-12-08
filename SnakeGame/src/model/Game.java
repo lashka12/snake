@@ -3,8 +3,6 @@ package model;
 import java.util.Date;
 import java.util.HashMap;
 
-
-
 public class Game {
 
 	private String nickName;
@@ -13,55 +11,48 @@ public class Game {
 	private double duration;
 	private HashMap<String, Integer> eatenObjects;
 
-
 	public Game(String nickName, Date date) {
+
 		this.nickName = nickName;
+		eatenObjects = new HashMap<String, Integer>();
 		this.date = date;
 		this.score = 0;
 		this.duration = 0;
-		eatenObjects = new HashMap<>();
-		eatenObjects.put("numOfApples", 0);
-		eatenObjects.put("numOfBannanas", 0);
-		eatenObjects.put("numOfPears", 0);
-		eatenObjects.put("numOfMouses", 0);
-
 
 	}
 
-	
 	/**
-	 * a method to maintain game data history during the game
-	 * @param name
+	 * this method adds a eaten object to the game and update the score
+	 * 
+	 * @param eatenObject eaten object on playGround
 	 */
-	public void incrementNumOfEatenObjects(String objectEaten) {
-		switch (objectEaten) {
-			case "APPLE":
-				Integer numOfApples = eatenObjects.get("numOfApples");
-				eatenObjects.put("numOfApples", numOfApples + 1);
-				break;
-			case "BANANA":
-				Integer numOfBannanas = eatenObjects.get("numOfBannanas");
-				eatenObjects.put("numOfBannanas", numOfBannanas + 1);
-				break;
-			case "PEAR":
-				Integer numOfPears = eatenObjects.get("numOfPears");
-				eatenObjects.put("numOfPears", numOfPears + 1);
-				break;
-			case "MOUSE":
-				Integer numOfMouses = eatenObjects.get("numOfMouses");
-				eatenObjects.put("numOfMouses", numOfMouses + 1);
-				break;
-			default:
-				break;
-		}
-	}
 	
-	
-	public void incrementScore(int pointsToAdd) {
-		
-		this.score = this.score + pointsToAdd;
-	}
+	public void addEatenObject(Block eatenObject) {
 
+		String key = eatenObject.getClass().getSimpleName();
+		int toAdd = 0;
+
+		if (eatenObject instanceof Fruit) {
+			key = ((Fruit) eatenObject).getType().name();
+			toAdd = ((Fruit) eatenObject).getType().getPoints();
+		}
+
+		if (eatenObject instanceof Mouse)
+			toAdd = 20;
+
+		if (eatenObject instanceof Question)
+			toAdd = 0;// question points will be added when we implement questionPage Controller based
+						// on the answer
+
+		if (!eatenObjects.containsKey(key))
+			eatenObjects.put(key, 1);
+
+		else
+			eatenObjects.put(key, eatenObjects.get(key) + 1);
+
+		score = getScore() + toAdd;
+
+	}
 
 	public String getNickName() {
 		return nickName;

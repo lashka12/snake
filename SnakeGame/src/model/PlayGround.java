@@ -27,9 +27,7 @@ public class PlayGround extends Pane {
 	private Fruit apple;
 	private Fruit banana;
 	private Fruit pear;
-	private int score;
-	private Game currentGame = null;
-
+	private Game currentGame;
 	private static PlayGround instance = null;
 
 	public static PlayGround getInstance() {
@@ -43,9 +41,7 @@ public class PlayGround extends Pane {
 		if (instance == null) {
 			instance = this;
 		}
-				
 
-		
 		segments = new ArrayList<Segment>();
 		w = width;
 		h = height;
@@ -63,7 +59,6 @@ public class PlayGround extends Pane {
 		addQuestion();
 		addGame();
 
-	
 		Thread thread = new Thread(() -> {
 			try {
 				Thread.sleep(800);
@@ -110,21 +105,20 @@ public class PlayGround extends Pane {
 		});
 		thread.start();
 
-	
 	}
 
-	
 	public void addGame() {
-		
+
 		// Creating game object
 		Calendar cal = Calendar.getInstance();
 		Date date = cal.getTime();
 		System.out.println(date);
-        // need to get the player name from the UserInputPage and at the end of the game save the game to the list in SysData
-		currentGame = new Game("PlayerName" , date);
-		
+		// need to get the player name from the UserInputPage and at the end of the game
+		// save the game to the list in SysData
+		currentGame = new Game("PlayerName", date);
+
 	}
-	
+
 	public void addSnake(Snake s) {
 
 		setSnake(s);
@@ -151,6 +145,7 @@ public class PlayGround extends Pane {
 
 		if (mouseWasEaten()) {
 
+			currentGame.addEatenObject(mouse);
 			SoundEffects.playBubbleSound();
 			getChildren().remove(mouse);
 			Fire fire = new Fire(mouse.getPosX(), mouse.getPosY());
@@ -171,19 +166,19 @@ public class PlayGround extends Pane {
 				}
 			});
 			thread.start();
-			currentGame.incrementScore(20);
-			score = currentGame.getScore();
-			MainPageController.getInstance().updateScore(score);
+
+			MainPageController.getInstance().updateScore(currentGame.getScore());
 
 		}
 
 		if (isEaten(apple)) {
 
+			currentGame.addEatenObject(apple);
 			popPoints(apple);
-
 			SoundEffects.playBubbleSound();
 			getChildren().remove(apple);
 			apple = new Fruit(-100, -100, FruiteType.APPLE);
+
 			Thread thread = new Thread(() -> {
 				try {
 
@@ -198,13 +193,13 @@ public class PlayGround extends Pane {
 
 			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
-			currentGame.incrementScore(apple.getType().getPoints());
-			score = currentGame.getScore();
-			MainPageController.getInstance().updateScore(score);
+			MainPageController.getInstance().updateScore(currentGame.getScore());
 
 		}
+
 		if (isEaten(banana)) {
 
+			currentGame.addEatenObject(banana);
 			popPoints(banana);
 			SoundEffects.playBubbleSound();
 			getChildren().remove(banana);
@@ -222,9 +217,7 @@ public class PlayGround extends Pane {
 				}
 			});
 			thread.start();
-			currentGame.incrementScore(banana.getType().getPoints());
-			score = currentGame.getScore();
-			MainPageController.getInstance().updateScore(score);
+			MainPageController.getInstance().updateScore(currentGame.getScore());
 
 			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
@@ -233,11 +226,10 @@ public class PlayGround extends Pane {
 
 		if (isEaten(pear)) {
 
+			currentGame.addEatenObject(pear);
 			popPoints(pear);
 			SoundEffects.playBubbleSound();
-
 			getChildren().remove(pear);
-
 			pear = new Fruit(-100, -100, FruiteType.PEAR);
 
 			Thread thread = new Thread(() -> {
@@ -254,9 +246,7 @@ public class PlayGround extends Pane {
 
 			snake.addSegment();
 			addSegment(snake.getBody().get(snake.getBody().size() - 1));
-			currentGame.incrementScore(pear.getType().getPoints());
-			score = currentGame.getScore();
-			MainPageController.getInstance().updateScore(score);
+			MainPageController.getInstance().updateScore(currentGame.getScore());
 		}
 
 		mouse.update();
@@ -337,7 +327,6 @@ public class PlayGround extends Pane {
 		q.setLayoutY(p.y * Constants.BLOCK_SIZE);
 		getChildren().add(q);
 
-
 	}
 
 	public void addBanana() {
@@ -367,23 +356,20 @@ public class PlayGround extends Pane {
 		Point p = new Point((int) (Math.random() * w), (int) (Math.random() * h));
 
 		// if point is not empty
-		// loop to till finding an empty point
+		// loop till finding an empty point
 
 		return p;
 
 	}
-
 
 	public boolean mouseWasEaten() {
 
 		if ((Math.abs(mouse.getPosX() - getSnake().getHead().getPosX()) >= 0
 				&& Math.abs(mouse.getPosX() - getSnake().getHead().getPosX()) < 2)
 				&& (Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) >= 0
-						&& Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) < 2)) {
-			
-					currentGame.incrementNumOfEatenObjects("MOUSE");
-					return true;
-		}
+						&& Math.abs(mouse.getPosY() - getSnake().getHead().getPosY()) < 2))
+			return true;
+
 		return false;
 
 	}
@@ -395,12 +381,10 @@ public class PlayGround extends Pane {
 		if ((Math.abs(fruit.getPosX() - getSnake().getHead().getPosX()) >= 0
 				&& Math.abs(fruit.getPosX() - getSnake().getHead().getPosX()) < 2)
 				&& (Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) >= 0
-						&& Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) < 2)) {
-		
-						currentGame.incrementNumOfEatenObjects(fruit.getType().name());
-						return true;
+						&& Math.abs(fruit.getPosY() - getSnake().getHead().getPosY()) < 2))
 
-		}
+			return true;
+
 		return false;
 
 	}
@@ -420,15 +404,5 @@ public class PlayGround extends Pane {
 	public void setSnake(Snake snake) {
 		this.snake = snake;
 	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-	
-	
 
 }

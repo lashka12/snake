@@ -82,7 +82,7 @@ public class AcceptenceTests2And3 {
 		Assert.assertTrue(ques.getTeam().equals(team));
 		ques.setAnswers(answers);
 		Assert.assertTrue(ques.getAnswers().equals(answers));
-		
+
 	}
 
 	@Test
@@ -92,20 +92,17 @@ public class AcceptenceTests2And3 {
 		SysData sd = new SysData();
 		int w = 100, h = 100;
 		Snake snake = new Snake(5);
-		int score = 10;
 		PlayGround playground = new PlayGround(w, h);
 		playground.addSnake(snake);
 		Assert.assertTrue(playground.getSnake() != null);
-		playground.setScore(score);
-		Assert.assertTrue(playground.getScore() == score);
 		Assert.assertTrue(playground.getH() == h);
 		Assert.assertTrue(playground.getW() == w);
 
 	}
-	
+
 	@Test
 	public void SnakeClassTest() {
-		
+
 		Snake snake = new Snake(7);
 		Assert.assertTrue(snake.getHead() != null);
 		Assert.assertTrue(snake.getBody() != null);
@@ -114,13 +111,12 @@ public class AcceptenceTests2And3 {
 		snake1.addSegment();
 		Assert.assertTrue(((snake1.getBody().size() == length + 1)));
 		length++;
-		
+
 	}
-	
-	
+
 	@Test
 	public void FruitClassesTesting() {
-		
+
 		FruiteType fruitType = FruiteType.APPLE;
 		int FruitX = 15, FruitY = 15;
 		Fruit fruit = new Fruit(FruitX, FruitY, fruitType);
@@ -128,24 +124,24 @@ public class AcceptenceTests2And3 {
 		fruit.setType(fruitTypeChange);
 		Assert.assertTrue((fruit.getType().equals(fruitTypeChange)));
 
-		Fruit apple = new Fruit(-100, -100 , FruiteType.APPLE);
-		Assert.assertTrue(apple.getType().equals(FruiteType.APPLE) );
+		Fruit apple = new Fruit(-100, -100, FruiteType.APPLE);
+		Assert.assertTrue(apple.getType().equals(FruiteType.APPLE));
 		Assert.assertTrue(apple.getType().name().equals("APPLE"));
 		Assert.assertTrue(apple.getType().getSecondsDelay() == 5);
 		Assert.assertTrue(apple.getType().getPoints() == 10);
 		Assert.assertTrue(apple.getType().getTailExtension() == 1);
 		Assert.assertTrue(apple.getType().getImage() != null);
-		
-		Fruit pear = new Fruit(-100, -100 , FruiteType.PEAR);
-		Assert.assertTrue(pear.getType().equals(FruiteType.PEAR) );
+
+		Fruit pear = new Fruit(-100, -100, FruiteType.PEAR);
+		Assert.assertTrue(pear.getType().equals(FruiteType.PEAR));
 		Assert.assertTrue(pear.getType().name().equals("PEAR"));
 		Assert.assertTrue(pear.getType().getSecondsDelay() == 0);
 		Assert.assertTrue(pear.getType().getPoints() == 20);
 		Assert.assertTrue(pear.getType().getTailExtension() == 1);
 		Assert.assertTrue(pear.getType().getImage() != null);
-		
-		Fruit bannana = new Fruit(-100, -100 , FruiteType.BANANA);
-		Assert.assertTrue(bannana.getType().equals(FruiteType.BANANA) );
+
+		Fruit bannana = new Fruit(-100, -100, FruiteType.BANANA);
+		Assert.assertTrue(bannana.getType().equals(FruiteType.BANANA));
 		Assert.assertTrue(bannana.getType().name().equals("BANANA"));
 		Assert.assertTrue(bannana.getType().getSecondsDelay() == 10);
 		Assert.assertTrue(bannana.getType().getPoints() == 15);
@@ -153,6 +149,5 @@ public class AcceptenceTests2And3 {
 		Assert.assertTrue(bannana.getType().getImage() != null);
 
 	}
-
 
 }
