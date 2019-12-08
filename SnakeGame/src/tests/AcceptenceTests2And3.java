@@ -1,5 +1,6 @@
 package tests;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class AcceptenceTests2And3 {
 	public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
 
 	@Test
-	public void GameClassTest() {
+	public void GameClassTest() throws ParseException, org.json.simple.parser.ParseException {
 
 		@SuppressWarnings("unused")
 		SysData sd = new SysData();
@@ -58,7 +59,7 @@ public class AcceptenceTests2And3 {
 	}
 
 	@Test
-	public void QuestionClassTest() {
+	public void QuestionClassTest() throws ParseException, org.json.simple.parser.ParseException {
 
 		@SuppressWarnings("unused")
 		SysData sd = new SysData();
@@ -86,7 +87,7 @@ public class AcceptenceTests2And3 {
 	}
 
 	@Test
-	public void PlayGroundClassTest() {
+	public void PlayGroundClassTest() throws ParseException, org.json.simple.parser.ParseException {
 
 		@SuppressWarnings("unused")
 		SysData sd = new SysData();
