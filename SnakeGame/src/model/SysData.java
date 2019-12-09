@@ -26,9 +26,15 @@ public class SysData {
 		}
 
 		questions = JsonReader.readQuestionsFile();
+		System.out.println(questions);
+
 		gamesHistory=JsonReader.readGamesFile(); 
+		System.out.println(gamesHistory);
+
 	
-//		JsonWriter.writeGameHistory(g);
+		JsonWriter.writeGameHistory(gamesHistory);
+		//System.out.println(gamesHistory);
+
 		// this code line
 
 	}

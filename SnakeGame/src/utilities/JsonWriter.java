@@ -21,51 +21,52 @@ import model.Game;
  */
 public class JsonWriter {
 	
-	public static void writeGameHistory(Game gameToAdd) throws ParseException {
+	public static void writeGameHistory(ArrayList<Game> gamesHistory) throws ParseException {
 		
-			        JSONObject gamesJson = new JSONObject();
+					JSONArray array = new JSONArray();
 			        JSONObject gameDetails = new JSONObject();
+			        JSONObject gamesJson = new JSONObject();
 			        
-			        String nickName = gameToAdd.getNickName().toString();
-			        String score = String.valueOf(gameToAdd.getScore());
-			        String duaration = Double.toString(gameToAdd.getDuration());
+			        for(Game gameToAdd : gamesHistory ) {
+			        	if(gameToAdd != null ) {
+			        		
+			        		String nickName = gameToAdd.getNickName().toString();
+					        String score = String.valueOf(gameToAdd.getScore());
+					        String duaration = Double.toString(gameToAdd.getDuration());
 
-			        Date date = gameToAdd.getDate();
-			        String pattern = "dd/MM/yyyy";
-			        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-			        String gameDate = simpleDateFormat.format(date);
-			        
-			        ArrayList<String> arr = new ArrayList<>();
-			        HashMap<String, Integer> map = gameToAdd.getEatenObjects();
-			        for (Entry<String, Integer> mapElement : map.entrySet()) { 
-			        	arr.add(mapElement.getKey()+"#"+mapElement.getValue());
+					        Date date = gameToAdd.getDate();
+					        String pattern = "dd/MM/yyyy";
+					        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+					        String gameDate = simpleDateFormat.format(date);
+					        
+					        ArrayList<String> arr = new ArrayList<>();
+					        HashMap<String, Integer> map = gameToAdd.getEatenObjects();
+					        for (Entry<String, Integer> mapElement : map.entrySet()) { 
+					        	arr.add(mapElement.getKey()+"#"+mapElement.getValue());
+					        }
+			
+					        gameDetails.put("playerName",nickName );
+					        gameDetails.put("date", gameDate);
+					        gameDetails.put("score",score );
+					        gameDetails.put("duaration",duaration );
+					        gameDetails.put("history", arr);
+					        
+					    	//Write JSON file
+					        try(FileWriter file = new FileWriter("games.json")) {
+					 
+								array.add(gameDetails);
+						        gamesJson.put("games", array);
+					        	file.write(gamesJson.toJSONString());
+					            file.flush();
+					 
+					        } catch (IOException e) {
+					            e.printStackTrace();
+					        }
+				      	
+			        	}
+
 			        }
 	
-			        gameDetails.put("playerName",nickName );
-			        gameDetails.put("date", gameDate);
-			        gameDetails.put("score",score );
-			        gameDetails.put("duaration",duaration );
-			        gameDetails.put("history", arr);
-		        
-			        
-	
-					//Write JSON file
-			        try {
-			 
-			        	Object obj = new JSONParser().parse(new FileReader("games.json"));
-						JSONObject jo = (JSONObject) obj;
-						JSONArray array = (JSONArray) jo.get("games");
-						array.add(gameDetails);
-				        gamesJson.put("games", array);
-						FileWriter file = new FileWriter("games.json" , false);
-			        	file.write(gamesJson.toJSONString());
-			            file.flush();
-			 
-			        } catch (IOException e) {
-			            e.printStackTrace();
-			        }
-
-		
 	}
 
 }
