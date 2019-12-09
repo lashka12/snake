@@ -8,11 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Block;
-import model.Fruit;
-import model.Mouse;
 import model.SysData;
-import utilities.FruiteType;
 import utilities.SoundEffects;
 
 /**
