@@ -112,7 +112,6 @@ public class PlayGround extends Pane {
 		// Creating game object
 		Calendar cal = Calendar.getInstance();
 		Date date = cal.getTime();
-		System.out.println(date);
 		// need to get the player name from the UserInputPage and at the end of the game
 		// save the game to the list in SysData
 		currentGame = new Game("PlayerName", date);
