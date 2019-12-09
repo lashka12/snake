@@ -1,9 +1,8 @@
 package model;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
-import utilities.JsonReader;
+import utilities.JsonProcessor;
 
 public class SysData {
 
@@ -15,24 +14,18 @@ public class SysData {
 		return instance;
 	}
 
-	public SysData()  {
+	public SysData() {
 		if (instance == null) {
 			instance = this;
 		}
 
-		questions = JsonReader.readQuestionsFile();
-		try {
-			gamesHistory=JsonReader.readGamesFile();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		questions = JsonProcessor.readQuestionsFile();
+		gamesHistory = JsonProcessor.readGamesFile();
 
-	
-//		JsonWriter.writeGameHistory(gamesHistory);
+	}
 
-		// this code line
-
+	public ArrayList<Game> getGames() {
+		return gamesHistory;
 	}
 
 	/**
@@ -50,6 +43,23 @@ public class SysData {
 			}
 		}
 		return false;
+	}
+
+	public static void UpdateQuestion(Question question) {
+
+		if (question != null) {
+			questions.remove(question);
+			questions.add(question);
+
+		}
+
+	}
+
+	public static void deleteQuestion(Question question) {
+		if (question != null) {
+			questions.remove(question);
+
+		}
 	}
 
 	/**
@@ -72,10 +82,6 @@ public class SysData {
 	public static boolean Save() {
 
 		return false;
-	}
-
-	public ArrayList<Game> getGamesHistory() {
-		return gamesHistory;
 	}
 
 	public static ArrayList<Question> getQuestions() {

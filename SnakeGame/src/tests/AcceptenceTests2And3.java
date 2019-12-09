@@ -6,7 +6,6 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.Rule;
-
 import model.Fruit;
 import model.Game;
 import model.PlayGround;
@@ -14,7 +13,7 @@ import model.Question;
 import model.Snake;
 import model.SysData;
 import utilities.FruiteType;
-import utilities.JsonReader;
+import utilities.JsonProcessor;
 import utilities.Level;
 
 public class AcceptenceTests2And3 {
@@ -47,7 +46,7 @@ public class AcceptenceTests2And3 {
 	public void JsonReaderClassTest() {
 
 		ArrayList<Question> result = new ArrayList<Question>();
-		result = JsonReader.readQuestionsFile();
+		result = JsonProcessor.readQuestionsFile();
 		Assert.assertTrue(result.size() != 0);
 	}
 
