@@ -11,8 +11,9 @@ public class Game {
 	private double duration;
 	private HashMap<String, Integer> eatenObjects;
 
-	public Game(String nickName, Date date) {
+	public Game(String nickName) {
 
+		this.date=new Date();
 		this.nickName = nickName;
 		eatenObjects = new HashMap<String, Integer>();
 		this.date = date;

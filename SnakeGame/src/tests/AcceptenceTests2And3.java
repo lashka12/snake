@@ -30,7 +30,7 @@ public class AcceptenceTests2And3 {
 		Date date = new Date();
 		int scoreGame = 15;
 		double duration = 20;
-		Game game = new Game(nickName, date);
+		Game game = new Game(nickName);
 		game.setNickName(nickName);
 		Assert.assertTrue(game.getNickName().equals(nickName));
 		game.setDate(date);

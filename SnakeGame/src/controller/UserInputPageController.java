@@ -15,8 +15,8 @@ import javafx.util.Duration;
 import utilities.SoundEffects;
 
 /**
- * this class controls the UserInputPage.FXML  , initialize it and handle
- * it's actions
+ * this class controls the UserInputPage.FXML , initialize it and handle it's
+ * actions
  * 
  * objects with @FXML sign are the graphic components of the FXML file
  * 
@@ -57,34 +57,36 @@ public class UserInputPageController implements Initializable {
 	@FXML
 	void play() {
 
-		Thread thread = new Thread(() -> {
-			try {
+		if (!nickName.getText().equals("")) {
+			Thread thread = new Thread(() -> {
+				try {
 
-				Platform.runLater(() -> {
-					SoundEffects.playButtonSound();
-					FadeTransition ft = new FadeTransition(Duration.millis(800), root);
-					ft.setFromValue(1.0);
-					ft.setToValue(0.0);
-					ft.play();
+					Platform.runLater(() -> {
+						SoundEffects.playButtonSound();
+						FadeTransition ft = new FadeTransition(Duration.millis(800), root);
+						ft.setFromValue(1.0);
+						ft.setToValue(0.0);
+						ft.play();
 
-				});
-				Thread.sleep(800);
-				Platform.runLater(() -> {
-					Stage stage = (Stage) nickName.getScene().getWindow();
-					stage.close();
+					});
+					Thread.sleep(800);
+					Platform.runLater(() -> {
+						Stage stage = (Stage) nickName.getScene().getWindow();
+						stage.close();
 
-				});
-				Thread.sleep(100);
-				Platform.runLater(() -> {
-					MainPageController.getInstance().openGamePane();
-				});
+					});
+					Thread.sleep(100);
+					Platform.runLater(() -> {
+						MainPageController.getInstance().openGamePane();
+					});
 
-			} catch (Exception exc) {
-				throw new Error("Unexpected interruption");
-			}
-		});
-		thread.start();
+				} catch (Exception exc) {
+					throw new Error("Unexpected interruption");
+				}
+			});
+			thread.start();
 
+		}
 	}
 
 	@FXML
@@ -114,6 +116,14 @@ public class UserInputPageController implements Initializable {
 		});
 		thread.start();
 
+	}
+
+	public JFXTextField getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(JFXTextField nickName) {
+		this.nickName = nickName;
 	}
 
 }

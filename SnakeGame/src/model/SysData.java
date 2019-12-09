@@ -7,7 +7,7 @@ import utilities.JsonProcessor;
 public class SysData {
 
 	private static SysData instance;
-	private ArrayList<Game> gamesHistory;
+	private static ArrayList<Game> games;
 	private static ArrayList<Question> questions;
 
 	public static SysData getInstance() {
@@ -20,12 +20,23 @@ public class SysData {
 		}
 
 		questions = JsonProcessor.readQuestionsFile();
-		gamesHistory = JsonProcessor.readGamesFile();
+		games = JsonProcessor.readGamesFile();
 
 	}
 
 	public ArrayList<Game> getGames() {
-		return gamesHistory;
+		return games;
+	}
+
+	public static boolean addGame(Game game) {
+
+		if (game != null) {
+			if (!games.contains(game)) {
+				games.add(game);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -86,10 +97,6 @@ public class SysData {
 
 	public static ArrayList<Question> getQuestions() {
 		return questions;
-	}
-
-	public void setGamesHistory(ArrayList<Game> gamesHistory) {
-		this.gamesHistory = gamesHistory;
 	}
 
 }

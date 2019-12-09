@@ -2,11 +2,10 @@ package model;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-
 import controller.GameEngine;
 import controller.MainPageController;
+import controller.UserInputPageController;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -42,6 +41,8 @@ public class PlayGround extends Pane {
 			instance = this;
 		}
 
+		currentGame = new Game(UserInputPageController.getInstance().getNickName().getText());
+
 		segments = new ArrayList<Segment>();
 		w = width;
 		h = height;
@@ -57,7 +58,6 @@ public class PlayGround extends Pane {
 		addPear();
 		addMouse();
 		addQuestion();
-		addGame();
 
 		Thread thread = new Thread(() -> {
 			try {
@@ -104,17 +104,6 @@ public class PlayGround extends Pane {
 			}
 		});
 		thread.start();
-
-	}
-
-	public void addGame() {
-
-		// Creating game object
-		Calendar cal = Calendar.getInstance();
-		Date date = cal.getTime();
-		// need to get the player name from the UserInputPage and at the end of the game
-		// save the game to the list in SysData
-		currentGame = new Game("PlayerName", date);
 
 	}
 
