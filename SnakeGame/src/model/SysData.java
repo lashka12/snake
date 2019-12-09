@@ -3,9 +3,7 @@ package model;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
-
 import utilities.JsonReader;
-import utilities.JsonWriter;
 
 public class SysData {
 
@@ -17,20 +15,21 @@ public class SysData {
 		return instance;
 	}
 
-	public SysData() throws ParseException, org.json.simple.parser.ParseException {
+	public SysData()  {
 		if (instance == null) {
 			instance = this;
 		}
 
 		questions = JsonReader.readQuestionsFile();
-		System.out.println(questions);
-
-		gamesHistory=JsonReader.readGamesFile(); 
-		System.out.println(gamesHistory);
+		try {
+			gamesHistory=JsonReader.readGamesFile();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 
 	
-		JsonWriter.writeGameHistory(gamesHistory);
-		//System.out.println(gamesHistory);
+//		JsonWriter.writeGameHistory(gamesHistory);
 
 		// this code line
 
