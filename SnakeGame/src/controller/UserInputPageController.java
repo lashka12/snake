@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Game;
 import utilities.SoundEffects;
 
 /**
@@ -78,6 +79,11 @@ public class UserInputPageController implements Initializable {
 					Thread.sleep(100);
 					Platform.runLater(() -> {
 						MainPageController.getInstance().openGamePane();
+					});
+					Thread.sleep(100);
+					Platform.runLater(() -> {
+						Game.getInstance().setNickName(nickName.getText());
+						GameController.getInstance().StartGame();
 					});
 
 				} catch (Exception exc) {

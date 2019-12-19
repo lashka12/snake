@@ -37,19 +37,19 @@
                         </StackPane>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="128.0" spacing="3.0">
                            <children>
-                              <ImageView fitHeight="50.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="h1" fitHeight="50.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../resources/pics/l1.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="50.0" fitWidth="35.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="h2" fitHeight="50.0" fitWidth="35.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../resources/pics/l1.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="50.0" fitWidth="35.0" layoutX="84.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="h3" fitHeight="50.0" fitWidth="35.0" layoutX="84.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../resources/pics/l2.png" />
+                                    <Image url="@../../resources/pics/l1.png" />
                                  </image>
                               </ImageView>
                            </children>

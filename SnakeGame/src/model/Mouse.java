@@ -7,17 +7,24 @@ import utilities.Direction;
 public class Mouse extends Block {
 
 	private Direction direction;
-	private static int stepsCount;
+	private boolean eaten;
 
 	public Mouse(int x, int y) {
-		super(x, y, Constants.MOUSE_RIGHT_IMAGE);
-
+		super(x, y);
 		stepsCount = 0;
-		setTranslateX(getPosX() * Constants.BLOCK_SIZE);
-		setTranslateY(getPosY() * Constants.BLOCK_SIZE);
 		this.direction = Direction.UP;
 
 	}
+
+	public boolean isEaten() {
+		return eaten;
+	}
+
+	public void setEaten(boolean eaten) {
+		this.eaten = eaten;
+	}
+
+	private static int stepsCount;
 
 	public Direction getDirection() {
 		return direction;
@@ -27,7 +34,7 @@ public class Mouse extends Block {
 		this.direction = direction;
 	}
 
-	public void update() { // update position
+	public void update() {
 
 		if (stepsCount == 0) {
 
@@ -87,7 +94,7 @@ public class Mouse extends Block {
 				break;
 			}
 
-			if (stepsCount == 30) { // keep walking in the same direction 10 steps before changing direction
+			if (stepsCount == 30) { // keep walking in the same direction 30 steps before changing direction
 
 				Random rand = new Random();
 				int randomNum = rand.nextInt(4) + 1;
@@ -133,57 +140,39 @@ public class Mouse extends Block {
 
 		}
 
-		updatePosition();
-
 	}
-
-	// ---------------------------------------Control-----------------------------------
 
 	public void moveUp() {
 
-		if (getPosY() > 4) {
-			setPosY(getPosY() - 1);
+		if (getY() > 4) {
+			setY(getY() - 1);
 		}
-		setImage(Constants.MOUSE_UP_IMAGE);
 
 	}
 
 	public void moveDown() {
 
-		if (getPosY() < Constants.GAME_HIGHT - 9) {
-			setPosY(getPosY() + 1);
+		if (getY() < Constants.GAME_HIGHT - 9) {
+			setY(getY() + 1);
 		}
-		setImage(Constants.MOUSE_DOWN_IMAGE);
 
 	}
 
 	public void moveLeft() {
 
-		if (getPosX() > 4) {
-			setPosX(getPosX() - 1);
+		if (getX() > 4) {
+			setX(getX() - 1);
 		}
-
-		setImage(Constants.MOUSE_LEFT_IMAGE);
 
 	}
 
 	public void moveRight() {
 
-		if (getPosX() < Constants.GAME_WIDTH - 9) {
-			setPosX(getPosX() + 1);
+		if (getX() < Constants.GAME_WIDTH - 9) {
+			setX(getX() + 1);
 		}
-		setImage(Constants.MOUSE_RIGHT_IMAGE);
 
 	}
-
-	public void updatePosition() { // visualy
-
-		setTranslateX(getPosX() * Constants.BLOCK_SIZE);
-		setTranslateY(getPosY() * Constants.BLOCK_SIZE);
-
-	}
-
-	// ---------------------------------------------------------------------------------
 
 	public static int getStepsCount() {
 		return stepsCount;

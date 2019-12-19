@@ -1,15 +1,16 @@
 package controller;
 
-import java.text.ParseException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.SysData;
+import model.Game;
+import utilities.Direction;
 import utilities.SoundEffects;
+import view.GameSimulator;
 
 /**
  * © 2019 Piranha Team , MIS - Haifa University Some Rights Reserved
@@ -25,19 +26,32 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		Game game = new Game(""); // nick name will be added later
+		GameSimulator view = new GameSimulator();
+		GameController gc = new GameController(game, view);
+
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainPage.fxml"));
 		Scene scene = new Scene(root);
-		GameEngine ge = new GameEngine(scene);
+		scene.setOnKeyPressed(e -> {
+
+			if (e.getCode().equals(KeyCode.UP) && game.getPlayGround().getSnake().getDirection() != Direction.DOWN)
+				gc.changeDiriction(Direction.UP);
+			if (e.getCode().equals(KeyCode.DOWN) && game.getPlayGround().getSnake().getDirection() != Direction.UP)
+				gc.changeDiriction(Direction.DOWN);
+			if (e.getCode().equals(KeyCode.LEFT) && game.getPlayGround().getSnake().getDirection() != Direction.RIGHT)
+				gc.changeDiriction(Direction.LEFT);
+			if (e.getCode().equals(KeyCode.RIGHT) && game.getPlayGround().getSnake().getDirection() != Direction.LEFT)
+				gc.changeDiriction(Direction.RIGHT);
+
+		});
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
 	}
 
-	public static void main(String[] args) throws ParseException, org.json.simple.parser.ParseException {
+	public static void main(String[] args) {
 
-		@SuppressWarnings("unused")
-		SysData data = new SysData(); // here we create an instance of the System data to use it while game is running
 		SoundEffects.playStartSound();
 		launch(args);
 

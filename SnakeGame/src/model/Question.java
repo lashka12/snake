@@ -1,9 +1,8 @@
 package model;
 import java.util.ArrayList;
-import utilities.Constants;
 import utilities.Level;
 
-public class Question extends Block {
+public class Question {
 
 	private String content;
 	private Level level;
@@ -13,7 +12,6 @@ public class Question extends Block {
 
 	public Question(String content, Level level, ArrayList<String> answers, String correctAnswer, String team) {
 
-		super(0, 0, Constants.QUESTION_IMAGE);
 		this.content = content;
 		this.level = level;
 		this.answers = answers;

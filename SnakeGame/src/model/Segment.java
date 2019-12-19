@@ -1,107 +1,67 @@
 package model;
 
-import utilities.Constants;
+import java.util.concurrent.atomic.AtomicInteger;
 import utilities.Direction;
 
 public class Segment extends Block {
 
-	private int oldPosX, oldPosY;
+	private static final AtomicInteger count = new AtomicInteger(0);
+	private int id;
+	private int oldX, oldY;
 	private Segment previous;
 	private Direction direction = Direction.LEFT;
 
 	public Segment(int x, int y, Segment prevBlock) {
-
-		super(x, y, Constants.SNAKE_BODY_IMAGE);
+		super(x, y);
+		this.id = count.getAndIncrement();
 		this.previous = prevBlock;
 
 	}
 
-	public void update() { // update position
+	public void move() { // update position
 
-		oldPosX = getPosX();
-		oldPosY = getPosY();
+		oldX = getX();
+		oldY = getY();
 
 		if (previous == null) { // this block is a head it has no previous
 			switch (direction) {
 			case UP:
-				moveUp();
+				setY(getY() - 1);
 				break;
 			case DOWN:
-				moveDown();
+				setY(getY() + 1);
 				break;
 			case LEFT:
-				moveLeft();
+				setX(getX() - 1);
 				break;
 			case RIGHT:
-				moveRight();
+				setX(getX() + 1);
 				break;
 			}
 
 		} else { // not a head
 
-			setPosX(previous.oldPosX);
-			setPosY(previous.oldPosY);
+			setX(previous.oldX);
+			setY(previous.oldY);
 
 		}
-		updatePosition();
-	}
-
-	private void moveUp() {
-
-		setPosY(getPosY() - 1);
-
-		if (getPosY() < 0) {// it means snake hit a wall must change
-			setPosY(Constants.GAME_HIGHT - 2);
-		}
 
 	}
 
-	private void moveDown() {
-		setPosY(getPosY() + 1);
-
-		if (getPosY() >= Constants.GAME_HIGHT-1) { // it means snake hit a wall must change
-			setPosY(0);
-		}
-
+	public int getOldX() {
+		return oldX;
 	}
 
-	private void moveLeft() {
-
-		setPosX(getPosX() - 1);
-		if (getPosX() < 0) {// it means snake hit a wall must change
-			setPosX(Constants.GAME_WIDTH - 2);
-		}
+	public void setOldX(int oldX) {
+		this.oldX = oldX;
 	}
 
-	private void moveRight() {
-		setPosX(getPosX() + 1);
-
-		if (getPosX() >= Constants.GAME_WIDTH-1) {// it means snake hit a wall must change
-			setPosX(0);
-		}
+	public int getOldY() {
+		return oldY;
 	}
 
-	public void updatePosition() { // visualy
-
-		setTranslateX(getPosX() * Constants.BLOCK_SIZE);
-		setTranslateY(getPosY() * Constants.BLOCK_SIZE);
-
-	}
-
-	public int getOldPosX() {
-		return oldPosX;
-	}
-
-	public void setOldPosX(int oldPosX) {
-		this.oldPosX = oldPosX;
-	}
-
-	public int getOldPosY() {
-		return oldPosY;
-	}
-
-	public void setOldPosY(int oldPosY) {
-		this.oldPosY = oldPosY;
+	public void setOldY(int oldY) {
+		this.oldY = oldY;
 	}
 
 	public Direction getDirection() {
@@ -112,12 +72,22 @@ public class Segment extends Block {
 		this.direction = direction;
 	}
 
-	public Block getPrevious() {
+	public Segment getPrevious() {
 		return previous;
 	}
 
 	public void setPrevious(Segment previous) {
 		this.previous = previous;
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	@Override
+	public String toString() {
+		return "Segment [id=" + id + ", oldX=" + oldX + ", oldY=" + oldY + ", previous=" + previous + ", direction="
+				+ direction + "]";
 	}
 
 }

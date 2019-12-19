@@ -5,47 +5,51 @@ import java.util.HashMap;
 
 public class Game {
 
+	private static Game instance;
 	private String nickName;
 	private Date date;
 	private int score;
+	private int lives;
 	private double duration;
 	private HashMap<String, Integer> eatenObjects;
+	private PlayGround playGround;
+	private boolean over;
 
 	public Game(String nickName) {
 
-		this.date=new Date();
+		if (instance == null)
+			instance = this;
+
+		this.eatenObjects = new HashMap<String, Integer>();
+		this.playGround = new PlayGround();
 		this.nickName = nickName;
-		eatenObjects = new HashMap<String, Integer>();
-		this.date = date;
-		this.score = 0;
+		this.date = new Date();
 		this.duration = 0;
+		this.score = 0;
+		this.lives = 3;
+		this.over = false;
 
 	}
-	
-	
+
+	public static Game getInstance() {
+		return instance;
+	}
 
 	public HashMap<String, Integer> getEatenObjects() {
 		return eatenObjects;
 	}
 
-
-
 	public void setEatenObjects(HashMap<String, Integer> eatenObjects) {
 		this.eatenObjects = eatenObjects;
 	}
 
-
-
 	public Game(String nickName, Date date, int score, double duration, HashMap<String, Integer> eatenObjects) {
-//		super();
 		this.nickName = nickName;
 		this.date = date;
 		this.score = score;
 		this.duration = duration;
 		this.eatenObjects = eatenObjects;
 	}
-
-
 
 	/**
 	 * this method adds a eaten object to the game and update the score
@@ -66,9 +70,10 @@ public class Game {
 		if (eatenObject instanceof Mouse)
 			toAdd = 20;
 
-		if (eatenObject instanceof Question)
-			toAdd = 0;// question points will be added when we implement questionPage Controller based
-						// on the answer
+		// if (eatenObject instanceof Question)
+		// toAdd = 0;// question points will be added when we implement questionPage
+		// Controller based
+		// on the answer
 
 		if (!eatenObjects.containsKey(key))
 			eatenObjects.put(key, 1);
@@ -77,8 +82,11 @@ public class Game {
 			eatenObjects.put(key, eatenObjects.get(key) + 1);
 
 		score = getScore() + toAdd;
-		
 
+	}
+
+	public PlayGround getPlayGround() {
+		return playGround;
 	}
 
 	public String getNickName() {
@@ -116,6 +124,22 @@ public class Game {
 	@Override
 	public String toString() {
 		return "Game [nickName=" + nickName + ", date=" + date + ", score=" + score + ", duration=" + duration + "]";
+	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+	public boolean isOver() {
+		return over;
+	}
+
+	public void setOver(boolean over) {
+		this.over = over;
 	}
 
 }

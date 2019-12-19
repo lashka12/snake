@@ -12,8 +12,8 @@ public class Snake {
 	public Snake(int length) {
 
 		body = new ArrayList<Segment>();
-		int ipx = Constants.GAME_WIDTH / 2; // in center
-		int ipy = Constants.GAME_HIGHT / 2; // in center
+		int ipx = Constants.GAME_WIDTH / 2;
+		int ipy = Constants.GAME_HIGHT / 2;
 
 		head = new Segment(ipx, ipy, null);
 		body.add(head);
@@ -31,8 +31,8 @@ public class Snake {
 
 	public void addSegment() {
 
-		Segment previous=body.get(body.size()-1);
-		Segment tail = new Segment(previous.getPosX()+1, previous.getPosY()+1, previous);
+		Segment previous = body.get(body.size() - 1);
+		Segment tail = new Segment(previous.getX() + 1, previous.getY() + 1, previous);
 		body.add(tail);
 
 	}
@@ -49,16 +49,13 @@ public class Snake {
 		return body;
 	}
 
-	public void setBody(ArrayList<Segment> body) {
-		this.body = body;
-	}
-
 	public Segment getHead() {
 		return head;
 	}
 
-	public void setHead(Segment head) {
-		this.head = head;
+	@Override
+	public String toString() {
+		return "Snake [body=" + body + ", head=" + head + "]";
 	}
 
 }

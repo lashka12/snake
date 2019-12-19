@@ -1,48 +1,31 @@
 package model;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import utilities.Constants;
+public class Block {
 
-/**
- * this class is the basic view of all the objects on the screen
- * 
- * @author Lawrence
- *
- */
+	private int x, y;
 
-public abstract class Block extends ImageView {
-
-	private int posX, posY;
-
-	public Block(int x, int y, Image image) {
-
-		super(image); // setting the image according to the object
-		this.posX = x;
-		this.posY = y;
-		ViewOnScreen();
-
+	public Block(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
-	public void ViewOnScreen() {
-		setTranslateX(posX * Constants.BLOCK_SIZE);
-		setTranslateY(posY * Constants.BLOCK_SIZE);
+	public int getX() {
+		return x;
 	}
 
-	public int getPosX() {
-		return posX;
+	public void setX(int x) {
+		this.x = x;
 	}
 
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public int getY() {
+		return y;
 	}
 
-	public int getPosY() {
-		return posY;
+	public void setY(int y) {
+		this.y = y;
 	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
+	
+	
+	
+	
 }
