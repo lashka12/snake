@@ -30,7 +30,13 @@ public class GameSimulator extends Pane {
 
 		if (instance == null)
 			instance = this;
+		reset();
 
+	}
+
+	public void reset() {
+
+		getChildren().clear();
 		game = Game.getInstance();
 		ivList = new ArrayList<ImageView>();
 		size = game.getPlayGround().getSnake().getBody().size();
@@ -58,40 +64,48 @@ public class GameSimulator extends Pane {
 		appleImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.APPLE).getX() * Constants.BLOCK_SIZE);
 		appleImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.APPLE).getY() * Constants.BLOCK_SIZE);
 		appleImage.setEffect(new DropShadow(5, Color.BLACK));
-		appleImage.setCache(true);
-		appleImage.setCacheHint(CacheHint.SPEED);
 		appleImage.setId("APPLE");
 		banaImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.BANANA).getX() * Constants.BLOCK_SIZE);
 		banaImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.BANANA).getY() * Constants.BLOCK_SIZE);
 		banaImage.setEffect(new DropShadow(5, Color.BLACK));
-		banaImage.setCache(true);
-		banaImage.setCacheHint(CacheHint.SPEED);
 		banaImage.setId("BANANA");
 		pearImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.PEAR).getX() * Constants.BLOCK_SIZE);
 		pearImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.PEAR).getY() * Constants.BLOCK_SIZE);
 		pearImage.setEffect(new DropShadow(5, Color.BLACK));
-		pearImage.setCache(true);
-		pearImage.setCacheHint(CacheHint.SPEED);
 		pearImage.setId("PEAR");
 		mouseImage.setTranslateX(game.getPlayGround().getMouse().getX() * Constants.BLOCK_SIZE);
 		mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
 		mouseImage.setEffect(new DropShadow(5, Color.BLACK));
 		mouseImage.setId("mouse");
-		mouseImage.setCache(true);
-		mouseImage.setCacheHint(CacheHint.SPEED);
 		ivList.add(appleImage);
 		ivList.add(banaImage);
 		ivList.add(pearImage);
 		ivList.add(mouseImage);
-
 		getChildren().addAll(ivList); // or each one separately , check this later
-
 	}
 
 	public void render() {
+//		ImageView apple = (ImageView) lookup("#APPLE");
+//		System.out.println("apple graphics : " + apple.getTranslateX() / Constants.BLOCK_SIZE + ","
+//				+ apple.getTranslateY() / Constants.BLOCK_SIZE);
+//		System.out.println("apple Logic : " + game.getPlayGround().getFruits().get(FruiteType.APPLE).getX() + ","
+//				+ game.getPlayGround().getFruits().get(FruiteType.APPLE).getY());
+//		System.out.println("-------------------------------------------");
+//		ImageView banana = (ImageView) lookup("#BANANA");
+//		System.out.println("banana graphics : " + banana.getTranslateX() / Constants.BLOCK_SIZE + ","
+//				+ banana.getTranslateY() / Constants.BLOCK_SIZE);
+//		System.out.println("banana Logic : " + game.getPlayGround().getFruits().get(FruiteType.BANANA).getX() + ","
+//				+ game.getPlayGround().getFruits().get(FruiteType.BANANA).getY());
+//		System.out.println("-------------------------------------------");
+//		ImageView pear = (ImageView) lookup("#PEAR");
+//		System.out.println("pear graphics : " + pear.getTranslateX() / Constants.BLOCK_SIZE + ","
+//				+ pear.getTranslateY() / Constants.BLOCK_SIZE);
+//		System.out.println("pear Logic : " + game.getPlayGround().getFruits().get(FruiteType.PEAR).getX() + ","
+//				+ game.getPlayGround().getFruits().get(FruiteType.PEAR).getY());
+//		System.out.println("-------------------------------------------");
 
 		if (game.isOver()) {
-			//stopmouse
+			// stopmouse
 			Thread thread = new Thread(() -> {
 				try {
 
@@ -140,7 +154,6 @@ public class GameSimulator extends Pane {
 
 		for (Segment segmentToUpdate : game.getPlayGround().getSnake().getBody()) { // updating the position of snake on
 																					// screen
-
 			ImageView tb = (ImageView) lookup("#" + segmentToUpdate.getId());
 			tb.setTranslateX(segmentToUpdate.getX() * Constants.BLOCK_SIZE);
 			tb.setTranslateY(segmentToUpdate.getY() * Constants.BLOCK_SIZE);

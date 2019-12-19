@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import utilities.Constants;
 import utilities.Direction;
 
@@ -14,6 +16,7 @@ public class Snake {
 		body = new ArrayList<Segment>();
 		int ipx = Constants.GAME_WIDTH / 2;
 		int ipy = Constants.GAME_HIGHT / 2;
+		Segment.restartCounter();
 
 		head = new Segment(ipx, ipy, null);
 		body.add(head);

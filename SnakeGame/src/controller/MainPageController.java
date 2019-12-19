@@ -79,6 +79,7 @@ public class MainPageController implements Initializable {
 	public void updateLives(int lives) {
 
 		switch (lives) {
+
 		case 2:
 			h3.setImage(Constants.GRAY_HEART);
 			break;
@@ -90,6 +91,14 @@ public class MainPageController implements Initializable {
 			break;
 
 		}
+
+	}
+
+	public void initLives() {
+
+		h1.setImage(Constants.RED_HEART);
+		h2.setImage(Constants.RED_HEART);
+		h3.setImage(Constants.RED_HEART);
 
 	}
 

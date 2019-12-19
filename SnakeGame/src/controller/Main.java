@@ -28,7 +28,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Game game = new Game(""); // nick name will be added later
+		Game game = new Game(); // nick name will be added later
 		GameSimulator view = new GameSimulator();
 		GameController gameController = new GameController(game, view);
 
@@ -53,9 +53,10 @@ public class Main extends Application {
 								&& game.getPlayGround().getSnake().getDirection() != Direction.LEFT) {
 							gameController.changeDiriction(Direction.RIGHT);
 						} else {
-							if (e.getCode().equals(KeyCode.P)) {
+							if (e.getCode().equals(KeyCode.P)) { // make sure game is not running 
 								GameController.getInstance().pauseGame();
 								try {
+
 									FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/view/PausePage.fxml"));
 									Parent root1 = (Parent) fxmlLoader1.load();
 									Stage stage1 = new Stage();

@@ -3,7 +3,6 @@ package controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +17,7 @@ import model.Game;
 import model.Segment;
 import utilities.Constants;
 import utilities.Direction;
+import utilities.FruiteType;
 import utilities.SoundEffects;
 import view.GameSimulator;
 
@@ -25,9 +25,11 @@ public class GameController {
 
 	private Game game;
 	private GameSimulator view;
-	private AnimationTimer timer;
+	private static AnimationTimer timer;
 	private long then = System.nanoTime();
 	private static GameController instance = null;
+	private int appleTimer;
+	private int bananaTimer;
 
 	public GameController(Game game, GameSimulator view) {
 
@@ -52,7 +54,7 @@ public class GameController {
 
 	}
 
-	public void update() { // must update the logic and the view
+	public void update() {
 
 		if ((game.getPlayGround().getSnake().getHead().getY() < 0)
 				|| (game.getPlayGround().getSnake().getHead().getY() > Constants.GAME_HIGHT - 2)
@@ -63,9 +65,9 @@ public class GameController {
 			game.setLives(game.getLives() - 1);
 			MainPageController.getInstance().updateLives(game.getLives());
 			game.getPlayGround().setHit(true);
+			game.getPlayGround().getSnake().setDirection(Direction.LEFT);
 
 			if (game.getLives() == 0) {
-
 				game.setDuration(calculateDuration(game.getDate(), new Date()));
 				game.setOver(true);
 				SoundEffects.stopSound();
@@ -98,6 +100,7 @@ public class GameController {
 					}
 				});
 				thread.start();
+				System.out.println(game);
 
 			}
 
@@ -136,6 +139,27 @@ public class GameController {
 
 		}
 
+		if (game.getPlayGround().getFruits().get(FruiteType.APPLE).isEaten()) {
+			appleTimer++;
+			if (appleTimer == 160) {
+
+				game.getPlayGround().addFruit(game.getPlayGround().getFruits().get(FruiteType.APPLE).getType());
+				appleTimer = 0;
+			}
+		}
+		if (game.getPlayGround().getFruits().get(FruiteType.BANANA).isEaten()) {
+			bananaTimer++;
+			if (bananaTimer == 320) {
+
+				game.getPlayGround().addFruit(game.getPlayGround().getFruits().get(FruiteType.BANANA).getType());
+				bananaTimer = 0;
+			}
+		}
+		if (game.getPlayGround().getFruits().get(FruiteType.PEAR).isEaten()) {
+			game.getPlayGround().addFruit(game.getPlayGround().getFruits().get(FruiteType.PEAR).getType());
+
+		}
+
 		for (Fruit fruit : game.getPlayGround().getFruits().values()) { // Iterate over fruits and check their state
 
 			if (snakeHit(fruit) && fruit.isEaten() == false) {
@@ -144,29 +168,11 @@ public class GameController {
 				fruit.setEaten(true);
 				game.setScore(game.getScore() + fruit.getType().getPoints());
 				MainPageController.getInstance().updateScore(game.getScore());
-
-				Thread thread = new Thread(() -> {
-					try {
-						Platform.runLater(() -> {
-							SoundEffects.playBubbleSound();
-							game.getPlayGround().getSnake().addSegment();
-						});
-
-						Thread.sleep(fruit.getType().getSecondsDelay() * 1000); // waiting
-						Platform.runLater(() -> {
-							game.getPlayGround().addFruit(fruit.getType());
-						});
-
-					} catch (Exception exc) {
-						throw new Error("Unexpected interruption");
-					}
-				});
-				thread.start();
-
+				SoundEffects.playBubbleSound();
+				game.getPlayGround().getSnake().addSegment();
 			}
 
 		}
-
 		view.render(); // refresh view
 
 	}
@@ -209,7 +215,7 @@ public class GameController {
 		timer.stop();
 	}
 
-	public void resumeGame() {
+	public static void resumeGame() {
 		timer.start();
 	}
 
@@ -265,6 +271,18 @@ public class GameController {
 
 		double result = Double.parseDouble(diffMinutes + "." + diffSeconds);
 		return result;
+
+	}
+
+	public void restartGame() {
+
+		appleTimer = 0;
+		bananaTimer = 0;
+		game.restart();
+		view.reset();
+		MainPageController.getInstance().updateScore(0);
+		MainPageController.getInstance().initLives();
+		StartGame();
 
 	}
 

@@ -307,7 +307,7 @@
                         <Image url="@../../resources/pics/b_8.png" />
                      </image>
                   </ImageView>
-                  <JFXButton contentDisplay="GRAPHIC_ONLY" prefHeight="38.0" prefWidth="48.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
+                  <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#restart" prefHeight="38.0" prefWidth="48.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
                      <font>
                         <Font name="Snap ITC" size="18.0" />
                      </font>

@@ -28,6 +28,7 @@ public class Constants {
 	public static final Image READY_IMAGE = new Image(new File("resources/pics/Ready.png").toURI().toString());
 	public static final Image GO_IMAGE = new Image(new File("resources/pics/GO.png").toURI().toString());
 	public static final Image GRAY_HEART = new Image(new File("resources/pics/l2.png").toURI().toString());
+	public static final Image RED_HEART = new Image(new File("resources/pics/l1.png").toURI().toString());
 	public static final Image GAME_OVER_IMAGE = new Image(new File("resources/pics/GAME-OVER.png").toURI().toString());
 	public static final Image HIT_IMAGE = new Image(new File("resources/pics/-1.png").toURI().toString());
 

@@ -5,7 +5,7 @@ import utilities.Direction;
 
 public class Segment extends Block {
 
-	private static final AtomicInteger count = new AtomicInteger(0);
+	private static AtomicInteger count ;
 	private int id;
 	private int oldX, oldY;
 	private Segment previous;
@@ -15,6 +15,11 @@ public class Segment extends Block {
 		super(x, y);
 		this.id = count.getAndIncrement();
 		this.previous = prevBlock;
+
+	}
+
+	public static void restartCounter() {
+		count = new AtomicInteger(0);
 
 	}
 

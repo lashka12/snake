@@ -15,14 +15,18 @@ public class Game {
 	private PlayGround playGround;
 	private boolean over;
 
-	public Game(String nickName) {
+	public Game() {
 
 		if (instance == null)
 			instance = this;
+		restart();
 
-		this.eatenObjects = new HashMap<String, Integer>();
+	}
+
+	public void restart() {
+		
 		this.playGround = new PlayGround();
-		this.nickName = nickName;
+		this.eatenObjects = new HashMap<String, Integer>();
 		this.date = new Date();
 		this.duration = 0;
 		this.score = 0;

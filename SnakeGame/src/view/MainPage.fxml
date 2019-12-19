@@ -55,54 +55,6 @@
                            </children>
                         </HBox>
                         <Region prefHeight="50.0" prefWidth="493.0" HBox.hgrow="ALWAYS" />
-                        <StackPane layoutX="842.0" layoutY="10.0" prefHeight="47.0" prefWidth="51.0">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/b_8.png" />
-                                 </image>
-                              </ImageView>
-                              <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#startGame" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
-                                 <font>
-                                    <Font name="Snap ITC" size="18.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <graphic>
-                                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../resources/pics/Play_50px.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="894.0" layoutY="10.0" prefHeight="47.0" prefWidth="51.0">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/b_8.png" />
-                                 </image>
-                              </ImageView>
-                              <JFXButton contentDisplay="GRAPHIC_ONLY" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
-                                 <font>
-                                    <Font name="Snap ITC" size="18.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <graphic>
-                                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../resources/pics/Restart_52px.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </StackPane>
                         <StackPane prefHeight="47.0" prefWidth="51.0">
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -121,30 +73,6 @@
                                     <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../resources/pics/Sound_50px.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="894.0" layoutY="10.0" prefHeight="47.0" prefWidth="51.0">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/b_8.png" />
-                                 </image>
-                              </ImageView>
-                              <JFXButton contentDisplay="GRAPHIC_ONLY" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
-                                 <font>
-                                    <Font name="Snap ITC" size="18.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <graphic>
-                                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../resources/pics/Play_50px.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

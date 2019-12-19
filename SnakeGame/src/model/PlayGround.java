@@ -17,11 +17,12 @@ public class PlayGround {
 
 		snake = new Snake(Constants.SNAKE_LENGTH);
 		fruits = new HashMap<FruiteType, Fruit>();
-		this.setHit(false);
 		addFruit(FruiteType.APPLE);
 		addFruit(FruiteType.BANANA);
 		addFruit(FruiteType.PEAR);
 		addMouse();
+		setHit(false);
+
 
 	}
 
