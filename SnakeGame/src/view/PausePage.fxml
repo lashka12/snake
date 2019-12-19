@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PausePageController">
+<StackPane fx:id="root" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PausePageController">
    <children>
       <ImageView fitHeight="249.0" fitWidth="334.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -42,7 +41,7 @@
                               <DropShadow />
                            </effect>
                         </ImageView>
-                        <JFXButton contentDisplay="GRAPHIC_ONLY" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="#ff5e08">
+                        <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#resumeGame" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="#ff5e08">
                            <font>
                               <Font name="Snap ITC" size="18.0" />
                            </font>
@@ -69,7 +68,7 @@
                               <DropShadow />
                            </effect>
                         </ImageView>
-                        <JFXButton contentDisplay="GRAPHIC_ONLY" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="#ff5e08">
+                        <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#restartGame" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="#ff5e08">
                            <font>
                               <Font name="Snap ITC" size="18.0" />
                            </font>

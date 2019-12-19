@@ -69,6 +69,7 @@ public class GameController {
 				game.setDuration(calculateDuration(game.getDate(), new Date()));
 				game.setOver(true);
 				SoundEffects.stopSound();
+				SoundEffects.playGameOverSound();
 
 				Thread thread = new Thread(() -> {
 					try {
