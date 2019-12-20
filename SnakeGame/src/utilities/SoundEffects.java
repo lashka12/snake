@@ -87,4 +87,5 @@ public class SoundEffects {
 		mediaPlayer1.setAutoPlay(true);			
 	}
 
+
 }
