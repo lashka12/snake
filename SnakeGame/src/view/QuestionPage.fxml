@@ -16,7 +16,6 @@
 
 <StackPane fx:id="root" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionPageController">
    <children>
-<<<<<<< HEAD
       <ImageView fitHeight="541.0" fitWidth="736.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/pics/f.png" />
@@ -27,7 +26,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="562.0">
                <children>
                   <Region prefHeight="51.0" prefWidth="29.0" />
-                  <Text fx:id="content" fill="#ff5e08" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most ?" wrappingWidth="489.11212158203125" HBox.hgrow="NEVER">
+                  <Text fx:id="content" fill="#ff5e08" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most ?" wrappingWidth="519.1121215820312" HBox.hgrow="NEVER">
                      <font>
                         <Font name="Segoe Print Bold" size="12.0" />
                      </font>
@@ -90,66 +89,6 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </HBox>
-=======
-      <ImageView fitHeight="580.0" fitWidth="759.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/pics/f.png" />
-         </image>
-      </ImageView>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="615.0" spacing="15.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="562.0">
-               <children>
-                  <Region prefHeight="51.0" prefWidth="29.0" />
-                  <Text fx:id="content" fill="#ff5e08" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most ?" wrappingWidth="548.4454345703125" HBox.hgrow="NEVER">
-                     <font>
-                        <Font name="Segoe Print Bold" size="12.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Region prefHeight="30.0" prefWidth="615.0" />
-            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="561.0">
-               <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="17.0" prefWidth="5.0" text="RadioButton" />
-                  <Text fx:id="ans1" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most articles of any of the editions.[2] As of" wrappingWidth="565.112060546875" />
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="561.0">
-               <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="17.0" prefWidth="5.0" text="RadioButton" />
-                  <Text fx:id="ans2" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most articles of any of the editions.[2] As of" wrappingWidth="563.7786865234375" />
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="561.0">
-               <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="17.0" prefWidth="5.0" text="RadioButton" />
-                  <Text fx:id="ans3" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most articles of any of the editions.[2] As of" wrappingWidth="565.112060546875" />
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="10.0" prefHeight="51.0" prefWidth="561.0">
-               <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="17.0" prefWidth="5.0" text="RadioButton" />
-                  <Text fx:id="ans4" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most articles of any of the editions.[2] As of" wrappingWidth="564.4453735351562" />
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Region prefHeight="24.0" prefWidth="615.0" />
->>>>>>> branch 'master' of https://github.com/lashka12/snake
             <StackPane prefHeight="59.0" prefWidth="444.0">
                <children>
                   <ImageView fitHeight="42.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
