@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Game;
+import model.SysData;
 import utilities.Direction;
 import utilities.SoundEffects;
 import view.GameSimulator;
@@ -53,11 +54,12 @@ public class Main extends Application {
 								&& game.getPlayGround().getSnake().getDirection() != Direction.LEFT) {
 							gameController.changeDiriction(Direction.RIGHT);
 						} else {
-							if (e.getCode().equals(KeyCode.P)) { // make sure game is not running 
+							if (e.getCode().equals(KeyCode.P)) { // make sure game is not running
 								GameController.getInstance().pauseGame();
 								try {
 
-									FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/view/PausePage.fxml"));
+									FXMLLoader fxmlLoader1 = new FXMLLoader(
+											getClass().getResource("/view/PausePage.fxml"));
 									Parent root1 = (Parent) fxmlLoader1.load();
 									Stage stage1 = new Stage();
 									stage1.initModality(Modality.APPLICATION_MODAL);
@@ -70,7 +72,7 @@ public class Main extends Application {
 									ex.printStackTrace();
 								}
 
-							} 
+							}
 
 						}
 
@@ -87,6 +89,8 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 
+		@SuppressWarnings("unused")
+		SysData data=new SysData();
 		SoundEffects.playStartSound();
 		launch(args);
 

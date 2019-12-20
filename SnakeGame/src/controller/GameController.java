@@ -12,8 +12,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Block;
 import model.Fruit;
 import model.Game;
+import model.Question;
 import model.Segment;
 import utilities.Constants;
 import utilities.Direction;
@@ -61,11 +63,13 @@ public class GameController {
 				|| (game.getPlayGround().getSnake().getHead().getX() < 0)
 				|| (game.getPlayGround().getSnake().getHead().getX() >= Constants.GAME_WIDTH - 2)) {
 
+			SoundEffects.playNegativeSound();
 			pauseGame();
 			game.setLives(game.getLives() - 1);
 			MainPageController.getInstance().updateLives(game.getLives());
 			game.getPlayGround().setHit(true);
 			game.getPlayGround().getSnake().setDirection(Direction.LEFT);
+			
 
 			if (game.getLives() == 0) {
 				game.setDuration(calculateDuration(game.getDate(), new Date()));
@@ -149,7 +153,7 @@ public class GameController {
 		}
 		if (game.getPlayGround().getFruits().get(FruiteType.BANANA).isEaten()) {
 			bananaTimer++;
-			if (bananaTimer == 320) {
+			if (bananaTimer == 320) { // updating the animation timer 320 times = 10 seconds delay
 
 				game.getPlayGround().addFruit(game.getPlayGround().getFruits().get(FruiteType.BANANA).getType());
 				bananaTimer = 0;
@@ -173,6 +177,51 @@ public class GameController {
 			}
 
 		}
+
+		for (Question question : game.getPlayGround().getQuestions().values()) { // Iterate over fruits and check their
+																					// state
+
+			if (snakeHit(question) && question.isEaten() == false) {
+				SoundEffects.playQuestionStartSound();
+				pauseGame();
+				game.getPlayGround().getSnake().addSegment();
+				game.addEatenObject(question);
+				question.setEaten(true);
+
+				Thread thread = new Thread(() -> {
+					try {
+
+						Platform.runLater(() -> {
+							try {
+								
+								FXMLLoader fxmlLoader = new FXMLLoader(
+										getClass().getResource("/view/QuestionPage.fxml"));
+								Parent root = (Parent) fxmlLoader.load();
+								Stage stage = new Stage();
+								stage.initModality(Modality.APPLICATION_MODAL);
+								Scene scene = new Scene(root);
+								stage.setScene(scene);
+								stage.initStyle(StageStyle.TRANSPARENT);
+								scene.setFill(Color.TRANSPARENT);
+								stage.show();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						});
+
+					} catch (Exception exc) {
+						throw new Error("Unexpected interruption");
+					}
+				});
+				thread.start();
+				// game.setScore(game.getScore() + fruit.getType().getPoints()); after answering
+				// MainPageController.getInstance().updateScore(game.getScore()); after
+				// answering
+
+			}
+
+		}
 		view.render(); // refresh view
 
 	}
@@ -183,12 +232,12 @@ public class GameController {
 
 	}
 
-	public Boolean snakeHit(Fruit fruit) {
+	public Boolean snakeHit(Block block) {
 
-		if ((Math.abs(fruit.getX() - game.getPlayGround().getSnake().getHead().getX()) >= 0
-				&& Math.abs(fruit.getX() - game.getPlayGround().getSnake().getHead().getX()) < 2)
-				&& (Math.abs(fruit.getY() - game.getPlayGround().getSnake().getHead().getY()) >= 0
-						&& Math.abs(fruit.getY() - game.getPlayGround().getSnake().getHead().getY()) < 2))
+		if ((Math.abs(block.getX() - game.getPlayGround().getSnake().getHead().getX()) >= 0
+				&& Math.abs(block.getX() - game.getPlayGround().getSnake().getHead().getX()) < 2)
+				&& (Math.abs(block.getY() - game.getPlayGround().getSnake().getHead().getY()) >= 0
+						&& Math.abs(block.getY() - game.getPlayGround().getSnake().getHead().getY()) < 2))
 
 			return true;
 
@@ -196,7 +245,7 @@ public class GameController {
 
 	}
 
-	public boolean mouseWasEaten() { // move to playground
+	public boolean mouseWasEaten() { // can merge with the last method
 
 		if ((Math.abs(game.getPlayGround().getMouse().getX() - game.getPlayGround().getSnake().getHead().getX()) >= 0
 				&& Math.abs(
@@ -212,14 +261,17 @@ public class GameController {
 	}
 
 	public void pauseGame() {
+		game.setPaused(true);
 		timer.stop();
 	}
 
-	public static void resumeGame() {
+	public void resumeGame() {
+		game.setPaused(false);
 		timer.start();
 	}
 
 	public void StartGame() {
+		game.setPaused(false);
 
 		Thread thread = new Thread(() -> {
 			try {

@@ -25,3 +25,35 @@
 
 
 
+.table-view {
+    -fx-base: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80.0%) transparent;
+}
+
+
+.table-view .table-column {
+  -fx-alignment: CENTER-LEFT;
+}
+
+
+
+
+.table-view.column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 19.0;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: gray;
+    -fx-alignment: center-left;
+    -fx-opacity: 1.0;
+}

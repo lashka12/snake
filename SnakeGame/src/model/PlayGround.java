@@ -4,28 +4,31 @@ import java.awt.Point;
 import java.util.HashMap;
 import utilities.Constants;
 import utilities.FruiteType;
+import utilities.Level;
 
 public class PlayGround {
 
 	private HashMap<FruiteType, Fruit> fruits;
+	private HashMap<Level, Question> questions;
 	private Snake snake;
 	private Mouse mouse;
 	private boolean hit;
 
 	public PlayGround() { // set the height according to the main view size to be responsive
 
-
 		snake = new Snake(Constants.SNAKE_LENGTH);
 		fruits = new HashMap<FruiteType, Fruit>();
+		questions = new HashMap<Level, Question>();
 		addFruit(FruiteType.APPLE);
 		addFruit(FruiteType.BANANA);
 		addFruit(FruiteType.PEAR);
+		addQuestion(Level.EASY);
+		addQuestion(Level.INTERMEDIATE);
+		addQuestion(Level.HARD);
 		addMouse();
 		setHit(false);
 
-
 	}
-
 
 	public void addMouse() {
 
@@ -34,14 +37,14 @@ public class PlayGround {
 
 	}
 
-	public void addQuestion() {
+	public void addQuestion(Level level) {
 
-//		Question q = SysData.popRandomQuestion();
-//		Point p = getEmptyPoint();
-//		q.setLayoutX(p.x * Constants.BLOCK_SIZE);
-//		q.setLayoutY(p.y * Constants.BLOCK_SIZE);
-//		getChildren().add(q);
-
+		//Question q = SysData.popRandomQuestion(level); // to add this later
+		Question q= new Question("", level, null, "", "");
+		Point p = getEmptyPoint();
+		q.setX(p.x);
+		q.setY(p.y);
+		questions.put(level, q);
 	}
 
 	public Point getEmptyPoint() {
@@ -73,6 +76,10 @@ public class PlayGround {
 	public HashMap<FruiteType, Fruit> getFruits() {
 
 		return fruits;
+	}
+
+	public HashMap<Level, Question> getQuestions() {
+		return questions;
 	}
 
 	public boolean isHit() {
