@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane stylesheets="@../../resources/style/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane stylesheets="@../../resources/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox>
          <children>
@@ -41,7 +40,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <JFXButton buttonType="RAISED" layoutX="745.0" layoutY="15.0" prefHeight="28.0" prefWidth="99.0" text="reset filters">
+                  <JFXButton buttonType="RAISED" layoutX="745.0" layoutY="15.0" prefHeight="28.0" prefWidth="141.0" text="reset filters">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,7 +49,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" onAction="#openAddShipPage" prefHeight="28.0" prefWidth="89.0" text="new ship">
+                  <JFXButton buttonType="RAISED" onAction="#openAddShipPage" prefHeight="28.0" prefWidth="120.0" text="new ship">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
                            <image>
