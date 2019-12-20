@@ -75,4 +75,10 @@ public class SoundEffects {
 		mediaPlayer1.setAutoPlay(true);
 	}
 
+	public static void playQuestionStartSound() {
+		media = new Media(new File(Constants.QUESTION_OPEN_SOUND).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.setAutoPlay(true);		
+	}
+
 }

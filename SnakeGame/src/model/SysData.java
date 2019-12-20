@@ -10,17 +10,14 @@ public class SysData {
 	private static ArrayList<Game> games;
 	private static ArrayList<Question> questions;
 
-	public static SysData getInstance() {
-		return instance;
-	}
-
 	public SysData() {
 		if (instance == null) {
 			instance = this;
+			questions = JsonProcessor.readQuestionsFile();
+			games = JsonProcessor.readGamesFile();
+		} else {
+			System.out.println("data class must be a singltone !");
 		}
-
-		questions = JsonProcessor.readQuestionsFile();
-		games = JsonProcessor.readGamesFile();
 
 	}
 

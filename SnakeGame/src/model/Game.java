@@ -14,6 +14,7 @@ public class Game {
 	private HashMap<String, Integer> eatenObjects;
 	private PlayGround playGround;
 	private boolean over;
+	private boolean paused;
 
 	public Game() {
 
@@ -32,7 +33,17 @@ public class Game {
 		this.score = 0;
 		this.lives = 3;
 		this.over = false;
+		this.paused = false;
 
+
+	}
+
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
 	}
 
 	public static Game getInstance() {

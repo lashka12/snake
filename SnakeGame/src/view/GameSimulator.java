@@ -13,9 +13,11 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.Fruit;
 import model.Game;
+import model.Question;
 import model.Segment;
 import utilities.Constants;
 import utilities.FruiteType;
+import utilities.Level;
 
 public class GameSimulator extends Pane {
 
@@ -61,6 +63,30 @@ public class GameSimulator extends Pane {
 		ImageView banaImage = new ImageView(Constants.BANANA_IMAGE);
 		ImageView pearImage = new ImageView(Constants.PEAR_IMAGE);
 		ImageView mouseImage = new ImageView(Constants.MOUSE_RIGHT_IMAGE);
+
+		ImageView easyQuestionImage = new ImageView(Constants.EASY_QUESTION);
+		ImageView intermediateQuestionImage = new ImageView(Constants.INTER_QUESTION);
+		ImageView hardQuestion = new ImageView(Constants.HARD_QUESTION);
+
+		easyQuestionImage
+				.setTranslateX(game.getPlayGround().getQuestions().get(Level.EASY).getX() * Constants.BLOCK_SIZE);
+		easyQuestionImage
+				.setTranslateY(game.getPlayGround().getQuestions().get(Level.EASY).getY() * Constants.BLOCK_SIZE);
+		easyQuestionImage.setEffect(new DropShadow(5, Color.BLACK));
+		easyQuestionImage.setId("EASY");
+
+		intermediateQuestionImage.setTranslateX(
+				game.getPlayGround().getQuestions().get(Level.INTERMEDIATE).getX() * Constants.BLOCK_SIZE);
+		intermediateQuestionImage.setTranslateY(
+				game.getPlayGround().getQuestions().get(Level.INTERMEDIATE).getY() * Constants.BLOCK_SIZE);
+		intermediateQuestionImage.setEffect(new DropShadow(5, Color.BLACK));
+		intermediateQuestionImage.setId("INTERMEDIATE");
+
+		hardQuestion.setTranslateX(game.getPlayGround().getQuestions().get(Level.HARD).getX() * Constants.BLOCK_SIZE);
+		hardQuestion.setTranslateY(game.getPlayGround().getQuestions().get(Level.HARD).getY() * Constants.BLOCK_SIZE);
+		hardQuestion.setEffect(new DropShadow(5, Color.BLACK));
+		hardQuestion.setId("HARD");
+
 		appleImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.APPLE).getX() * Constants.BLOCK_SIZE);
 		appleImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.APPLE).getY() * Constants.BLOCK_SIZE);
 		appleImage.setEffect(new DropShadow(5, Color.BLACK));
@@ -81,28 +107,14 @@ public class GameSimulator extends Pane {
 		ivList.add(banaImage);
 		ivList.add(pearImage);
 		ivList.add(mouseImage);
+		ivList.add(easyQuestionImage);
+		ivList.add(intermediateQuestionImage);
+		ivList.add(hardQuestion);
 		getChildren().addAll(ivList); // or each one separately , check this later
+
 	}
 
 	public void render() {
-//		ImageView apple = (ImageView) lookup("#APPLE");
-//		System.out.println("apple graphics : " + apple.getTranslateX() / Constants.BLOCK_SIZE + ","
-//				+ apple.getTranslateY() / Constants.BLOCK_SIZE);
-//		System.out.println("apple Logic : " + game.getPlayGround().getFruits().get(FruiteType.APPLE).getX() + ","
-//				+ game.getPlayGround().getFruits().get(FruiteType.APPLE).getY());
-//		System.out.println("-------------------------------------------");
-//		ImageView banana = (ImageView) lookup("#BANANA");
-//		System.out.println("banana graphics : " + banana.getTranslateX() / Constants.BLOCK_SIZE + ","
-//				+ banana.getTranslateY() / Constants.BLOCK_SIZE);
-//		System.out.println("banana Logic : " + game.getPlayGround().getFruits().get(FruiteType.BANANA).getX() + ","
-//				+ game.getPlayGround().getFruits().get(FruiteType.BANANA).getY());
-//		System.out.println("-------------------------------------------");
-//		ImageView pear = (ImageView) lookup("#PEAR");
-//		System.out.println("pear graphics : " + pear.getTranslateX() / Constants.BLOCK_SIZE + ","
-//				+ pear.getTranslateY() / Constants.BLOCK_SIZE);
-//		System.out.println("pear Logic : " + game.getPlayGround().getFruits().get(FruiteType.PEAR).getX() + ","
-//				+ game.getPlayGround().getFruits().get(FruiteType.PEAR).getY());
-//		System.out.println("-------------------------------------------");
 
 		if (game.isOver()) {
 			// stopmouse
@@ -135,72 +147,97 @@ public class GameSimulator extends Pane {
 				});
 				thread.start();
 			}
-		}
 
-		if (game.getPlayGround().getSnake().getBody().size() > size) { // check if there is need to add new block
+			if (game.getPlayGround().getSnake().getBody().size() > size) { // check if there is need to add new block
 
-			for (int i = game.getPlayGround().getSnake().getBody().size() - size; i > 0; i--) {// view leftBehind blocks
-				ImageView iv = new ImageView(Constants.SNAKE_BODY_IMAGE);
-				iv.setEffect(new DropShadow(10, Color.BLACK));
-				iv.setCache(true);
-				iv.setCacheHint(CacheHint.SPEED);
+				for (int i = game.getPlayGround().getSnake().getBody().size() - size; i > 0; i--) {// view leftBehind
+																									// blocks
+					ImageView iv = new ImageView(Constants.SNAKE_BODY_IMAGE);
+					iv.setEffect(new DropShadow(10, Color.BLACK));
+					iv.setCache(true);
+					iv.setCacheHint(CacheHint.SPEED);
 
-				iv.setId(game.getPlayGround().getSnake().getBody().size() - i + "");
-				getChildren().add(iv); // adding snake part image to screen
+					iv.setId(game.getPlayGround().getSnake().getBody().size() - i + "");
+					getChildren().add(iv); // adding snake part image to screen
 
-			}
-
-		}
-
-		for (Segment segmentToUpdate : game.getPlayGround().getSnake().getBody()) { // updating the position of snake on
-																					// screen
-			ImageView tb = (ImageView) lookup("#" + segmentToUpdate.getId());
-			tb.setTranslateX(segmentToUpdate.getX() * Constants.BLOCK_SIZE);
-			tb.setTranslateY(segmentToUpdate.getY() * Constants.BLOCK_SIZE);
-
-		}
-
-		ImageView mouseImage = (ImageView) lookup("#mouse");
-		mouseImage.setTranslateX(game.getPlayGround().getMouse().getX() * Constants.BLOCK_SIZE); // update mouse pic
-																									// position
-		// on screen
-		mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
-
-		switch (game.getPlayGround().getMouse().getDirection()) {
-		case UP:
-			mouseImage.setImage(Constants.MOUSE_UP_IMAGE);
-			break;
-		case DOWN:
-			mouseImage.setImage(Constants.MOUSE_DOWN_IMAGE);
-			break;
-		case LEFT:
-			mouseImage.setImage(Constants.MOUSE_LEFT_IMAGE);
-			break;
-		case RIGHT:
-			mouseImage.setImage(Constants.MOUSE_RIGHT_IMAGE);
-			break;
-		}
-
-		for (Fruit fruit : game.getPlayGround().getFruits().values()) {
-
-			ImageView fruitImage = (ImageView) lookup("#" + fruit.getType());
-
-			if (fruit.isEaten()) {
-				if (fruitImage.isVisible()) {
-					fruitImage.setVisible(false);
-					popPoints(fruit);
-				}
-			} else {
-				if (!fruitImage.isVisible()) { // it means it was hidden and now is the time to show it again
-					fruitImage.setTranslateX(fruit.getX() * Constants.BLOCK_SIZE);
-					fruitImage.setTranslateY(fruit.getY() * Constants.BLOCK_SIZE);
-					fruitImage.setVisible(true);
 				}
 
 			}
-		}
-		size = game.getPlayGround().getSnake().getBody().size();
 
+			for (Segment segmentToUpdate : game.getPlayGround().getSnake().getBody()) { // updating the position of
+																						// snake on
+																						// screen
+				ImageView tb = (ImageView) lookup("#" + segmentToUpdate.getId());
+				tb.setTranslateX(segmentToUpdate.getX() * Constants.BLOCK_SIZE);
+				tb.setTranslateY(segmentToUpdate.getY() * Constants.BLOCK_SIZE);
+				tb.setVisible(true);
+
+			}
+			if (game.isPaused()) {
+				ImageView tb = (ImageView) lookup("#" + (game.getPlayGround().getSnake().getBody().size() - 1));
+				tb.setVisible(false);
+			}
+
+			ImageView mouseImage = (ImageView) lookup("#mouse");
+			mouseImage.setTranslateX(game.getPlayGround().getMouse().getX() * Constants.BLOCK_SIZE); // update mouse pic
+																										// position
+			// on screen
+			mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
+
+			switch (game.getPlayGround().getMouse().getDirection()) {
+			case UP:
+				mouseImage.setImage(Constants.MOUSE_UP_IMAGE);
+				break;
+			case DOWN:
+				mouseImage.setImage(Constants.MOUSE_DOWN_IMAGE);
+				break;
+			case LEFT:
+				mouseImage.setImage(Constants.MOUSE_LEFT_IMAGE);
+				break;
+			case RIGHT:
+				mouseImage.setImage(Constants.MOUSE_RIGHT_IMAGE);
+				break;
+			}
+
+			for (Fruit fruit : game.getPlayGround().getFruits().values()) {
+
+				ImageView fruitImage = (ImageView) lookup("#" + fruit.getType());
+
+				if (fruit.isEaten()) {
+					if (fruitImage.isVisible()) {
+						fruitImage.setVisible(false);
+						popPoints(fruit);
+					}
+				} else {
+					if (!fruitImage.isVisible()) { // it means it was hidden and now is the time to show it again
+						fruitImage.setTranslateX(fruit.getX() * Constants.BLOCK_SIZE);
+						fruitImage.setTranslateY(fruit.getY() * Constants.BLOCK_SIZE);
+						fruitImage.setVisible(true);
+					}
+
+				}
+			}
+
+			for (Question question : game.getPlayGround().getQuestions().values()) {
+
+				ImageView questionImage = (ImageView) lookup("#" + question.getLevel());
+
+				if (question.isEaten()) {
+					if (questionImage.isVisible()) {
+						questionImage.setVisible(false);
+					}
+				} else {
+					if (!questionImage.isVisible()) { // it means it was hidden and now is the time to show it again
+						questionImage.setTranslateX(question.getX() * Constants.BLOCK_SIZE);
+						questionImage.setTranslateY(question.getY() * Constants.BLOCK_SIZE);
+						questionImage.setVisible(true);
+					}
+
+				}
+			}
+
+			size = game.getPlayGround().getSnake().getBody().size();
+		}
 	}
 
 	public void showReady() {// can merge with showGo as the same function
@@ -266,14 +303,14 @@ public class GameSimulator extends Pane {
 		getChildren().add(Go);
 		Go.setTranslateX((Constants.GAME_WIDTH * Constants.BLOCK_SIZE) - 750);
 		Go.setTranslateY((Constants.GAME_HIGHT * Constants.BLOCK_SIZE) - 300);
-		ScaleTransition st2 = new ScaleTransition(Duration.millis(800), Go);
+		ScaleTransition st2 = new ScaleTransition(Duration.millis(600), Go);
 		st2.setFromX(0.1);
 		st2.setFromY(0.1);
 		st2.setToX(1);
 		st2.setToY(1);
 		st2.play();
 
-		FadeTransition ft2 = new FadeTransition(Duration.millis(4000), Go);
+		FadeTransition ft2 = new FadeTransition(Duration.millis(2500), Go);
 		ft2.setFromValue(1.0);
 		ft2.setToValue(0.0);
 		ft2.play();

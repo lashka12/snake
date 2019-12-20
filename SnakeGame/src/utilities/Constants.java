@@ -31,6 +31,9 @@ public class Constants {
 	public static final Image RED_HEART = new Image(new File("resources/pics/l1.png").toURI().toString());
 	public static final Image GAME_OVER_IMAGE = new Image(new File("resources/pics/GAME-OVER.png").toURI().toString());
 	public static final Image HIT_IMAGE = new Image(new File("resources/pics/-1.png").toURI().toString());
+	public static final Image EASY_QUESTION = new Image(new File("resources/pics/whiteQuestion22.png").toURI().toString());
+	public static final Image INTER_QUESTION = new Image(new File("resources/pics/yellowQuestion22.png").toURI().toString());
+	public static final Image HARD_QUESTION = new Image(new File("resources/pics/redQuestion22.png").toURI().toString());
 
 	public static final String GAME_SOUND = "resources/audio/funny.mp3";
 	public static final String BUBBLE_SOUND = "resources/audio/Bubble.mp3";
@@ -39,6 +42,7 @@ public class Constants {
 	public static final String START_SOUND = "resources/audio/start.mp3";
 	public static final String END_SOUND = "resources/audio/gameOver.mp3";
 	public static final String RATING_SOUND ="resources/audio/ratingSound.mp3";
+	public static final String QUESTION_OPEN_SOUND ="resources/audio/openQuestion.mp3";
 
 
 	public static int getGAME_HIGHT() {
