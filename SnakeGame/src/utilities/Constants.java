@@ -45,6 +45,8 @@ public class Constants {
 	public static final String RATING_SOUND = "resources/audio/ratingSound.mp3";
 	public static final String QUESTION_OPEN_SOUND = "resources/audio/openQuestion.mp3";
 	public static final String NEGATIVE_SOUND = "resources/audio/negative3.mp3";
+	public static final String RIGHT_ANSWER_SOUND = "resources/audio/rightAnswer.mp3";
+	public static final String WRONG_ANSWER_SOUND = "resources/audio/negative.mp3";
 
 
 	public static int getGAME_HIGHT() {

@@ -169,7 +169,6 @@ public class GameController {
 
 				game.addEatenObject(fruit);
 				fruit.setEaten(true);
-				game.setScore(game.getScore() + fruit.getType().getPoints());
 				MainPageController.getInstance().updateScore(game.getScore());
 				SoundEffects.playBubbleSound();
 				game.getPlayGround().getSnake().addSegment();

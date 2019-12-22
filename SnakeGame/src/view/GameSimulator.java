@@ -221,7 +221,6 @@ public class GameSimulator extends Pane {
 			for (Question question : game.getPlayGround().getQuestions().values()) {
 
 				ImageView questionImage = (ImageView) lookup("#" + question.getLevel());
-
 				if (question.isEaten()) {
 					if (questionImage.isVisible()) {
 						questionImage.setVisible(false);

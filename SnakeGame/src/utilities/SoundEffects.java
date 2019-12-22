@@ -10,11 +10,10 @@ public class SoundEffects {
 	private static MediaPlayer mediaPlayer;
 	private static Media media;
 
-	
 	public static void stopSound() {
 		mediaPlayer.stop();
 	}
-	
+
 	public static void playGameBoardMusic() {
 
 		media = new Media(new File(Constants.GAME_SOUND).toURI().toString());
@@ -28,6 +27,7 @@ public class SoundEffects {
 		mediaPlayer.play();
 
 	}
+
 	public static void playRatingMusic() {
 
 		media = new Media(new File(Constants.RATING_SOUND).toURI().toString());
@@ -41,6 +41,7 @@ public class SoundEffects {
 		mediaPlayer.play();
 
 	}
+
 	public static void playButtonSound() {
 
 		media = new Media(new File(Constants.BUTTON_SOUND).toURI().toString());
@@ -54,6 +55,7 @@ public class SoundEffects {
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
 		mediaPlayer1.setAutoPlay(true);
 	}
+
 	public static void playGameOverSound() {
 
 		media = new Media(new File(Constants.END_SOUND).toURI().toString());
@@ -78,14 +80,24 @@ public class SoundEffects {
 	public static void playQuestionStartSound() {
 		media = new Media(new File(Constants.QUESTION_OPEN_SOUND).toURI().toString());
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
-		mediaPlayer1.setAutoPlay(true);		
+		mediaPlayer1.setAutoPlay(true);
 	}
 
 	public static void playNegativeSound() {
 		media = new Media(new File(Constants.NEGATIVE_SOUND).toURI().toString());
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
-		mediaPlayer1.setAutoPlay(true);			
+		mediaPlayer1.setAutoPlay(true);
 	}
 
+	public static void playRightAnswerSound() {
+		media = new Media(new File(Constants.RIGHT_ANSWER_SOUND).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.setAutoPlay(true);
+	}
+	public static void playWrongAnswerSound() {
+		media = new Media(new File(Constants.WRONG_ANSWER_SOUND).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.setAutoPlay(true);
+	}
 
 }

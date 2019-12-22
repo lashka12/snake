@@ -64,6 +64,13 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	private ImageView h3;
+	
+	@FXML
+	private VBox starsBox;
+
+	public VBox getStarsBox() {
+		return starsBox;
+	}
 
 	@FXML
 	void startGame() {

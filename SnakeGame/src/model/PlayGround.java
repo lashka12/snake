@@ -39,11 +39,11 @@ public class PlayGround {
 	}
 
 	public void addQuestion(Level level) {
-
 		Question q = SysData.popRandomQuestion(level);
 		Point p = getEmptyPoint();
 		q.setX(p.x);
 		q.setY(p.y);
+		q.setEaten(false);
 		questions.put(level, q);
 	}
 

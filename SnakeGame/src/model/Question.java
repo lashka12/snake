@@ -10,7 +10,7 @@ public class Question extends Block {
 	private ArrayList<String> answers;
 	private String correctAnswer;
 	private String team;
-	private boolean eaten; //move to block
+	private boolean eaten;
 
 	public Question(String content, Level level, ArrayList<String> answers, String correctAnswer, String team) {
 
@@ -20,7 +20,7 @@ public class Question extends Block {
 		this.answers = answers;
 		this.correctAnswer = correctAnswer;
 		this.team = team;
-		this.eaten=false;
+		this.eaten = false;
 	}
 
 	public boolean isEaten() {

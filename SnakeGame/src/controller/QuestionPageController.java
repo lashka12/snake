@@ -4,16 +4,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Game;
 import model.Question;
 import model.SysData;
+import utilities.Constants;
 import utilities.SoundEffects;
 
 public class QuestionPageController implements Initializable {
@@ -38,36 +42,130 @@ public class QuestionPageController implements Initializable {
 	private Text ans4;
 
 	@FXML
+	private RadioButton choose1;
+	@FXML
+	private RadioButton choose2;
+	@FXML
+	private RadioButton choose3;
+	@FXML
+	private RadioButton choose4;
+
+	@FXML
+	void emptyOthers(ActionEvent event) {
+
+		RadioButton choosen = (RadioButton) event.getSource();
+
+		if (choose1.isSelected() && !choose1.equals(choosen))
+			choose1.setSelected(false);
+		if (choose2.isSelected() && !choose2.equals(choosen))
+			choose2.setSelected(false);
+		if (choose3.isSelected() && !choose3.equals(choosen))
+			choose3.setSelected(false);
+		if (choose4.isSelected() && !choose4.equals(choosen))
+			choose4.setSelected(false);
+
+	}
+
+	private boolean answeredRight() {
+
+		if ((choose1.isSelected() && curQuestion.getcorrectAnswer().equals("1"))
+				|| (choose2.isSelected() && curQuestion.getcorrectAnswer().equals("2"))
+				|| (choose3.isSelected() && curQuestion.getcorrectAnswer().equals("3"))
+				|| (choose4.isSelected() && curQuestion.getcorrectAnswer().equals("4"))) {
+			return true;
+		}
+		return false;
+
+	}
+
+	@FXML
 	void answer(ActionEvent event) {
-		
-		//if(right answer)
-		// game.setScore(game.getScore() + fruit.getType().getPoints()); after answering
-		// MainPageController.getInstance().updateScore(game.getScore()); after answering
-		
-		Thread thread = new Thread(() -> {
-			try {
 
-				Platform.runLater(() -> {
-					GameController.getInstance().startTimer();
-					SoundEffects.playButtonSound();
-					FadeTransition ft = new FadeTransition(Duration.millis(500), root);
-					ft.setFromValue(1.0);
-					ft.setToValue(0.0);
-					ft.play();
+		if (answeredRight()) {
 
-				});
-				Thread.sleep(500);
-				Platform.runLater(() -> {
-					Stage stage = (Stage) root.getScene().getWindow();
-					stage.close();
+			Thread thread = new Thread(() -> {
+				try {
 
-				});
+					Platform.runLater(() -> {
+						Game.getInstance()
+								.setScore(Game.getInstance().getScore() + curQuestion.getLevel().getPointsToAdd());
+						MainPageController.getInstance().updateScore(Game.getInstance().getScore());
+						MainPageController.getInstance().getStarsBox().toFront();
+						FadeTransition ft1 = new FadeTransition(Duration.millis(3000),
+								MainPageController.getInstance().getStarsBox());
+						ft1.setFromValue(1.0);
+						ft1.setToValue(0.0);
+						ft1.play();
+						GameController.getInstance().startTimer();
+						SoundEffects.playButtonSound();
+						FadeTransition ft = new FadeTransition(Duration.millis(500), root);
+						ft.setFromValue(1.0);
+						ft.setToValue(0.0);
+						ft.play();
 
-			} catch (Exception exc) {
-				throw new Error("Unexpected interruption");
-			}
-		});
-		thread.start();
+					});
+					Thread.sleep(100);
+
+					Platform.runLater(() -> {
+						SoundEffects.playChimeSound();
+					});
+					Thread.sleep(500);
+					Platform.runLater(() -> {
+						Stage stage = (Stage) root.getScene().getWindow();
+						stage.close();
+
+					});
+
+				} catch (Exception exc) {
+					throw new Error("Unexpected interruption");
+				}
+			});
+			thread.start();
+		} else {
+
+			Thread thread = new Thread(() -> {
+				try {
+
+					Platform.runLater(() -> {
+						Game.getInstance()
+								.setScore(Game.getInstance().getScore() - curQuestion.getLevel().getPointsToRemove());
+						MainPageController.getInstance().updateScore(Game.getInstance().getScore());
+						MainPageController.getInstance().getStarsBox().toFront();
+
+						// *********************************************************
+						//
+						// wrong answer animation
+						//
+						// *********************************************************
+
+						GameController.getInstance().startTimer();
+						SoundEffects.playButtonSound();
+						FadeTransition ft = new FadeTransition(Duration.millis(500), root);
+						ft.setFromValue(1.0);
+						ft.setToValue(0.0);
+						ft.play();
+
+					});
+					Thread.sleep(100);
+
+					Platform.runLater(() -> {
+						SoundEffects.playWrongAnswerSound();
+					});
+					Thread.sleep(500);
+					Platform.runLater(() -> {
+						Stage stage = (Stage) root.getScene().getWindow();
+						stage.close();
+
+					});
+
+				} catch (Exception exc) {
+					throw new Error("Unexpected interruption");
+				}
+			});
+			thread.start();
+		}
+
+		Game.getInstance().getPlayGround().addQuestion(curQuestion.getLevel());
 
 	}
 

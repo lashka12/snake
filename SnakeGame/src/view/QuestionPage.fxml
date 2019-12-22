@@ -38,7 +38,7 @@
             <Region prefHeight="15.0" prefWidth="599.0" />
             <HBox prefHeight="41.0" prefWidth="579.0">
                <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
+                  <RadioButton fx:id="choose1" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
                   <Text fx:id="ans1" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
                      <font>
                         <Font name="Segoe Print Bold" size="12.0" />
@@ -51,7 +51,7 @@
             </HBox>
             <HBox layoutX="20.0" layoutY="119.0" prefHeight="41.0" prefWidth="579.0">
                <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
+                  <RadioButton fx:id="choose2" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
                   <Text fx:id="ans2" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
                      <font>
                         <Font name="Segoe Print Bold" size="12.0" />
@@ -64,7 +64,7 @@
             </HBox>
             <HBox prefHeight="41.0" prefWidth="579.0">
                <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
+                  <RadioButton fx:id="choose3" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
                   <Text fx:id="ans3" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
                      <font>
                         <Font name="Segoe Print Bold" size="12.0" />
@@ -77,7 +77,7 @@
             </HBox>
             <HBox prefHeight="41.0" prefWidth="579.0">
                <children>
-                  <RadioButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
+                  <RadioButton fx:id="choose4" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
                   <Text fx:id="ans4" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
                      <font>
                         <Font name="Segoe Print Bold" size="12.0" />
