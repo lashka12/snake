@@ -10,7 +10,7 @@
       ],
       "correct_ans": "2",
       "level": "1",
-      "team": "animal"
+      "team": "team1"
     },
     {
       "question": "q2",
@@ -22,7 +22,19 @@
       ],
       "correct_ans": "1",
       "level": "2",
-      "team": "animal"
+      "team": "team2"
+    },
+    {
+      "question": "q3",
+      "answers": [
+        "answer1",
+        "answer2",
+        "answer3",
+        "answer4"
+      ],
+      "correct_ans": "1",
+      "level": "3",
+      "team": "team3"
     }
   ]
 }
