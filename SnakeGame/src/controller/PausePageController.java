@@ -69,7 +69,7 @@ public class PausePageController implements Initializable {
 			try {
 
 				Platform.runLater(() -> {
-					GameController.getInstance().StartGame();
+					GameController.getInstance().startTimer();
 					SoundEffects.playButtonSound();
 					FadeTransition ft = new FadeTransition(Duration.millis(500), root);
 					ft.setFromValue(1.0);

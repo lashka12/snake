@@ -69,7 +69,6 @@ public class GameController {
 			MainPageController.getInstance().updateLives(game.getLives());
 			game.getPlayGround().setHit(true);
 			game.getPlayGround().getSnake().setDirection(Direction.LEFT);
-			
 
 			if (game.getLives() == 0) {
 				game.setDuration(calculateDuration(game.getDate(), new Date()));
@@ -178,8 +177,7 @@ public class GameController {
 
 		}
 
-		for (Question question : game.getPlayGround().getQuestions().values()) { // Iterate over fruits and check their
-																					// state
+		for (Question question : game.getPlayGround().getQuestions().values()) {
 
 			if (snakeHit(question) && question.isEaten() == false) {
 				SoundEffects.playQuestionStartSound();
@@ -193,7 +191,7 @@ public class GameController {
 
 						Platform.runLater(() -> {
 							try {
-								
+
 								FXMLLoader fxmlLoader = new FXMLLoader(
 										getClass().getResource("/view/QuestionPage.fxml"));
 								Parent root = (Parent) fxmlLoader.load();
@@ -270,9 +268,9 @@ public class GameController {
 		timer.start();
 	}
 
-	public void StartGame() {
-		game.setPaused(false);
+	public void startTimer() {
 
+		game.setPaused(false);
 		Thread thread = new Thread(() -> {
 			try {
 				Thread.sleep(800);
@@ -294,7 +292,6 @@ public class GameController {
 	}
 
 	public static GameController getInstance() {
-		// TODO Auto-generated method stub
 		return instance;
 	}
 
@@ -334,7 +331,7 @@ public class GameController {
 		view.reset();
 		MainPageController.getInstance().updateScore(0);
 		MainPageController.getInstance().initLives();
-		StartGame();
+		startTimer();
 
 	}
 

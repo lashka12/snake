@@ -1,19 +1,31 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import utilities.JsonProcessor;
+import utilities.Level;
 
 public class SysData {
 
 	private static SysData instance;
 	private static ArrayList<Game> games;
-	private static ArrayList<Question> questions;
+	private static HashMap<Level, ArrayList<Question>> questions;
 
 	public SysData() {
 		if (instance == null) {
 			instance = this;
-			questions = JsonProcessor.readQuestionsFile();
+
+			for (Level level : Level.values()) {
+				ArrayList<Question> questionsOfLevel = new ArrayList<Question>();
+				for (Question q : JsonProcessor.readQuestionsFile()) {
+
+					if (q.getLevel().equals(level))
+						questionsOfLevel.add(q);
+				}
+				questions.put(level, questionsOfLevel);
+			}
+
 			games = JsonProcessor.readGamesFile();
 		} else {
 			System.out.println("data class must be a singltone !");
@@ -45,19 +57,19 @@ public class SysData {
 	public static boolean addQuestion(Question question) {
 
 		if (question != null) {
-			if (!questions.contains(question)) {
-				questions.add(question);
+			if (!questions.get(question.getLevel()).contains(question)) {
+				questions.get(question.getLevel()).add(question);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static void UpdateQuestion(Question question) {
+	public static void updateQuestion(Question question) {
 
 		if (question != null) {
-			questions.remove(question);
-			questions.add(question);
+			questions.get(question.getLevel()).remove(question);
+			questions.get(question.getLevel()).add(question);
 
 		}
 
@@ -65,20 +77,20 @@ public class SysData {
 
 	public static void deleteQuestion(Question question) {
 		if (question != null) {
-			questions.remove(question);
+			questions.get(question.getLevel()).remove(question);
 
 		}
 	}
 
 	/**
-	 * this method generate a random question from the questions list
+	 * this method generate a random question from the questions data
 	 * 
 	 * @return
 	 */
-	public static Question popRandomQuestion() {
+	public static Question popRandomQuestion(Level level) {
 
 		Random rand = new Random();
-		return questions.get(rand.nextInt(questions.size()));
+		return questions.get(level).get(rand.nextInt(questions.size()));
 
 	}
 
@@ -92,8 +104,6 @@ public class SysData {
 		return false;
 	}
 
-	public static ArrayList<Question> getQuestions() {
-		return questions;
-	}
+
 
 }
