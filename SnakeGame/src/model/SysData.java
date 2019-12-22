@@ -15,9 +15,8 @@ public class SysData {
 	public SysData() {
 		if (instance == null) {
 			instance = this;
-			
-			
-			questions=new HashMap<Level, ArrayList<Question>>();
+
+			questions = new HashMap<Level, ArrayList<Question>>();
 			for (Level level : Level.values()) {
 				ArrayList<Question> questionsOfLevel = new ArrayList<Question>();
 				for (Question q : JsonProcessor.readQuestionsFile()) {
@@ -29,10 +28,7 @@ public class SysData {
 			}
 
 			games = JsonProcessor.readGamesFile();
-			
-			
-			System.out.println(questions);
-			
+
 		} else {
 			System.out.println("data class must be a singltone !");
 		}
@@ -96,9 +92,7 @@ public class SysData {
 	public static Question popRandomQuestion(Level level) {
 
 		Random rand = new Random();
-		
 		return questions.get(level).get(rand.nextInt(questions.get(level).size()));
-		//return null;
 
 	}
 
@@ -111,7 +105,5 @@ public class SysData {
 
 		return false;
 	}
-
-
 
 }
