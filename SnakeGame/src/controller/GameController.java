@@ -194,6 +194,7 @@ public class GameController {
 
 								FXMLLoader fxmlLoader = new FXMLLoader(
 										getClass().getResource("/view/QuestionPage.fxml"));
+								fxmlLoader.setController(new QuestionPageController(question));
 								Parent root = (Parent) fxmlLoader.load();
 								Stage stage = new Stage();
 								stage.initModality(Modality.APPLICATION_MODAL);
@@ -213,9 +214,8 @@ public class GameController {
 					}
 				});
 				thread.start();
-				// game.setScore(game.getScore() + fruit.getType().getPoints()); after answering
-				// MainPageController.getInstance().updateScore(game.getScore()); after
-				// answering
+				
+
 
 			}
 

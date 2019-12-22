@@ -18,7 +18,8 @@ import utilities.SoundEffects;
 
 public class QuestionPageController implements Initializable {
 
-	private static Question question;
+	private static Question curQuestion;
+
 	@FXML
 	private StackPane root;
 	@FXML
@@ -38,7 +39,11 @@ public class QuestionPageController implements Initializable {
 
 	@FXML
 	void answer(ActionEvent event) {
-
+		
+		//if(right answer)
+		// game.setScore(game.getScore() + fruit.getType().getPoints()); after answering
+		// MainPageController.getInstance().updateScore(game.getScore()); after answering
+		
 		Thread thread = new Thread(() -> {
 			try {
 
@@ -73,20 +78,18 @@ public class QuestionPageController implements Initializable {
 		ft.setFromValue(0.0);
 		ft.setToValue(1.0);
 		ft.play();
-//		content.setText(question.getContent());
-//		ans1.setText(question.getAnswers().get(0));
-//		ans2.setText(question.getAnswers().get(1));
-//		ans3.setText(question.getAnswers().get(2));
-//		ans4.setText(question.getAnswers().get(3));
+
+		content.setText(curQuestion.getContent());
+		ans1.setText(curQuestion.getAnswers().get(0));
+		ans2.setText(curQuestion.getAnswers().get(1));
+		ans3.setText(curQuestion.getAnswers().get(2));
+		ans4.setText(curQuestion.getAnswers().get(3));
 
 	}
 
-	public static Question getQuestion() {
-		return question;
-	}
+	public QuestionPageController(Question question) {
+		curQuestion = question;
 
-	public static void setQuestion(Question question) {
-		QuestionPageController.question = question;
 	}
 
 }
