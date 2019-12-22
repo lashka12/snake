@@ -18,6 +18,7 @@ public class SysData {
 
 			questions = new HashMap<Level, ArrayList<Question>>();
 			ArrayList<Question> jsonResult = JsonProcessor.readQuestionsFile();
+
 			for (Level level : Level.values()) {
 				ArrayList<Question> questionsOfLevel = new ArrayList<Question>();
 				for (Question q : jsonResult) {
