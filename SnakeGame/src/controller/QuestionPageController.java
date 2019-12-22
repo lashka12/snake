@@ -2,9 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +14,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Game;
 import model.Question;
-import model.SysData;
-import utilities.Constants;
 import utilities.SoundEffects;
 
 public class QuestionPageController implements Initializable {

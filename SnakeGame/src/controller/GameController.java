@@ -103,7 +103,6 @@ public class GameController {
 					}
 				});
 				thread.start();
-				System.out.println(game);
 
 			}
 
@@ -112,8 +111,9 @@ public class GameController {
 				Thread thread = new Thread(() -> {
 					try {
 
-						Thread.sleep(1 * 1000); // waiting
+						Thread.sleep(1000);
 						Platform.runLater(() -> {
+
 							game.getPlayGround().setHit(false);
 							game.getPlayGround().getSnake().getHead().setX(Constants.GAME_WIDTH / 2);
 							game.getPlayGround().getSnake().getHead().setY(Constants.GAME_HIGHT / 2);
@@ -213,8 +213,6 @@ public class GameController {
 					}
 				});
 				thread.start();
-				
-
 
 			}
 

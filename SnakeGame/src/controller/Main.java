@@ -29,7 +29,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Game game = new Game(); // nick name will be added later
+		Game game = new Game();
 		GameSimulator view = new GameSimulator();
 		GameController gameController = new GameController(game, view);
 

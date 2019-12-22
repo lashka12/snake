@@ -2,389 +2,101 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="517.0" style="-fx-background-color: transparent;" stylesheets="@../../resources/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RatingPageController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="635.0" style="-fx-background-color: transparent;" stylesheets="@../../resources/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RatingPageController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="487.0" stylesheets="@../../resources/style/style.css">
+      <ImageView fitHeight="453.0" fitWidth="598.0" layoutX="13.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/pics/f.png" />
+         </image>
+      </ImageView>
+      <ScrollPane hbarPolicy="NEVER" layoutX="91.0" layoutY="165.0" prefHeight="281.0" prefWidth="493.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+         <content>
+            <GridPane fx:id="scoreGrid" alignment="CENTER" hgap="10.0" minHeight="60.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="493.0" vgap="10.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <StackPane layoutX="284.0" layoutY="67.0" prefHeight="41.0" prefWidth="55.0">
          <children>
-            <ImageView fitHeight="354.0" fitWidth="470.0" layoutX="-2.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="44.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/pics/f.png" />
+                  <Image url="@../../resources/pics/b_8.png" />
                </image>
             </ImageView>
-            <ScrollPane hbarPolicy="NEVER" layoutX="41.0" layoutY="154.0" prefHeight="236.0" prefWidth="179.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
-               <content>
-                  <VBox prefHeight="286.0" prefWidth="174.0" spacing="10.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Mike" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Sam" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="2323" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Noa" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="412" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="noor" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Mike" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Mike" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Mike" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Mike" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Mike" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="233.0" spacing="5.0">
-                           <children>
-                              <Region prefHeight="41.0" prefWidth="14.0" />
-                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/pics/rating/face.png" />
-                                 </image>
-                              </ImageView>
-                              <Region prefHeight="41.0" prefWidth="7.0" />
-                              <VBox alignment="CENTER_LEFT" spacing="3.0">
-                                 <children>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Mike" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="12343" textFill="#fe5e08">
-                                       <font>
-                                          <Font name="Snap ITC" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="10.0" spacing="3.0" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </content>
-            </ScrollPane>
-            <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="30.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../Desktop/סמסטר%20א/הנדסת%20תכנה/pixel/PNG/level_select/star_1.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="30.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../Desktop/סמסטר%20א/הנדסת%20תכנה/pixel/PNG/level_select/star_1.png" />
-               </image>
-            </ImageView>
-            <StackPane layoutX="268.0" layoutY="353.0" prefHeight="41.0" prefWidth="55.0">
-               <children>
-                  <ImageView fitHeight="44.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+            <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#restart" prefHeight="38.0" prefWidth="48.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
+               <font>
+                  <Font name="Snap ITC" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/pics/b_8.png" />
+                        <Image url="@../../resources/pics/Restart_52px.png" />
                      </image>
                   </ImageView>
-                  <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#restart" prefHeight="38.0" prefWidth="48.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
-                     <font>
-                        <Font name="Snap ITC" size="18.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/pics/Restart_52px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </StackPane>
-            <VBox alignment="CENTER_LEFT" layoutX="245.0" layoutY="168.0" spacing="10.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../Desktop/סמסטר%20א/הנדסת%20תכנה/pixel/c.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="12343" textFill="#fe5e08">
-                           <font>
-                              <Font name="Snap ITC" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/pics/Paprika_96px.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="x23" textFill="#fe5e08">
-                           <font>
-                              <Font name="Snap ITC" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/pics/Banana_96px.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="x13" textFill="#fe5e08">
-                           <font>
-                              <Font name="Snap ITC" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/pics/Pear_96px.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="x42" textFill="#fe5e08">
-                           <font>
-                              <Font name="Snap ITC" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+               </graphic>
+            </JFXButton>
          </children>
-      </AnchorPane>
+      </StackPane>
+      <GridPane alignment="CENTER" hgap="10.0" layoutX="99.0" layoutY="127.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="493.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../../../../../Desktop/סמסטר%20א/הנדסת%20תכנה/pixel/c.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@../../resources/pics/Paprika_96px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../../resources/pics/Banana_96px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@../../resources/pics/Pear_96px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/pics/rating/face.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
    </children>
-</StackPane>
+</AnchorPane>

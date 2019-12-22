@@ -136,11 +136,6 @@ public class Game {
 		this.duration = duration;
 	}
 
-	@Override
-	public String toString() {
-		return "Game [nickName=" + nickName + ", date=" + date + ", score=" + score + ", duration=" + duration + "]";
-	}
-
 	public int getLives() {
 		return lives;
 	}
@@ -157,4 +152,13 @@ public class Game {
 		this.over = over;
 	}
 
+	@Override
+	public String toString() {
+		return "Game [nickName=" + nickName + ", date=" + date + ", score=" + score + ", lives=" + lives + ", duration="
+				+ duration + ", eatenObjects=" + eatenObjects + ", playGround=" + playGround + ", over=" + over
+				+ ", paused=" + paused + "]";
+	}
+
+	
+	
 }

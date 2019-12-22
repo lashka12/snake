@@ -36,7 +36,7 @@ public class SysData {
 
 	}
 
-	public ArrayList<Game> getGames() {
+	public static ArrayList<Game> getGames() {
 		return games;
 	}
 
