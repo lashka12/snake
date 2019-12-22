@@ -89,17 +89,19 @@ public class JsonProcessor {
 				String correct = (String) question.get("correct_ans");
 				Integer level = Integer.valueOf((String) question.get("level"));
 
-				Level lvl;
-				if (level == 1)
+				System.out.println(level);
+				Level lvl=null;
+				if (level.equals(1))
 					lvl = Level.EASY;
-				if (level == 2)
+				if (level.equals(2))
 					lvl = Level.INTERMEDIATE;
-				else
+				if(level.equals(3))
 					lvl = Level.HARD;
 
 				String team = (String) question.get("team");
 				Question q = new Question(content, lvl, qs, correct, team);
 				questions.add(q);
+				
 
 			}
 
@@ -108,6 +110,10 @@ public class JsonProcessor {
 			e.printStackTrace();
 		}
 
+		for(Question q : questions)
+		{
+			System.out.println(q.getLevel());
+		}
 		return questions;
 	}
 
