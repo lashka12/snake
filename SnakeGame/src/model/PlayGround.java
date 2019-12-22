@@ -39,8 +39,7 @@ public class PlayGround {
 
 	public void addQuestion(Level level) {
 
-		//Question q = SysData.popRandomQuestion(level); // to add this later
-		Question q= new Question("", level, null, "", "");
+		Question q = SysData.popRandomQuestion(level); // to add this later
 		Point p = getEmptyPoint();
 		q.setX(p.x);
 		q.setY(p.y);

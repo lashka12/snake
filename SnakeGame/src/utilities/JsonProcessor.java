@@ -89,18 +89,19 @@ public class JsonProcessor {
 				String correct = (String) question.get("correct_ans");
 				Integer level = Integer.valueOf((String) question.get("level"));
 
-				Level lvl;
+				Level lvl = null;
 				if (level == 1)
 					lvl = Level.EASY;
 				if (level == 2)
 					lvl = Level.INTERMEDIATE;
-				else
+				if (level == 3)
 					lvl = Level.HARD;
 
 				String team = (String) question.get("team");
 				Question q = new Question(content, lvl, qs, correct, team);
 				questions.add(q);
 
+				
 			}
 
 		} catch (Exception e) {
