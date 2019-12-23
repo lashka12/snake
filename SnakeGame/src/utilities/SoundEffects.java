@@ -14,6 +14,7 @@ public class SoundEffects {
 		mediaPlayer.stop();
 	}
 
+
 	public static void playGameBoardMusic() {
 
 		media = new Media(new File(Constants.GAME_SOUND).toURI().toString());
@@ -25,7 +26,12 @@ public class SoundEffects {
 			}
 		});
 		mediaPlayer.play();
+		mediaPlayer.setMute(true);
 
+	}
+
+	public static MediaPlayer getMediaPlayer() {
+		return mediaPlayer;
 	}
 
 	public static void playRatingMusic() {
@@ -94,6 +100,7 @@ public class SoundEffects {
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
 		mediaPlayer1.setAutoPlay(true);
 	}
+
 	public static void playWrongAnswerSound() {
 		media = new Media(new File(Constants.WRONG_ANSWER_SOUND).toURI().toString());
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);

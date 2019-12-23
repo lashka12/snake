@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +28,8 @@ import view.GameSimulator;
  * this class controls the view.MainPage.FXML page , initialize it and handle
  * it's actions
  * 
- * objects with @FXML sign are the graphic components of the FXML file
+ * objects with @FXML sign are references to the graphic components of the FXML
+ * file
  * 
  * methods with @FXML sign are the methods used to handle actions triggered by
  * the FXML File
@@ -42,6 +44,7 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	private AnchorPane gamePane;
+
 	@FXML
 	private AnchorPane homePane;
 
@@ -50,6 +53,7 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	private AnchorPane toAddTo;
+
 	@FXML
 	private AnchorPane playGroundPane;
 
@@ -64,7 +68,7 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	private ImageView h3;
-	
+
 	@FXML
 	private VBox starsBox;
 
@@ -120,18 +124,15 @@ public class MainPageController implements Initializable {
 	public void openGamePane() {
 
 		SoundEffects.playGameBoardMusic();
-
 		FadeTransition ft = new FadeTransition(Duration.millis(1000), homePane);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
 		ft.play();
-
 		ft = new FadeTransition(Duration.millis(1000), gamePane);
 		ft.setFromValue(0.0);
 		ft.setToValue(1.0);
 		ft.play();
 		gamePane.toFront();
-
 		playGroundPane.getChildren().add(GameSimulator.getInstance());
 
 	}
@@ -185,6 +186,18 @@ public class MainPageController implements Initializable {
 			}
 		});
 		thread.start();
+
+	}
+
+	@FXML
+	void muteGame(ActionEvent event) {
+
+		if (SoundEffects.getMediaPlayer().isMute()) {
+			SoundEffects.getMediaPlayer().setMute(false);
+		} else {
+			SoundEffects.getMediaPlayer().setMute(true);
+
+		}
 
 	}
 

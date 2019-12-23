@@ -12,7 +12,7 @@ import org.junit.runners.model.Statement;
  * we used this class to make sure that the main thread of the javafX runs
  * before starting the tests because the tests includes constructing javaFX
  * components (ImageView,Pane,...) and we can't access these components before
- * the main javaFX thread start so this class initialize JavaFX thread before
+ * the main javaFX thread starts so this class initialize JavaFX thread before
  * testing .
  * 
  * @author lawrence
@@ -75,7 +75,7 @@ public class JavaFXThreadingRule implements TestRule {
 
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					// initializes JavaFX environment
+					// initializes JavaFX
 					new JFXPanel();
 
 					latch.countDown();

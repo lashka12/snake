@@ -17,6 +17,7 @@ import model.Fruit;
 import model.Game;
 import model.Question;
 import model.Segment;
+import model.SysData;
 import utilities.Constants;
 import utilities.Direction;
 import utilities.FruiteType;
@@ -75,6 +76,8 @@ public class GameController {
 				game.setOver(true);
 				SoundEffects.stopSound();
 				SoundEffects.playGameOverSound();
+				SysData.addGame(game);
+				SysData.Save();
 
 				Thread thread = new Thread(() -> {
 					try {

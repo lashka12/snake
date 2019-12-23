@@ -20,54 +20,37 @@ import model.Question;
  */
 public class JsonProcessor {
 
-	@SuppressWarnings("unchecked")
+	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+	@SuppressWarnings({ "unchecked", "resource" })
 	public static void writeGameHistory(ArrayList<Game> gamesHistory) {
 
-		JSONArray array = new JSONArray();
-		JSONObject gameDetails = new JSONObject();
-		JSONObject gamesJson = new JSONObject();
-
-		for (Game gameToAdd : gamesHistory) {
-			if (gameToAdd != null) {
-
-				String nickName = gameToAdd.getNickName().toString();
-				String score = String.valueOf(gameToAdd.getScore());
-				String duaration = Double.toString(gameToAdd.getDuration());
-
-				Date date = gameToAdd.getDate();
-				String pattern = "dd/MM/yyyy";
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-				String gameDate = simpleDateFormat.format(date);
-
+		try {
+			JSONArray array = new JSONArray();
+			JSONObject gamesJson = new JSONObject();
+			JSONObject gameDetails;
+			for (Game gameToAdd : gamesHistory) {
+				gameDetails = new JSONObject();
 				ArrayList<String> arr = new ArrayList<>();
 				HashMap<String, Integer> map = gameToAdd.getEatenObjects();
-				for (Entry<String, Integer> mapElement : map.entrySet()) {
+				for (Entry<String, Integer> mapElement : map.entrySet())
 					arr.add(mapElement.getKey() + "#" + mapElement.getValue());
-				}
-
-				gameDetails.put("playerName", nickName);
-				gameDetails.put("date", gameDate);
-				gameDetails.put("score", score);
-				gameDetails.put("duaration", duaration);
+				gameDetails.put("playerName", gameToAdd.getNickName().toString());
+				gameDetails.put("date", simpleDateFormat.format(gameToAdd.getDate()));
+				gameDetails.put("score", String.valueOf(gameToAdd.getScore()));
+				gameDetails.put("duaration", gameToAdd.getDuration() + "");
 				gameDetails.put("history", arr);
-
-				// Write JSON file
-				FileWriter file;
-				try {
-					file = new FileWriter("games.json");
-					array.add(gameDetails);
-					gamesJson.put("games", array);
-					file.write(gamesJson.toJSONString());
-					file.flush();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				array.add(gameDetails);
 			}
-
+			gamesJson.put("games", array);
+			FileWriter file;
+			file = new FileWriter("games.json");
+			file.write(gamesJson.toJSONString());
+			file.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
 	}
 
 	public static ArrayList<Question> readQuestionsFile() {
@@ -101,7 +84,6 @@ public class JsonProcessor {
 				Question q = new Question(content, lvl, qs, correct, team);
 				questions.add(q);
 
-				
 			}
 
 		} catch (Exception e) {

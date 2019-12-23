@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Game;
 import model.SysData;
-import utilities.FruiteType;
 import utilities.SoundEffects;
 
 public class RatingPageController implements Initializable {
@@ -36,29 +34,26 @@ public class RatingPageController implements Initializable {
 		ft.setToValue(1.0);
 		ft.play();
 
-		
 		int i = 1;
 		for (Game game : SysData.getGames()) {
 
-			if(i==1)game=Game.getInstance();
-			
 			Text apple;
 			if (game.getEatenObjects().get("APPLE") != null) {
-				apple = new Text("x "+game.getEatenObjects().get("APPLE").toString());
+				apple = new Text("x " + game.getEatenObjects().get("APPLE").toString());
 			} else {
 				apple = new Text("0");
 
 			}
 			Text banana;
 			if (game.getEatenObjects().get("BANANA") != null) {
-				banana = new Text("x "+game.getEatenObjects().get("BANANA").toString());
+				banana = new Text("x " + game.getEatenObjects().get("BANANA").toString());
 			} else {
 				banana = new Text("0");
 
 			}
 			Text pear;
 			if (game.getEatenObjects().get("PEAR") != null) {
-				pear = new Text("x "+game.getEatenObjects().get("PEAR").toString());
+				pear = new Text("x " + game.getEatenObjects().get("PEAR").toString());
 			} else {
 				pear = new Text("0");
 

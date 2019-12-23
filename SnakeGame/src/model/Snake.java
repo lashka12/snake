@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import utilities.Constants;
 import utilities.Direction;
 

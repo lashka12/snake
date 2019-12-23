@@ -104,7 +104,19 @@ public class SysData {
 	 */
 	public static boolean Save() {
 
+		try {
+			JsonProcessor.writeGameHistory(games);
+			// jsonProccesser.writeQuestions(questions);
+
+			return true;
+
+		} catch (Exception e) {
+
+			System.out.println("somthing went wrong data was not saved");
+
+		}
 		return false;
+
 	}
 
 }

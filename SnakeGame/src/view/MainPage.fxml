@@ -62,7 +62,7 @@
                                     <Image url="@../../resources/pics/b_8.png" />
                                  </image>
                               </ImageView>
-                              <JFXButton contentDisplay="GRAPHIC_ONLY" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
+                              <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#muteGame" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="mute" textFill="WHITE">
                                  <font>
                                     <Font name="Snap ITC" size="18.0" />
                                  </font>
