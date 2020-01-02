@@ -25,7 +25,7 @@ import utilities.SoundEffects;
 import view.GameSimulator;
 
 public class GameController {
-	
+
 	private static GameController instance = null;
 	private Game game;
 	private GameSimulator view;
@@ -105,7 +105,10 @@ public class GameController {
 						Thread.sleep(3 * 1000); // waiting
 						Platform.runLater(() -> {
 							try {
+
 								FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RatingPage.fxml"));
+								RatingPageController rpc = new RatingPageController(true);
+								fxmlLoader.setController(rpc);
 								Parent root = (Parent) fxmlLoader.load();
 								Stage stage = new Stage();
 								stage.initModality(Modality.APPLICATION_MODAL);
@@ -369,6 +372,7 @@ public class GameController {
 
 		appleTimer = 0;
 		bananaTimer = 0;
+		mouseTimer=0;
 		game.restart();
 		view.reset();
 		MainPageController.getInstance().updateScore(0);

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<StackPane fx:id="root" prefHeight="304.0" prefWidth="407.0" style="-fx-background-color: transparent;;" stylesheets="@../../resources/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminAuthenticationController">
+   <children>
+      <ImageView fitHeight="342.0" fitWidth="496.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="pics/f.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" prefHeight="348.0" prefWidth="486.0">
+         <children>
+            <Text fill="#ff5e08" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter administrator password in order to manage questions page" textAlignment="CENTER" wrappingWidth="361.12176513671875">
+               <font>
+                  <Font name="Snap ITC" size="18.0" />
+               </font>
+            </Text>
+            <Region prefHeight="22.0" prefWidth="468.0" />
+            <StackPane prefHeight="88.0" prefWidth="274.0">
+               <children>
+                  <ImageView fitHeight="88.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="pics/b_5.png" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="279.0">
+                     <StackPane.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </StackPane.margin>
+                     <children>
+                        <JFXPasswordField fx:id="password" alignment="CENTER" focusColor="#fe9b00" prefHeight="25.0" prefWidth="121.0" unFocusColor="#fe9b00">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXPasswordField>
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+            <Region prefHeight="23.0" prefWidth="468.0" />
+            <HBox alignment="CENTER">
+               <children>
+                  <StackPane prefHeight="54.0" prefWidth="127.0">
+                     <children>
+                        <ImageView fitHeight="59.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="pics/b_4.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton contentDisplay="TEXT_ONLY" onAction="#enter" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 20;" text="Enter" textFill="#ff5e08">
+                           <font>
+                              <Font name="Snap ITC" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="54.0" prefWidth="127.0">
+                     <children>
+                        <ImageView fitHeight="59.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="pics/b_4.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton contentDisplay="TEXT_ONLY" onAction="#quit" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 20;" text="Quit" textFill="#ff5e08">
+                           <font>
+                              <Font name="Snap ITC" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <Region prefHeight="9.0" prefWidth="407.0" />
+         </children>
+      </VBox>
+   </children>
+</StackPane>

@@ -13,102 +13,140 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="root" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="541.0" fitWidth="736.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/pics/f.png" />
-         </image>
-      </ImageView>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="599.0" spacing="15.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="562.0">
-               <children>
-                  <Region prefHeight="51.0" prefWidth="29.0" />
-                  <Text fx:id="content" fill="#ff5e08" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most ?" wrappingWidth="519.1121215820312" HBox.hgrow="NEVER">
-                     <font>
-                        <Font name="Segoe Print Bold" size="12.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Region prefHeight="15.0" prefWidth="599.0" />
-            <HBox prefHeight="41.0" prefWidth="579.0">
-               <children>
-                  <RadioButton fx:id="choose1" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
-                  <Text fx:id="ans1" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
-                     <font>
-                        <Font name="Segoe Print Bold" size="12.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox layoutX="20.0" layoutY="119.0" prefHeight="41.0" prefWidth="579.0">
-               <children>
-                  <RadioButton fx:id="choose2" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
-                  <Text fx:id="ans2" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
-                     <font>
-                        <Font name="Segoe Print Bold" size="12.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="41.0" prefWidth="579.0">
-               <children>
-                  <RadioButton fx:id="choose3" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
-                  <Text fx:id="ans3" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
-                     <font>
-                        <Font name="Segoe Print Bold" size="12.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="41.0" prefWidth="579.0">
-               <children>
-                  <RadioButton fx:id="choose4" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0" text="RadioButton" />
-                  <Text fx:id="ans4" fill="#065508" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ." wrappingWidth="558.4453735351562">
-                     <font>
-                        <Font name="Segoe Print Bold" size="12.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <StackPane prefHeight="59.0" prefWidth="444.0">
-               <children>
-                  <ImageView fitHeight="42.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../resources/pics/b_4.png" />
-                     </image>
-                  </ImageView>
-                  <JFXButton contentDisplay="TEXT_ONLY" onAction="#answer" prefHeight="36.0" prefWidth="68.0" style="-fx-background-radius: 20;" text="ok" textFill="#ff5e08">
-                     <font>
-                        <Font name="Snap ITC" size="18.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-               </children>
-            </StackPane>
-         </children>
-         <StackPane.margin>
-            <Insets />
-         </StackPane.margin>
-      </VBox>
-   </children>
+<StackPane fx:id="root"
+	style="-fx-background-color: transparent;"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<ImageView fitHeight="541.0" fitWidth="736.0"
+			pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="pics/f.png" />
+			</image>
+		</ImageView>
+		<VBox maxHeight="-Infinity" maxWidth="-Infinity"
+			minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0"
+			prefWidth="599.0" spacing="15.0">
+			<children>
+				<HBox alignment="CENTER_LEFT" prefHeight="39.0"
+					prefWidth="562.0">
+					<children>
+						<Region prefHeight="51.0" prefWidth="29.0" />
+						<Text fx:id="content" fill="#ff5e08" fontSmoothingType="LCD"
+							strokeType="OUTSIDE" strokeWidth="0.0"
+							text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019, has the most ?"
+							wrappingWidth="519.1121215820312" HBox.hgrow="NEVER">
+							<font>
+								<Font name="Segoe Print Bold" size="12.0" />
+							</font>
+						</Text>
+					</children>
+					<VBox.margin>
+						<Insets left="10.0" right="10.0" />
+					</VBox.margin>
+				</HBox>
+				<Region prefHeight="15.0" prefWidth="599.0" />
+				<HBox prefHeight="41.0" prefWidth="579.0">
+					<children>
+						<RadioButton fx:id="choose1"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0"
+							text="RadioButton" />
+						<Text fx:id="ans1" fill="#065508" fontSmoothingType="LCD"
+							strokeType="OUTSIDE" strokeWidth="0.0"
+							text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ."
+							wrappingWidth="558.4453735351562">
+							<font>
+								<Font name="Segoe Print Bold" size="12.0" />
+							</font>
+						</Text>
+					</children>
+					<VBox.margin>
+						<Insets left="10.0" right="10.0" />
+					</VBox.margin>
+				</HBox>
+				<HBox layoutX="20.0" layoutY="119.0" prefHeight="41.0"
+					prefWidth="579.0">
+					<children>
+						<RadioButton fx:id="choose2"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0"
+							text="RadioButton" />
+						<Text fx:id="ans2" fill="#065508" fontSmoothingType="LCD"
+							strokeType="OUTSIDE" strokeWidth="0.0"
+							text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ."
+							wrappingWidth="558.4453735351562">
+							<font>
+								<Font name="Segoe Print Bold" size="12.0" />
+							</font>
+						</Text>
+					</children>
+					<VBox.margin>
+						<Insets left="10.0" right="10.0" />
+					</VBox.margin>
+				</HBox>
+				<HBox prefHeight="41.0" prefWidth="579.0">
+					<children>
+						<RadioButton fx:id="choose3"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0"
+							text="RadioButton" />
+						<Text fx:id="ans3" fill="#065508" fontSmoothingType="LCD"
+							strokeType="OUTSIDE" strokeWidth="0.0"
+							text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ."
+							wrappingWidth="558.4453735351562">
+							<font>
+								<Font name="Segoe Print Bold" size="12.0" />
+							</font>
+						</Text>
+					</children>
+					<VBox.margin>
+						<Insets left="10.0" right="10.0" />
+					</VBox.margin>
+				</HBox>
+				<HBox prefHeight="41.0" prefWidth="579.0">
+					<children>
+						<RadioButton fx:id="choose4"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#emptyOthers" prefHeight="24.0" prefWidth="29.0"
+							text="RadioButton" />
+						<Text fx:id="ans4" fill="#065508" fontSmoothingType="LCD"
+							strokeType="OUTSIDE" strokeWidth="0.0"
+							text="The English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia. Founded on 15 January 2001, it is the first edition of Wikipedia and, as of April 2019 ."
+							wrappingWidth="558.4453735351562">
+							<font>
+								<Font name="Segoe Print Bold" size="12.0" />
+							</font>
+						</Text>
+					</children>
+					<VBox.margin>
+						<Insets left="10.0" right="10.0" />
+					</VBox.margin>
+				</HBox>
+				<StackPane prefHeight="59.0" prefWidth="444.0">
+					<children>
+						<ImageView fitHeight="42.0" fitWidth="111.0"
+							pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="pics/b_4.png" />
+							</image>
+						</ImageView>
+						<JFXButton contentDisplay="TEXT_ONLY" onAction="#answer"
+							prefHeight="36.0" prefWidth="68.0"
+							style="-fx-background-radius: 20;" text="ok" textFill="#ff5e08">
+							<font>
+								<Font name="Snap ITC" size="18.0" />
+							</font>
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+						</JFXButton>
+					</children>
+				</StackPane>
+			</children>
+			<StackPane.margin>
+				<Insets />
+			</StackPane.margin>
+		</VBox>
+	</children>
 </StackPane>

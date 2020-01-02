@@ -1,12 +1,12 @@
 .pane{
     -fx-background-image: url("bg3.jpg");
-    -fx-background-size: 955 560;
+    -fx-background-size: 955.0 560.0;
     -fx-background-position: center center;
     
 }
 
 .tab-pane {
-    -fx-tab-max-height: 0 ;
+    -fx-tab-max-height: 0.0 ;
     
 } 
 .tab-pane .tab-header-area {
@@ -15,7 +15,7 @@
 
 #transparent{
 	
-	-fx-background-color: rgba(50, 50, 50, 0.5); 
+	-fx-background-color: rgba(50.0, 50.0, 50.0, 0.5); 
 	
 }
 .scroll-pane > .viewport {
@@ -56,4 +56,8 @@
     -fx-text-fill: gray;
     -fx-alignment: center-left;
     -fx-opacity: 1.0;
+}
+.deleteBtn{
+	  -fx-graphic: url("/pics/Delete_15px.png");
+	
 }

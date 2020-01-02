@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Game;
 import model.SysData;
+import utilities.Constants;
 import utilities.Direction;
 import utilities.SoundEffects;
 import view.GameSimulator;
@@ -29,12 +30,20 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Game game = new Game();
-		GameSimulator view = new GameSimulator();
-		GameController gameController = new GameController(game, view);
-
+		// in order to fix the question update bug move those just right before
+		// timer.start or enforce restarting the
+		// launch of the game
+		
+		Game game = new Game(); // model
+		GameSimulator view = new GameSimulator(); // view
+		GameController gameController = new GameController(game, view); // controller
+		
+//////////////////////////////////////////////////////////////////////////////////
+		
+		
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainPage.fxml"));
 		Scene scene = new Scene(root);
+
 		scene.setOnKeyPressed(e -> {
 
 			if (!game.isPaused()) {
@@ -55,7 +64,7 @@ public class Main extends Application {
 									&& game.getPlayGround().getSnake().getDirection() != Direction.LEFT) {
 								gameController.changeDiriction(Direction.RIGHT);
 							} else {
-								if (e.getCode().equals(KeyCode.P)) { // make sure game is not running
+								if (e.getCode().equals(KeyCode.P)) {
 									GameController.getInstance().pauseGame();
 									try {
 
@@ -85,6 +94,7 @@ public class Main extends Application {
 
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
+		primaryStage.getIcons().add(Constants.SNAKE_ICON);
 		primaryStage.show();
 
 	}
@@ -97,14 +107,5 @@ public class Main extends Application {
 		launch(args);
 
 	}
-
-//	@Override
-//	public void start(Stage stage) throws Exception {
-//		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/QuestionsManagmentPage.fxml"));
-//		Scene scene = new Scene(root);
-//		stage.setScene(scene);
-//		stage.show();
-//
-//	}
 
 }

@@ -116,7 +116,10 @@ public class SysData {
 
 		try {
 			JsonProcessor.writeGameHistory(games);
-			// jsonProccesser.writeQuestions(questions);
+			ArrayList<Question> allQuestions = new ArrayList<Question>();
+			for (ArrayList<Question> questionsOfLevel : questions.values())
+				allQuestions.addAll(questionsOfLevel);
+			JsonProcessor.writeQuestions(allQuestions);
 
 			return true;
 

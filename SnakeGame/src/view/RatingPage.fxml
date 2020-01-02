@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="635.0" style="-fx-background-color: transparent;" stylesheets="@../../resources/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RatingPageController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="635.0" style="-fx-background-color: transparent;" stylesheets="style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="453.0" fitWidth="598.0" layoutX="13.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../resources/pics/f.png" />
+            <Image url="pics/f.png" />
          </image>
       </ImageView>
       <ScrollPane hbarPolicy="NEVER" layoutX="91.0" layoutY="165.0" prefHeight="266.0" prefWidth="493.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
@@ -39,10 +39,10 @@
          <children>
             <ImageView fitHeight="44.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/pics/b_8.png" />
+                  <Image url="pics/b_8.png" />
                </image>
             </ImageView>
-            <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#restart" prefHeight="38.0" prefWidth="48.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
+            <JFXButton fx:id="restartBtn" contentDisplay="GRAPHIC_ONLY" onAction="#restart" prefHeight="38.0" prefWidth="48.0" style="-fx-background-radius: 15;" text="Play" textFill="WHITE">
                <font>
                   <Font name="Snap ITC" size="18.0" />
                </font>
@@ -52,7 +52,22 @@
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/pics/Restart_52px.png" />
+                        <Image url="pics/Restart_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="closeBtn" contentDisplay="GRAPHIC_ONLY" layoutX="14.0" layoutY="13.0" onAction="#close" prefHeight="38.0" prefWidth="47.0" style="-fx-background-radius: 15;" text="close" textFill="WHITE">
+               <font>
+                  <Font name="Snap ITC" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="pics/Delete_50px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -73,27 +88,27 @@
          <children>
             <ImageView fitHeight="32.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@../../../../../Desktop/סמסטר%20א/הנדסת%20תכנה/pixel/c.png" />
+                  <Image url="pics/Banana_96px.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
-                  <Image url="@../../resources/pics/Paprika_96px.png" />
+                  <Image url="pics/Paprika_96px.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
-                  <Image url="@../../resources/pics/Banana_96px.png" />
+                  <Image url="pics/Banana_96px.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
-                  <Image url="@../../resources/pics/Pear_96px.png" />
+                  <Image url="pics/Pear_96px.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/pics/rating/face.png" />
+                  <Image url="pics/Banana_96px.png" />
                </image>
             </ImageView>
          </children>

@@ -85,6 +85,47 @@ public class MainPageController implements Initializable {
 
 	}
 
+	@FXML
+	void openRating() {
+		try {
+			
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RatingPage.fxml"));
+			RatingPageController rpc=new RatingPageController(false);
+			fxmlLoader.setController(rpc);
+			Parent root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.initStyle(StageStyle.TRANSPARENT);
+			scene.setFill(Color.TRANSPARENT);
+			stage.show();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@FXML
+	void openAuthentication() {
+		
+		try {
+			SoundEffects.playButtonSound();
+			FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/view/AdminAuthenticationPage.fxml"));
+			Parent root1 = (Parent) fxmlLoader1.load();
+			Stage stage1 = new Stage();
+			stage1.initModality(Modality.APPLICATION_MODAL);
+			Scene scene1 = new Scene(root1);
+			stage1.setScene(scene1);
+			stage1.initStyle(StageStyle.TRANSPARENT);
+			scene1.setFill(Color.TRANSPARENT);
+			stage1.show();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+	
 	public void updateScore(int score) {
 
 		this.score.setText(score + "");
@@ -133,8 +174,6 @@ public class MainPageController implements Initializable {
 		if (instance == null)
 			instance = this;
 
-		root.getStylesheets().add("style/style.css");
-		root.getStyleClass().add("pane");
 
 	}
 

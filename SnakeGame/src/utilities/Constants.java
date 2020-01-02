@@ -12,6 +12,9 @@ public class Constants {
 	public static int GAME_WIDTH = 104;
 	public static final int BLOCK_SIZE = 9;
 	public static int SNAKE_LENGTH = 10;
+	public static final Image STACK_IMAGE = new Image(new File("resources/pics/stack.png").toURI().toString());
+
+	public static final Image STOP_IMAGE = new Image(new File("resources/pics/stop.png").toURI().toString());
 	public static final Image SNAKE_BODY_IMAGE = new Image(new File("resources/pics/t.png").toURI().toString());
 	public static final Image APPLE_IMAGE = new Image(new File("resources/pics/apple22.png").toURI().toString());
 	public static final Image BANANA_IMAGE = new Image(new File("resources/pics/banana22.png").toURI().toString());
@@ -34,6 +37,7 @@ public class Constants {
 	public static final Image EASY_QUESTION = new Image(new File("resources/pics/whiteQuestion22.png").toURI().toString());
 	public static final Image INTER_QUESTION = new Image(new File("resources/pics/yellowQuestion22.png").toURI().toString());
 	public static final Image HARD_QUESTION = new Image(new File("resources/pics/redQuestion22.png").toURI().toString());
+	public static final Image SNAKE_ICON = new Image(new File("resources/pics/snakePic.png").toURI().toString());
 
 	public static final String GAME_SOUND = "resources/audio/funny.mp3";
 	public static final String BUBBLE_SOUND = "resources/audio/Bubble.mp3";

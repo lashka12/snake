@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="249.0" fitWidth="334.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../resources/pics/f.png" />
+            <Image url="pics/f.png" />
          </image>
       </ImageView>
       <VBox alignment="CENTER" spacing="10.0">
@@ -35,7 +35,7 @@
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/pics/b_8.png" />
+                              <Image url="pics/b_8.png" />
                            </image>
                            <effect>
                               <DropShadow />
@@ -51,7 +51,7 @@
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../resources/pics/Play_50px.png" />
+                                    <Image url="pics/Play_50px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -62,7 +62,7 @@
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/pics/b_8.png" />
+                              <Image url="pics/b_8.png" />
                            </image>
                            <effect>
                               <DropShadow />
@@ -78,7 +78,7 @@
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../resources/pics/Restart_52px.png" />
+                                    <Image url="pics/Restart_52px.png" />
                                  </image>
                               </ImageView>
                            </graphic>

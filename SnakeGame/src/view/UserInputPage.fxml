@@ -16,7 +16,7 @@
    <children>
       <ImageView fitHeight="330.0" fitWidth="407.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../resources/pics/f.png" />
+            <Image url="pics/f.png" />
          </image>
       </ImageView>
       <VBox alignment="CENTER" prefHeight="295.0" prefWidth="407.0">
@@ -25,7 +25,7 @@
                <children>
                   <ImageView fitHeight="88.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/pics/b_5.png" />
+                        <Image url="pics/b_5.png" />
                      </image>
                   </ImageView>
                   <HBox alignment="CENTER" prefHeight="88.0" prefWidth="279.0">
@@ -52,7 +52,7 @@
                      <children>
                         <ImageView fitHeight="59.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/pics/b_4.png" />
+                              <Image url="pics/b_4.png" />
                            </image>
                         </ImageView>
                         <JFXButton contentDisplay="TEXT_ONLY" onAction="#play" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 20;" text="PLay" textFill="#ff5e08">
@@ -69,7 +69,7 @@
                      <children>
                         <ImageView fitHeight="59.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/pics/b_4.png" />
+                              <Image url="pics/b_4.png" />
                            </image>
                         </ImageView>
                         <JFXButton contentDisplay="TEXT_ONLY" onAction="#quit" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 20;" text="Quit" textFill="#ff5e08">

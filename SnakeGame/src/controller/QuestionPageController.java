@@ -63,13 +63,14 @@ public class QuestionPageController implements Initializable {
 	}
 
 	private boolean answeredRight() {
-
+		
 		if ((choose1.isSelected() && curQuestion.getcorrectAnswer().equals("1"))
 				|| (choose2.isSelected() && curQuestion.getcorrectAnswer().equals("2"))
 				|| (choose3.isSelected() && curQuestion.getcorrectAnswer().equals("3"))
 				|| (choose4.isSelected() && curQuestion.getcorrectAnswer().equals("4"))) {
 			return true;
 		}
+		
 		return false;
 
 	}

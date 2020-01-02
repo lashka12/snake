@@ -53,6 +53,55 @@ public class JsonProcessor {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "resource" })
+	public static void writeQuestions(ArrayList<Question> questions) {
+
+		try {
+			JSONArray array = new JSONArray();
+			JSONObject quesJson = new JSONObject();
+			JSONObject quesDetails;
+			for (Question quesToAdd : questions) {
+				quesDetails = new JSONObject();
+				quesDetails.put("question", quesToAdd.getContent());
+
+				String levelAsString = "";
+				switch (quesToAdd.getLevel()) {
+				case EASY:
+					levelAsString = "1";
+					break;
+				case INTERMEDIATE:
+					levelAsString = "2";
+					break;
+				case HARD:
+					levelAsString = "3";
+					break;
+
+				}
+
+
+				ArrayList<String> answers = new ArrayList<String>();
+				answers.add(quesToAdd.getAns1());
+				answers.add(quesToAdd.getAns2());
+				answers.add(quesToAdd.getAns3());
+				answers.add(quesToAdd.getAns4());
+
+				quesDetails.put("answers", answers);
+				quesDetails.put("correct_ans", quesToAdd.getcorrectAnswer());
+				quesDetails.put("level", levelAsString);
+				quesDetails.put("team", quesToAdd.getTeam());
+				array.add(quesDetails);
+			}
+			quesJson.put("questions", array);
+			FileWriter file;
+			file = new FileWriter("questions.json");
+			file.write(quesJson.toJSONString());
+			file.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static ArrayList<Question> readQuestionsFile() {
 
 		ArrayList<Question> questions = new ArrayList<Question>();
