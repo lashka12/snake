@@ -1,7 +1,5 @@
 package utilities;
 
-import javafx.scene.image.Image;
-
 public enum FruiteType {
 
 	APPLE(5, 10, 1), BANANA(10, 15, 1), PEAR(0, 20, 1);
@@ -28,7 +26,5 @@ public enum FruiteType {
 	public int getTailExtension() {
 		return tailExtension;
 	}
-
-
 
 }

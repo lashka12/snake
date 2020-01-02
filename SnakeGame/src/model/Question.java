@@ -7,7 +7,10 @@ public class Question extends Block {
 
 	private String content;
 	private Level level;
-	private ArrayList<String> answers;
+	private String ans1;
+	private String ans2;
+	private String ans3;
+	private String ans4;
 	private String correctAnswer;
 	private String team;
 	private boolean eaten;
@@ -17,7 +20,10 @@ public class Question extends Block {
 		super(0, 0);
 		this.content = content;
 		this.level = level;
-		this.answers = answers;
+		this.ans1 = answers.get(0);
+		this.ans2 = answers.get(1);
+		this.ans3 = answers.get(2);
+		this.ans4 = answers.get(3);
 		this.correctAnswer = correctAnswer;
 		this.team = team;
 		this.eaten = false;
@@ -63,18 +69,26 @@ public class Question extends Block {
 		this.team = team;
 	}
 
-	public ArrayList<String> getAnswers() {
-		return answers;
-	}
-
-	public void setAnswers(ArrayList<String> answers) {
-		this.answers = answers;
-	}
-
 	@Override
 	public String toString() {
-		return "Question [ x=" + getX() + ", y=" + getY() + ", content=" + content + ", level=" + level + ", answers="
-				+ answers + ", correctAnswer=" + correctAnswer + ", team=" + team + "]";
+		return "Question [ x=" + getX() + ", y=" + getY() + ", content=" + content + ", level=" + level
+				+ ", correctAnswer=" + correctAnswer + ", team=" + team + "]";
+	}
+
+	public String getAns1() {
+		return ans1;
+	}
+
+	public String getAns2() {
+		return ans2;
+	}
+
+	public String getAns3() {
+		return ans3;
+	}
+
+	public String getAns4() {
+		return ans4;
 	}
 
 }

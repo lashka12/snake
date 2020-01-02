@@ -17,8 +17,7 @@ public class Constants {
 	public static final Image BANANA_IMAGE = new Image(new File("resources/pics/banana22.png").toURI().toString());
 	public static final Image PEAR_IMAGE = new Image(new File("resources/pics/pear22.png").toURI().toString());
 	public static final Image MOUSE_LEFT_IMAGE = new Image(new File("resources/pics/mouseLeft.gif").toURI().toString());
-	public static final Image MOUSE_RIGHT_IMAGE = new Image(
-			new File("resources/pics/mouseRight.gif").toURI().toString());
+	public static final Image MOUSE_RIGHT_IMAGE = new Image(new File("resources/pics/mouseRight.gif").toURI().toString());
 	public static final Image MOUSE_UP_IMAGE = new Image(new File("resources/pics/mouseUp.gif").toURI().toString());
 	public static final Image MOUSE_DOWN_IMAGE = new Image(new File("resources/pics/mouseDown.gif").toURI().toString());
 	public static final Image QUESTION_IMAGE = new Image(new File("resources/pics/question22.png").toURI().toString());

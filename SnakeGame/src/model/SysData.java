@@ -97,6 +97,16 @@ public class SysData {
 
 	}
 
+	public static ArrayList<Question> getQuestions() {
+
+		ArrayList<Question> allQuestions = new ArrayList<Question>();
+		for (ArrayList<Question> questionsOfLevel : questions.values())
+			allQuestions.addAll(questionsOfLevel);
+
+		return allQuestions;
+
+	}
+
 	/**
 	 * this method saves the changes to the .json files
 	 * 

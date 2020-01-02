@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -72,6 +73,9 @@ public class MainPageController implements Initializable {
 	@FXML
 	private VBox starsBox;
 
+	@FXML
+	private StackPane root;
+
 	public VBox getStarsBox() {
 		return starsBox;
 	}
@@ -90,15 +94,25 @@ public class MainPageController implements Initializable {
 	public void updateLives(int lives) {
 
 		switch (lives) {
-
+		case 3: {
+			initLives();
+			break;
+		}
 		case 2:
+			h1.setImage(Constants.RED_HEART);
+			h2.setImage(Constants.RED_HEART);
 			h3.setImage(Constants.GRAY_HEART);
 			break;
 		case 1:
+			h1.setImage(Constants.RED_HEART);
 			h2.setImage(Constants.GRAY_HEART);
+			h3.setImage(Constants.GRAY_HEART);
+
 			break;
 		case 0:
 			h1.setImage(Constants.GRAY_HEART);
+			h2.setImage(Constants.GRAY_HEART);
+			h3.setImage(Constants.GRAY_HEART);
 			break;
 
 		}
@@ -118,6 +132,9 @@ public class MainPageController implements Initializable {
 
 		if (instance == null)
 			instance = this;
+
+		root.getStylesheets().add("style/style.css");
+		root.getStyleClass().add("pane");
 
 	}
 

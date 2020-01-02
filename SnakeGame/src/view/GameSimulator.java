@@ -63,7 +63,6 @@ public class GameSimulator extends Pane {
 		ImageView banaImage = new ImageView(Constants.BANANA_IMAGE);
 		ImageView pearImage = new ImageView(Constants.PEAR_IMAGE);
 		ImageView mouseImage = new ImageView(Constants.MOUSE_RIGHT_IMAGE);
-
 		ImageView easyQuestionImage = new ImageView(Constants.EASY_QUESTION);
 		ImageView intermediateQuestionImage = new ImageView(Constants.INTER_QUESTION);
 		ImageView hardQuestion = new ImageView(Constants.HARD_QUESTION);
@@ -179,24 +178,34 @@ public class GameSimulator extends Pane {
 			}
 
 			ImageView mouseImage = (ImageView) lookup("#mouse");
-			mouseImage.setTranslateX(game.getPlayGround().getMouse().getX() * Constants.BLOCK_SIZE); // update mouse pic
-																										// position
-			// on screen
-			mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
 
-			switch (game.getPlayGround().getMouse().getDirection()) {
-			case UP:
-				mouseImage.setImage(Constants.MOUSE_UP_IMAGE);
-				break;
-			case DOWN:
-				mouseImage.setImage(Constants.MOUSE_DOWN_IMAGE);
-				break;
-			case LEFT:
-				mouseImage.setImage(Constants.MOUSE_LEFT_IMAGE);
-				break;
-			case RIGHT:
-				mouseImage.setImage(Constants.MOUSE_RIGHT_IMAGE);
-				break;
+			if (!game.getPlayGround().getMouse().isEaten()) {
+				if (!mouseImage.isVisible())
+					mouseImage.setVisible(true);
+				// update visually position
+				mouseImage.setTranslateX(game.getPlayGround().getMouse().getX() * Constants.BLOCK_SIZE);
+				mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
+
+				switch (game.getPlayGround().getMouse().getDirection()) {
+				case UP:
+					mouseImage.setImage(Constants.MOUSE_UP_IMAGE);
+					break;
+				case DOWN:
+					mouseImage.setImage(Constants.MOUSE_DOWN_IMAGE);
+					break;
+				case LEFT:
+					mouseImage.setImage(Constants.MOUSE_LEFT_IMAGE);
+					break;
+				case RIGHT:
+					mouseImage.setImage(Constants.MOUSE_RIGHT_IMAGE);
+					break;
+				}
+			} else {
+				if (mouseImage.isVisible()) {
+					mouseImage.setVisible(false);
+					showFire();
+				}
+
 			}
 
 			for (Fruit fruit : game.getPlayGround().getFruits().values()) {
@@ -237,6 +246,32 @@ public class GameSimulator extends Pane {
 
 			size = game.getPlayGround().getSnake().getBody().size();
 		}
+	}
+
+	private void showFire() {
+
+		ImageView fire = new ImageView(Constants.FIRE_IMAGE);
+		Thread thread = new Thread(() -> {
+
+			try {
+
+				Platform.runLater(() -> {
+					fire.setTranslateX(game.getPlayGround().getMouse().getX() * Constants.BLOCK_SIZE);
+					fire.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
+					getChildren().add(fire);
+				});
+
+				Thread.sleep(500);
+				Platform.runLater(() -> {
+					getChildren().remove(fire);
+				});
+
+			} catch (Exception exc) {
+				throw new Error("Unexpected interruption");
+			}
+		});
+		thread.start();
+
 	}
 
 	public void showReady() {// can merge with showGo as the same function

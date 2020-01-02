@@ -25,6 +25,9 @@ public class Segment extends Block {
 
 	public void move() { // update position
 
+		
+		
+		
 		oldX = getX();
 		oldY = getY();
 

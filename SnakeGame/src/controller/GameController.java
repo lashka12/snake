@@ -25,14 +25,15 @@ import utilities.SoundEffects;
 import view.GameSimulator;
 
 public class GameController {
-
+	
+	private static GameController instance = null;
 	private Game game;
 	private GameSimulator view;
 	private static AnimationTimer timer;
 	private long then = System.nanoTime();
-	private static GameController instance = null;
 	private int appleTimer;
 	private int bananaTimer;
+	private int mouseTimer;
 
 	public GameController(Game game, GameSimulator view) {
 
@@ -57,12 +58,31 @@ public class GameController {
 
 	}
 
-	public void update() {
-
+	private boolean snakeHitWall() {
 		if ((game.getPlayGround().getSnake().getHead().getY() < 0)
 				|| (game.getPlayGround().getSnake().getHead().getY() > Constants.GAME_HIGHT - 2)
 				|| (game.getPlayGround().getSnake().getHead().getX() < 0)
 				|| (game.getPlayGround().getSnake().getHead().getX() >= Constants.GAME_WIDTH - 2)) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean snakeHitBody() { // use abs | | between head and body segment
+		for (Segment s : game.getPlayGround().getSnake().getBody()) {
+			if ((game.getPlayGround().getSnake().getHead().getX() == s.getX())
+					&& (game.getPlayGround().getSnake().getHead().getY() == s.getY())
+					&& !s.equals(game.getPlayGround().getSnake().getHead())) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+	public void update() {
+
+		if (snakeHitBody() || snakeHitWall()) {
 
 			SoundEffects.playNegativeSound();
 			pauseGame();
@@ -116,10 +136,13 @@ public class GameController {
 
 						Thread.sleep(1000);
 						Platform.runLater(() -> {
-
 							game.getPlayGround().setHit(false);
-							game.getPlayGround().getSnake().getHead().setX(Constants.GAME_WIDTH / 2);
-							game.getPlayGround().getSnake().getHead().setY(Constants.GAME_HIGHT / 2);
+							int ipx = Constants.GAME_WIDTH / 2;
+							int ipy = Constants.GAME_HIGHT / 2;
+							for (Segment s : game.getPlayGround().getSnake().getBody()) {
+								s.setX(ipx++);
+								s.setY(ipy);
+							}
 							resumeGame();
 
 						});
@@ -132,16 +155,33 @@ public class GameController {
 			}
 		}
 
-		for (Segment segment : game.getPlayGround().getSnake().getBody()) // update snake pos
+		for (Segment segment : game.getPlayGround().getSnake().getBody()) // update snake logical pos
 			segment.move();
 
-		game.getPlayGround().getMouse().update(); // update mouse pos
+		if (!game.getPlayGround().getMouse().isEaten()) {
+			game.getPlayGround().getMouse().update(); // update mouse logical pos
+		} else {
+			mouseTimer++;
+			if (mouseTimer == 1920) { // 1920 iteration = 1 min
+				game.addEatenObject(game.getPlayGround().getMouse());
+				game.getPlayGround().addMouse();
+				mouseTimer = 0;
+			}
+
+		}
 
 		if (mouseWasEaten()) {
 			SoundEffects.playBubbleSound();
-			game.addEatenObject(game.getPlayGround().getMouse());
 			game.getPlayGround().getMouse().setEaten(true);
-			game.getPlayGround().addMouse();
+			game.addEatenObject(game.getPlayGround().getMouse());
+			MainPageController.getInstance().updateScore(game.getScore());
+			game.getPlayGround().getSnake().addSegment();
+			game.getPlayGround().getSnake().addSegment();
+			if (game.getLives() < 3) {
+				game.setLives(game.getLives() + 1);
+				MainPageController.getInstance().updateLives(game.getLives());
+
+			}
 
 		}
 
@@ -243,15 +283,17 @@ public class GameController {
 
 	}
 
-	public boolean mouseWasEaten() { // can merge with the last method
+	public boolean mouseWasEaten() {
 
-		if ((Math.abs(game.getPlayGround().getMouse().getX() - game.getPlayGround().getSnake().getHead().getX()) >= 0
+		if (!game.getPlayGround().getMouse().isEaten() && ((Math
+				.abs(game.getPlayGround().getMouse().getX() - game.getPlayGround().getSnake().getHead().getX()) >= 0
 				&& Math.abs(
 						game.getPlayGround().getMouse().getX() - game.getPlayGround().getSnake().getHead().getX()) < 2)
 				&& (Math.abs(
 						game.getPlayGround().getMouse().getY() - game.getPlayGround().getSnake().getHead().getY()) >= 0
 						&& Math.abs(game.getPlayGround().getMouse().getY()
-								- game.getPlayGround().getSnake().getHead().getY()) < 2))
+								- game.getPlayGround().getSnake().getHead().getY()) < 2)))
+
 			return true;
 
 		return false;
@@ -270,7 +312,7 @@ public class GameController {
 
 	public void startTimer() {
 
-		game.setPaused(false);
+		game.setPaused(true);
 		Thread thread = new Thread(() -> {
 			try {
 				Thread.sleep(800);

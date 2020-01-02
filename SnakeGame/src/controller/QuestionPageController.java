@@ -174,10 +174,10 @@ public class QuestionPageController implements Initializable {
 		ft.play();
 
 		content.setText(curQuestion.getContent());
-		ans1.setText(curQuestion.getAnswers().get(0));
-		ans2.setText(curQuestion.getAnswers().get(1));
-		ans3.setText(curQuestion.getAnswers().get(2));
-		ans4.setText(curQuestion.getAnswers().get(3));
+		ans1.setText(curQuestion.getAns1());
+		ans2.setText(curQuestion.getAns2());
+		ans3.setText(curQuestion.getAns3());
+		ans4.setText(curQuestion.getAns4());
 
 	}
 

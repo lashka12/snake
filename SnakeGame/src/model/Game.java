@@ -25,7 +25,7 @@ public class Game {
 	}
 
 	public void restart() {
-		
+
 		this.playGround = new PlayGround();
 		this.eatenObjects = new HashMap<String, Integer>();
 		this.date = new Date();
@@ -34,7 +34,6 @@ public class Game {
 		this.lives = 3;
 		this.over = false;
 		this.paused = false;
-
 
 	}
 
@@ -84,11 +83,6 @@ public class Game {
 
 		if (eatenObject instanceof Mouse)
 			toAdd = 20;
-
-		// if (eatenObject instanceof Question)
-		// toAdd = 0;// question points will be added when we implement questionPage
-		// Controller based
-		// on the answer
 
 		if (!eatenObjects.containsKey(key))
 			eatenObjects.put(key, 1);
@@ -159,6 +153,4 @@ public class Game {
 				+ ", paused=" + paused + "]";
 	}
 
-	
-	
 }

@@ -1,8 +1,5 @@
 package controller;
 
-import java.sql.Savepoint;
-import java.util.Date;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,45 +37,47 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		scene.setOnKeyPressed(e -> {
 
-			if (e.getCode().equals(KeyCode.UP) && game.getPlayGround().getSnake().getDirection() != Direction.DOWN) {// change
-																														// to
-																														// switch
-				gameController.changeDiriction(Direction.UP);
-			} else {
-				if (e.getCode().equals(KeyCode.DOWN)
-						&& game.getPlayGround().getSnake().getDirection() != Direction.UP) {
-					gameController.changeDiriction(Direction.DOWN);
-				} else {
-					if (e.getCode().equals(KeyCode.LEFT)
-							&& game.getPlayGround().getSnake().getDirection() != Direction.RIGHT) {
-						gameController.changeDiriction(Direction.LEFT);
-					} else {
-						if (e.getCode().equals(KeyCode.RIGHT)
-								&& game.getPlayGround().getSnake().getDirection() != Direction.LEFT) {
-							gameController.changeDiriction(Direction.RIGHT);
-						} else {
-							if (e.getCode().equals(KeyCode.P)) { // make sure game is not running
-								GameController.getInstance().pauseGame();
-								try {
+			if (!game.isPaused()) {
 
-									FXMLLoader fxmlLoader1 = new FXMLLoader(
-											getClass().getResource("/view/PausePage.fxml"));
-									Parent root1 = (Parent) fxmlLoader1.load();
-									Stage stage1 = new Stage();
-									stage1.initModality(Modality.APPLICATION_MODAL);
-									Scene scene1 = new Scene(root1);
-									stage1.setScene(scene1);
-									stage1.initStyle(StageStyle.TRANSPARENT);
-									scene1.setFill(Color.TRANSPARENT);
-									stage1.show();
-								} catch (Exception ex) {
-									ex.printStackTrace();
+				if (e.getCode().equals(KeyCode.UP)
+						&& game.getPlayGround().getSnake().getDirection() != Direction.DOWN) {
+					gameController.changeDiriction(Direction.UP);
+				} else {
+					if (e.getCode().equals(KeyCode.DOWN)
+							&& game.getPlayGround().getSnake().getDirection() != Direction.UP) {
+						gameController.changeDiriction(Direction.DOWN);
+					} else {
+						if (e.getCode().equals(KeyCode.LEFT)
+								&& game.getPlayGround().getSnake().getDirection() != Direction.RIGHT) {
+							gameController.changeDiriction(Direction.LEFT);
+						} else {
+							if (e.getCode().equals(KeyCode.RIGHT)
+									&& game.getPlayGround().getSnake().getDirection() != Direction.LEFT) {
+								gameController.changeDiriction(Direction.RIGHT);
+							} else {
+								if (e.getCode().equals(KeyCode.P)) { // make sure game is not running
+									GameController.getInstance().pauseGame();
+									try {
+
+										FXMLLoader fxmlLoader1 = new FXMLLoader(
+												getClass().getResource("/view/PausePage.fxml"));
+										Parent root1 = (Parent) fxmlLoader1.load();
+										Stage stage1 = new Stage();
+										stage1.initModality(Modality.APPLICATION_MODAL);
+										Scene scene1 = new Scene(root1);
+										stage1.setScene(scene1);
+										stage1.initStyle(StageStyle.TRANSPARENT);
+										scene1.setFill(Color.TRANSPARENT);
+										stage1.show();
+									} catch (Exception ex) {
+										ex.printStackTrace();
+									}
+
 								}
 
 							}
 
 						}
-
 					}
 				}
 			}
@@ -93,10 +92,19 @@ public class Main extends Application {
 	public static void main(String[] args) {
 
 		@SuppressWarnings("unused")
-		SysData data=new SysData();
+		SysData data = new SysData();
 		SoundEffects.playStartSound();
 		launch(args);
 
 	}
+
+//	@Override
+//	public void start(Stage stage) throws Exception {
+//		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/QuestionsManagmentPage.fxml"));
+//		Scene scene = new Scene(root);
+//		stage.setScene(scene);
+//		stage.show();
+//
+//	}
 
 }
