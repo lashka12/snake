@@ -52,33 +52,6 @@ public class JsonProcessor {
 			e.printStackTrace();
 		}
 	}
-	
-	@SuppressWarnings({ "unchecked", "resource" })
-	public static void writeQuestions(ArrayList<Question> questions) {
-
-		try {
-			JSONArray array = new JSONArray();
-			JSONObject quesJson = new JSONObject();
-			JSONObject quesDetails;
-			for (Question quesToAdd : questions) {
-				quesDetails = new JSONObject();
-				quesDetails.put("content", quesToAdd.getContent());
-				quesDetails.put("level",  quesToAdd.getLevel());
-				quesDetails.put("answers", quesToAdd.getAnswers());
-				quesDetails.put("correctAnswer", quesToAdd.getcorrectAnswer() );
-				quesDetails.put("team", quesToAdd.getTeam());
-				array.add(quesDetails);
-			}
-			quesJson.put("questions", array);
-			FileWriter file;
-			file = new FileWriter("questions.json");
-			file.write(quesJson.toJSONString());
-			file.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	public static ArrayList<Question> readQuestionsFile() {
 
