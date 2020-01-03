@@ -88,9 +88,9 @@ public class MainPageController implements Initializable {
 	@FXML
 	void openRating() {
 		try {
-			
+
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RatingPage.fxml"));
-			RatingPageController rpc=new RatingPageController(false);
+			RatingPageController rpc = new RatingPageController(false);
 			fxmlLoader.setController(rpc);
 			Parent root = (Parent) fxmlLoader.load();
 			Stage stage = new Stage();
@@ -100,15 +100,16 @@ public class MainPageController implements Initializable {
 			stage.initStyle(StageStyle.TRANSPARENT);
 			scene.setFill(Color.TRANSPARENT);
 			stage.show();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
+
 	@FXML
 	void openAuthentication() {
-		
+
 		try {
 			SoundEffects.playButtonSound();
 			FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/view/AdminAuthenticationPage.fxml"));
@@ -123,9 +124,9 @@ public class MainPageController implements Initializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void updateScore(int score) {
 
 		this.score.setText(score + "");
@@ -174,7 +175,6 @@ public class MainPageController implements Initializable {
 		if (instance == null)
 			instance = this;
 
-
 	}
 
 	public void openGamePane() {
@@ -189,8 +189,11 @@ public class MainPageController implements Initializable {
 		ft.setToValue(1.0);
 		ft.play();
 		gamePane.toFront();
-		playGroundPane.getChildren().add(GameSimulator.getInstance());
 
+		if (!playGroundPane.getChildren().contains(GameSimulator.getInstance())) { // adding the PlayGround Graphics to
+																					// the main page
+			playGroundPane.getChildren().add(GameSimulator.getInstance());
+		}
 	}
 
 	@FXML

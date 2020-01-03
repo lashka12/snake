@@ -62,6 +62,44 @@ public class PausePageController implements Initializable {
 		thread.start();
 
 	}
+	@FXML
+	void leaveGame() {
+		
+		
+		Thread thread = new Thread(() -> {
+			try {
+
+				Platform.runLater(() -> {
+					SoundEffects.stopSound();
+					GameController.getInstance().pauseGame();
+					MainPageController.getInstance().openHomePane();
+					SoundEffects.playButtonSound();
+					FadeTransition ft = new FadeTransition(Duration.millis(500), root);
+					ft.setFromValue(1.0);
+					ft.setToValue(0.0);
+					ft.play();
+
+				});
+				Thread.sleep(500);
+				Platform.runLater(() -> {
+					Stage stage = (Stage) root.getScene().getWindow();
+					stage.close();
+
+				});
+
+			} catch (Exception exc) {
+				throw new Error("Unexpected interruption");
+			}
+		});
+		thread.start();
+		
+		
+		
+		
+		
+
+		
+	}
 
 	@FXML
 	void resumeGame(ActionEvent event) {

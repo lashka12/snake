@@ -85,6 +85,33 @@
                         </JFXButton>
                      </children>
                   </StackPane>
+                  <StackPane layoutX="130.0" layoutY="10.0" prefHeight="47.0" prefWidth="51.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="pics/b_8.png" />
+                           </image>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </ImageView>
+                        <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#leaveGame" prefHeight="45.0" prefWidth="50.0" style="-fx-background-radius: 15;" text="Play" textFill="#ff5e08">
+                           <font>
+                              <Font name="Snap ITC" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="pics/Home_50px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
          </children>

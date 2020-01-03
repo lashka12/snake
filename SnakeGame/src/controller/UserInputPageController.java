@@ -83,7 +83,7 @@ public class UserInputPageController implements Initializable {
 					Thread.sleep(100);
 					Platform.runLater(() -> {
 						Game.getInstance().setNickName(nickName.getText());
-						GameController.getInstance().startTimer();
+						GameController.getInstance().restartGame();
 					});
 
 				} catch (Exception exc) {
