@@ -60,6 +60,8 @@ public class QuestionsManagmentController implements Initializable {
 
 	@FXML
 	private TableView<Question> questionsTbl;
+	@FXML
+	private TableColumn<?, ?> theAnswer;
 
 	@FXML
 	private TableColumn<?, ?> content;
@@ -95,22 +97,15 @@ public class QuestionsManagmentController implements Initializable {
 		newCorrectAnswer.getItems().add(1);
 		newCorrectAnswer.getItems().add(2);
 		newCorrectAnswer.getItems().add(3);
+		newCorrectAnswer.getItems().add(4);
 
-		questionsTbl.setFixedCellSize(90.0);
+		questionsTbl.setFixedCellSize(150.0);
 		fillQuestionsTbl();
 
 	}
 
 	@FXML
 	void addQuestion(ActionEvent event) {
-
-//		String text = newContent.getText();
-//		String[] lines = text.split(System.getProperty("line.separator"));
-//		String content = "";
-//		for (int i = 0; i < lines.length; i++) {
-//			content = content + "\n" + lines[i];
-//		}
-//		System.out.println(content);
 
 		// check for empty and null with try and catch on the hole code piece
 
@@ -149,18 +144,17 @@ public class QuestionsManagmentController implements Initializable {
 
 		}
 
-		content.setCellValueFactory(new PropertyValueFactory<>("content"));
-		ans1.setCellValueFactory(new PropertyValueFactory<>("ans1"));
-		ans2.setCellValueFactory(new PropertyValueFactory<>("ans2"));
-		ans3.setCellValueFactory(new PropertyValueFactory<>("ans3"));
-		ans4.setCellValueFactory(new PropertyValueFactory<>("ans4"));
+		content.setCellValueFactory(new PropertyValueFactory<>("contentAsLines"));
+		ans1.setCellValueFactory(new PropertyValueFactory<>("ans1AsLines"));
+		ans2.setCellValueFactory(new PropertyValueFactory<>("ans2AsLines"));
+		ans3.setCellValueFactory(new PropertyValueFactory<>("ans3AsLines"));
+		ans4.setCellValueFactory(new PropertyValueFactory<>("ans4AsLines"));
+		theAnswer.setCellValueFactory(new PropertyValueFactory<>("correctAnswer"));
 		level.setCellValueFactory(new PropertyValueFactory<>("level"));
 		team.setCellValueFactory(new PropertyValueFactory<>("team"));
-
 		questionsTbl.setItems(data);
 
-		if (questionsTbl.getColumns().size() == 7) {
-
+		if (questionsTbl.getColumns().size() == 8) {
 			TableColumn<Question, Void> deleteCol = new TableColumn<>();
 			deleteCol.setPrefWidth(50);
 			deleteCol.setMinWidth(50);

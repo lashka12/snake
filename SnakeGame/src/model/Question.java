@@ -6,13 +6,24 @@ import utilities.Level;
 public class Question extends Block {
 
 	private String content;
-	private Level level;
 	private String ans1;
 	private String ans2;
 	private String ans3;
 	private String ans4;
 	private String correctAnswer;
+	private Level level;
 	private String team;
+
+
+	//to be used later in the view tables
+	private String contentAsLines;
+	private String ans1AsLines;
+	private String ans2AsLines;
+	private String ans3AsLines;
+	private String ans4AsLines;
+	
+	
+	
 	private boolean eaten;
 
 	public Question(String content, Level level, ArrayList<String> answers, String correctAnswer, String team) {
@@ -27,8 +38,59 @@ public class Question extends Block {
 		this.correctAnswer = correctAnswer;
 		this.team = team;
 		this.eaten = false;
+		
+		
+		contentAsLines=makeAsLines(content);
+		ans1AsLines=makeAsLines(ans1);
+		ans2AsLines=makeAsLines(ans2);
+		ans3AsLines=makeAsLines(ans3);
+		ans4AsLines=makeAsLines(ans4);
+
+		
+	}
+	
+	public String getContentAsLines() {
+		return contentAsLines;
 	}
 
+	public String getAns1AsLines() {
+		return ans1AsLines;
+	}
+
+	public String getAns2AsLines() {
+		return ans2AsLines;
+	}
+
+	public String getAns3AsLines() {
+		return ans3AsLines;
+	}
+
+	public String getAns4AsLines() {
+		return ans4AsLines;
+	}
+	public String getCorrectAnswer() {
+		return correctAnswer;
+	}
+
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+	}
+	private String makeAsLines(String str) {
+
+		String[] wordsArray = str.split(" ");
+		int i = 0;
+		String StringAsLines = "";
+		for (String word : wordsArray) {
+			if (i == 4) {
+				StringAsLines = StringAsLines + "\n";
+				i = 0;
+			}
+			StringAsLines += " " + word;
+			i++;
+		}
+		return StringAsLines;
+	}
+	
 	public boolean isEaten() {
 		return eaten;
 	}

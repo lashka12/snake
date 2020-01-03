@@ -173,7 +173,6 @@ public class QuestionPageController implements Initializable {
 		ft.setFromValue(0.0);
 		ft.setToValue(1.0);
 		ft.play();
-
 		content.setText(curQuestion.getContent());
 		ans1.setText(curQuestion.getAns1());
 		ans2.setText(curQuestion.getAns2());

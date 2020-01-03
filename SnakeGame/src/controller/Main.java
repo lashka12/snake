@@ -105,6 +105,7 @@ public class Main extends Application {
 		SysData data = new SysData();
 		SoundEffects.playStartSound();
 		launch(args);
+		
 
 	}
 
