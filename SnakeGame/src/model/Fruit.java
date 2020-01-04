@@ -2,11 +2,24 @@ package model;
 
 import utilities.FruiteType;
 
+/**
+ * fruit objects on the play board
+ * 
+ * @author L.A
+ *
+ */
 public class Fruit extends Block {
 
 	private FruiteType type;
 	private boolean eaten;
 
+	/**
+	 * full constructor
+	 * 
+	 * @param x    : logical x position
+	 * @param y    : logical y position
+	 * @param type : the type of the fruit @see utilities.FruitType
+	 */
 	public Fruit(int x, int y, FruiteType type) {
 		super(x, y);
 		this.type = type;

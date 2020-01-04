@@ -55,7 +55,7 @@ public class UnitTest {
 		Question q = new Question(content, l, answers, correct, team);
 		Assert.assertNotNull(q);
 		Assert.assertFalse(q.isEaten()); // we just make the question so its not eaten yet!
-		Assert.assertEquals(correct, q.getcorrectAnswer());
+		Assert.assertEquals(correct, q.getCorrectAnswer());
 	}
 
 	@Test

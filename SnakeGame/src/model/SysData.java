@@ -16,19 +16,7 @@ public class SysData {
 		if (instance == null) {
 			instance = this;
 
-			questions = new HashMap<Level, ArrayList<Question>>();
-			ArrayList<Question> jsonResult = JsonProcessor.readQuestionsFile();
-
-			for (Level level : Level.values()) {
-				ArrayList<Question> questionsOfLevel = new ArrayList<Question>();
-				for (Question q : jsonResult) {
-					if (q.getLevel().equals(level))
-						questionsOfLevel.add(q);
-				}
-				questions.put(level, questionsOfLevel);
-			}
-
-			games = JsonProcessor.readGamesFile();
+			readData();
 
 		} else {
 			System.out.println("data class must be a singltone !");
@@ -36,19 +24,29 @@ public class SysData {
 
 	}
 
+	public static void readData() {
+		questions = new HashMap<Level, ArrayList<Question>>();
+		ArrayList<Question> jsonResult = JsonProcessor.readQuestionsFile();
+
+		for (Level level : Level.values()) {
+			ArrayList<Question> questionsOfLevel = new ArrayList<Question>();
+			for (Question q : jsonResult) {
+				if (q.getLevel().equals(level))
+					questionsOfLevel.add(q);
+			}
+			questions.put(level, questionsOfLevel);
+		}
+
+		games = JsonProcessor.readGamesFile();
+	}
+
 	public static ArrayList<Game> getGames() {
 		return games;
 	}
 
-	public static boolean addGame(Game game) {
-
-		if (game != null) {
-			if (!games.contains(game)) {
-				games.add(game);
-				return true;
-			}
-		}
-		return false;
+	public static void addGame(Game game) {
+		if (game != null)
+			games.add(game);
 	}
 
 	/**
@@ -121,6 +119,7 @@ public class SysData {
 				allQuestions.addAll(questionsOfLevel);
 			JsonProcessor.writeQuestions(allQuestions);
 
+			readData();
 			return true;
 
 		} catch (Exception e) {

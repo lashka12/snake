@@ -20,7 +20,7 @@ import model.Question;
  */
 public class JsonProcessor {
 
-	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	@SuppressWarnings({ "unchecked", "resource" })
 	public static void writeGameHistory(ArrayList<Game> gamesHistory) {
@@ -86,7 +86,7 @@ public class JsonProcessor {
 				answers.add(quesToAdd.getAns4());
 
 				quesDetails.put("answers", answers);
-				quesDetails.put("correct_ans", quesToAdd.getcorrectAnswer());
+				quesDetails.put("correct_ans", quesToAdd.getCorrectAnswer());
 				quesDetails.put("level", levelAsString);
 				quesDetails.put("team", quesToAdd.getTeam());
 				array.add(quesDetails);
@@ -155,7 +155,7 @@ public class JsonProcessor {
 				JSONObject game = (JSONObject) o;
 				String playerName = game.get("playerName").toString();
 				String date = game.get("date").toString();
-				DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+				DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 				Date gameDate = format.parse(date);
 
 				int score = Integer.parseInt(game.get("score").toString());

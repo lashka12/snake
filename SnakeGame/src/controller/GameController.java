@@ -98,7 +98,6 @@ public class GameController {
 				SoundEffects.playGameOverSound();
 				SysData.addGame(game);
 				SysData.Save();
-
 				Thread thread = new Thread(() -> {
 					try {
 
@@ -372,7 +371,7 @@ public class GameController {
 
 		appleTimer = 0;
 		bananaTimer = 0;
-		mouseTimer=0;
+		mouseTimer = 0;
 		game.restart();
 		view.reset();
 		MainPageController.getInstance().updateScore(0);

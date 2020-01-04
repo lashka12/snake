@@ -34,6 +34,9 @@ public class PlayGround {
 
 	}
 
+	/**
+	 * this method adds a mouse to the playground
+	 */
 	public void addMouse() {
 
 		Point p = getEmptyPoint();
@@ -41,6 +44,11 @@ public class PlayGround {
 
 	}
 
+	/**
+	 * this method adds a question to the playground
+	 * 
+	 * @param level : the level of the question wee need to add
+	 */
 	public void addQuestion(Level level) {
 		Question q = SysData.popRandomQuestion(level);
 		Point p = getEmptyPoint();
@@ -50,9 +58,15 @@ public class PlayGround {
 		questions.put(level, q);
 	}
 
+	/**
+	 * this method gives us an logic empty point on the play ground where we can
+	 * place an object
+	 * 
+	 * @return empty point (x,y)
+	 */
 	public Point getEmptyPoint() {
 
-		Point p = new Point((int) (Math.random() * Constants.GAME_WIDTH), (int) (Math.random() * Constants.GAME_HIGHT));
+		Point p = new Point((int) (Math.random() * (Constants.GAME_WIDTH-3)), (int) (Math.random() * (Constants.GAME_HIGHT-3)));
 
 		// if point is not empty
 		// loop till finding an empty point
@@ -61,14 +75,11 @@ public class PlayGround {
 
 	}
 
-	public Snake getSnake() {
-		return snake;
-	}
-
-	public Mouse getMouse() {
-		return mouse;
-	}
-
+	/**
+	 * this method adds fruit object to the play ground logically
+	 * 
+	 * @param type : the type of the fruit needed
+	 */
 	public void addFruit(FruiteType type) {
 
 		if (type.equals(FruiteType.PEAR)) {
@@ -88,7 +99,7 @@ public class PlayGround {
 	 * 
 	 * @return random corner position
 	 */
-	
+
 	private Point getCornerPoint() {
 
 		Point p0 = new Point(2, 2);
@@ -191,4 +202,11 @@ public class PlayGround {
 		this.hit = hit;
 	}
 
+	public Snake getSnake() {
+		return snake;
+	}
+
+	public Mouse getMouse() {
+		return mouse;
+	}
 }

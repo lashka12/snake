@@ -19,7 +19,7 @@
             <Image url="pics/f.png" />
          </image>
       </ImageView>
-      <ScrollPane hbarPolicy="NEVER" layoutX="91.0" layoutY="165.0" prefHeight="266.0" prefWidth="493.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="91.0" layoutY="165.0" prefHeight="266.0" prefWidth="493.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
          <content>
             <GridPane fx:id="scoreGrid" alignment="CENTER" hgap="10.0" minHeight="60.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="493.0" vgap="10.0">
                <columnConstraints>
@@ -86,9 +86,9 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fitHeight="32.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="pics/Banana_96px.png" />
+                  <Image url="pics/bag.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
@@ -106,9 +106,9 @@
                   <Image url="pics/Pear_96px.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="pics/Banana_96px.png" />
+                  <Image url="pics/Male_48px.png" />
                </image>
             </ImageView>
          </children>

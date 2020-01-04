@@ -30,15 +30,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		// in order to fix the question update bug move those just right before
-		// timer.start or enforce restarting the
-		// launch of the game
+		
 		
 		Game game = new Game(); // model
 		GameSimulator view = new GameSimulator(); // view
 		GameController gameController = new GameController(game, view); // controller
-		
-//////////////////////////////////////////////////////////////////////////////////
+
 		
 		
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainPage.fxml"));
@@ -105,7 +102,6 @@ public class Main extends Application {
 		SysData data = new SysData();
 		SoundEffects.playStartSound();
 		launch(args);
-		
 
 	}
 

@@ -86,9 +86,33 @@ public class MainPageController implements Initializable {
 	}
 
 	@FXML
+	void exit() {
+
+		Thread thread = new Thread(() -> {
+			try {
+
+				Platform.runLater(() -> {
+					SoundEffects.playButtonSound();
+				});
+				Thread.sleep(400);
+				Platform.runLater(() -> {
+					Stage stage = (Stage) gamePane.getScene().getWindow();
+					stage.close();
+
+				});
+
+			} catch (Exception exc) {
+				throw new Error("Unexpected interruption");
+			}
+		});
+		thread.start();
+
+	}
+
+	@FXML
 	void openRating() {
 		try {
-
+			SoundEffects.playButtonSound();
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RatingPage.fxml"));
 			RatingPageController rpc = new RatingPageController(false);
 			fxmlLoader.setController(rpc);

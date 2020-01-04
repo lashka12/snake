@@ -2,35 +2,33 @@ package controller;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import model.Question;
 import model.SysData;
-import utilities.Constants;
 import utilities.Level;
+import view.Alerts;
 
 public class QuestionsManagmentController implements Initializable {
 
@@ -61,28 +59,28 @@ public class QuestionsManagmentController implements Initializable {
 	@FXML
 	private TableView<Question> questionsTbl;
 	@FXML
-	private TableColumn<?, ?> theAnswer;
+	private TableColumn<Question, String> theAnswer;
 
 	@FXML
-	private TableColumn<?, ?> content;
+	private TableColumn<Question, String> content;
 
 	@FXML
-	private TableColumn<?, ?> ans1;
+	private TableColumn<Question, String> ans1;
 
 	@FXML
-	private TableColumn<?, ?> ans2;
+	private TableColumn<Question, String> ans2;
 
 	@FXML
-	private TableColumn<?, ?> ans3;
+	private TableColumn<Question, String> ans3;
 
 	@FXML
-	private TableColumn<?, ?> ans4;
+	private TableColumn<Question, String> ans4;
 
 	@FXML
-	private TableColumn<?, ?> level;
+	private TableColumn<Question, String> level;
 
 	@FXML
-	private TableColumn<?, ?> team;
+	private TableColumn<Question, String> team;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -98,7 +96,6 @@ public class QuestionsManagmentController implements Initializable {
 		newCorrectAnswer.getItems().add(2);
 		newCorrectAnswer.getItems().add(3);
 		newCorrectAnswer.getItems().add(4);
-
 		questionsTbl.setFixedCellSize(150.0);
 		fillQuestionsTbl();
 
@@ -107,29 +104,36 @@ public class QuestionsManagmentController implements Initializable {
 	@FXML
 	void addQuestion(ActionEvent event) {
 
-		// check for empty and null with try and catch on the hole code piece
+		try {
+			if (newAns1.getText().equals("") || newAns2.getText().equals("") || newAns3.getText().equals("")
+					|| newAns4.getText().equals(""))
+				throw new NullPointerException();
 
-		ArrayList<String> answers = new ArrayList<String>();
-		answers.add(newAns1.getText());
-		answers.add(newAns2.getText());
-		answers.add(newAns3.getText());
-		answers.add(newAns4.getText());
+			ArrayList<String> answers = new ArrayList<String>();
+			answers.add(newAns1.getText());
+			answers.add(newAns2.getText());
+			answers.add(newAns3.getText());
+			answers.add(newAns4.getText());
 
-		Question questionToAdd = new Question(newContent.getText(), Level.valueOf(newLevel.getValue().toString()),
-				answers, newCorrectAnswer.getValue() + "", "Piranha");
+			Question questionToAdd = new Question(newContent.getText(), Level.valueOf(newLevel.getValue().toString()),
+					answers, newCorrectAnswer.getValue() + "", "Piranha");
 
-		SysData.addQuestion(questionToAdd);
-		SysData.Save();
+			SysData.addQuestion(questionToAdd);
+			SysData.Save();
 
-		fillQuestionsTbl(); // refresh the table after adding question
+			fillQuestionsTbl(); // refresh the table after adding question
 
-		newContent.setText("");
-		newAns1.setText("");
-		newAns2.setText("");
-		newAns3.setText("");
-		newAns4.setText("");
-		newCorrectAnswer.setValue(null);
-		newLevel.setValue(null);
+			newContent.setText("");
+			newAns1.setText("");
+			newAns2.setText("");
+			newAns3.setText("");
+			newAns4.setText("");
+			newCorrectAnswer.setValue(null);
+			newLevel.setValue(null);
+		} catch (Exception e) {
+			Alerts.warning("missing fields , please make sure all required fields are filled out");
+
+		}
 
 	}
 
@@ -145,13 +149,167 @@ public class QuestionsManagmentController implements Initializable {
 		}
 
 		content.setCellValueFactory(new PropertyValueFactory<>("contentAsLines"));
+		content.setCellFactory(TextFieldTableCell.forTableColumn());
+		content.setOnEditCommit(new EventHandler<CellEditEvent<Question, String>>() {
+			@Override
+			public void handle(CellEditEvent<Question, String> t) {
+
+				try {
+					if (Alerts.update() == 1) {
+
+						SysData.deleteQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						((Question) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+								.setContent(t.getNewValue().trim());
+						SysData.addQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						SysData.Save();
+						Alerts.confirmation("updated");
+					}
+				} catch (Exception e) {
+					System.out.println("no selection");
+				}
+				fillQuestionsTbl();
+
+			}
+		});
+
 		ans1.setCellValueFactory(new PropertyValueFactory<>("ans1AsLines"));
+		ans1.setCellFactory(TextFieldTableCell.forTableColumn());
+		ans1.setOnEditCommit(new EventHandler<CellEditEvent<Question, String>>() {
+			@Override
+			public void handle(CellEditEvent<Question, String> t) {
+
+				try {
+					if (Alerts.update() == 1) {
+
+						SysData.deleteQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						((Question) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+								.setAns1(t.getNewValue().trim());
+						SysData.addQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						SysData.Save();
+						Alerts.confirmation("updated");
+					}
+				} catch (Exception e) {
+					System.out.println("no selection");
+				}
+				fillQuestionsTbl();
+
+			}
+		});
 		ans2.setCellValueFactory(new PropertyValueFactory<>("ans2AsLines"));
+		ans2.setCellFactory(TextFieldTableCell.forTableColumn());
+		ans2.setOnEditCommit(new EventHandler<CellEditEvent<Question, String>>() {
+			@Override
+			public void handle(CellEditEvent<Question, String> t) {
+
+				try {
+					if (Alerts.update() == 1) {
+
+						SysData.deleteQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						((Question) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+								.setAns2(t.getNewValue().trim());
+						SysData.addQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						SysData.Save();
+						Alerts.confirmation("updated");
+					}
+				} catch (Exception e) {
+					System.out.println("no selection");
+				}
+				fillQuestionsTbl();
+
+			}
+		});
 		ans3.setCellValueFactory(new PropertyValueFactory<>("ans3AsLines"));
+		ans3.setCellFactory(TextFieldTableCell.forTableColumn());
+		ans3.setOnEditCommit(new EventHandler<CellEditEvent<Question, String>>() {
+			@Override
+			public void handle(CellEditEvent<Question, String> t) {
+
+				try {
+					if (Alerts.update() == 1) {
+
+						SysData.deleteQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						((Question) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+								.setAns3(t.getNewValue().trim());
+						SysData.addQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						SysData.Save();
+						Alerts.confirmation("updated");
+					}
+				} catch (Exception e) {
+					System.out.println("no selection");
+				}
+				fillQuestionsTbl();
+			}
+		});
 		ans4.setCellValueFactory(new PropertyValueFactory<>("ans4AsLines"));
+		ans4.setCellFactory(TextFieldTableCell.forTableColumn());
+		ans4.setOnEditCommit(new EventHandler<CellEditEvent<Question, String>>() {
+			@Override
+			public void handle(CellEditEvent<Question, String> t) {
+
+				try {
+					if (Alerts.update() == 1) {
+
+						SysData.deleteQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						((Question) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+								.setAns4(t.getNewValue().trim());
+						SysData.addQuestion(
+								((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+						SysData.Save();
+						Alerts.confirmation("updated");
+					}
+				} catch (Exception e) {
+					System.out.println("no selection");
+				}
+				fillQuestionsTbl();
+
+			}
+		});
 		theAnswer.setCellValueFactory(new PropertyValueFactory<>("correctAnswer"));
+		theAnswer.setCellFactory(TextFieldTableCell.forTableColumn());
+		theAnswer.setOnEditCommit(new EventHandler<CellEditEvent<Question, String>>() {
+			@Override
+			public void handle(CellEditEvent<Question, String> t) {
+
+				try {
+					if (Alerts.update() == 1) {
+
+						if (t.getNewValue().equals("1") || t.getNewValue().equals("2") || t.getNewValue().equals("3")
+								|| t.getNewValue().equals("4")) {
+
+							SysData.deleteQuestion(
+									((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+							((Question) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+									.setCorrectAnswer(t.getNewValue().trim());
+							SysData.addQuestion(
+									((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+							SysData.Save();
+							Alerts.confirmation("updated");
+
+						} else {
+							Alerts.warning("Please make sure you choose a legal number");
+						}
+
+					}
+				} catch (Exception e) {
+					System.out.println("no selection");
+				}
+				fillQuestionsTbl();
+
+			}
+		});
+
 		level.setCellValueFactory(new PropertyValueFactory<>("level"));
 		team.setCellValueFactory(new PropertyValueFactory<>("team"));
+
 		questionsTbl.setItems(data);
 
 		if (questionsTbl.getColumns().size() == 8) {
@@ -175,19 +333,19 @@ public class QuestionsManagmentController implements Initializable {
 							deleteBtn.setCursor(Cursor.HAND);
 							deleteBtn.setOnAction((ActionEvent event) -> {
 								Question data = getTableView().getItems().get(getIndex());
-								Alert alert = new Alert(AlertType.CONFIRMATION);
-								alert.setTitle("Delete Question");
-								alert.setHeaderText("Are you sure want to delete this question ?");
-								alert.setContentText(data.getContent());
-								Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-								stage.getIcons().add(Constants.STOP_IMAGE);
-								Optional<ButtonType> option = alert.showAndWait();
-								if (option.get() == ButtonType.OK) {
-									SysData.deleteQuestion(data);
-									SysData.Save();
-									fillQuestionsTbl();
 
+								try {
+									if (Alerts.delete(data.getContent()) == 1) {
+										SysData.deleteQuestion(data);
+										SysData.Save();
+										fillQuestionsTbl();
+										Alerts.confirmation("deleted");
+
+									}
+								} catch (Exception e) {
+									System.out.println("no selection");
 								}
+
 							});
 
 						}
@@ -207,6 +365,18 @@ public class QuestionsManagmentController implements Initializable {
 			questionsTbl.getColumns().add(deleteCol);
 
 		}
+
+	}
+
+	@FXML
+	void openFileChooser() {
+
+		Alerts.warning("take it easy , we are still working on this feature :)");
+//		FileChooser fileChooser = new FileChooser();
+//		fileChooser.setTitle("Choose .jar file");
+//		Stage stg = new Stage();
+//		stg.setAlwaysOnTop(true);
+//		fileChooser.showOpenDialog(stg);
 
 	}
 
