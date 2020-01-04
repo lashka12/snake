@@ -22,11 +22,10 @@ import utilities.Level;
 public class GameSimulator extends Pane {
 
 	public static GameSimulator instance;
+	ArrayList<ImageView> ivList;
+	private Game game; // game reference
 	private int size;
-	ArrayList<ImageView> ivList; // could be removed and adding children each one alone
-	private Game game;
 
-	// Maybe adding a data structure to hold images is more efficient than lookUp
 
 	public GameSimulator() {
 
@@ -66,26 +65,22 @@ public class GameSimulator extends Pane {
 		ImageView easyQuestionImage = new ImageView(Constants.EASY_QUESTION);
 		ImageView intermediateQuestionImage = new ImageView(Constants.INTER_QUESTION);
 		ImageView hardQuestion = new ImageView(Constants.HARD_QUESTION);
-
 		easyQuestionImage
 				.setTranslateX(game.getPlayGround().getQuestions().get(Level.EASY).getX() * Constants.BLOCK_SIZE);
 		easyQuestionImage
 				.setTranslateY(game.getPlayGround().getQuestions().get(Level.EASY).getY() * Constants.BLOCK_SIZE);
 		easyQuestionImage.setEffect(new DropShadow(5, Color.BLACK));
 		easyQuestionImage.setId("EASY");
-
 		intermediateQuestionImage.setTranslateX(
 				game.getPlayGround().getQuestions().get(Level.INTERMEDIATE).getX() * Constants.BLOCK_SIZE);
 		intermediateQuestionImage.setTranslateY(
 				game.getPlayGround().getQuestions().get(Level.INTERMEDIATE).getY() * Constants.BLOCK_SIZE);
 		intermediateQuestionImage.setEffect(new DropShadow(5, Color.BLACK));
 		intermediateQuestionImage.setId("INTERMEDIATE");
-
 		hardQuestion.setTranslateX(game.getPlayGround().getQuestions().get(Level.HARD).getX() * Constants.BLOCK_SIZE);
 		hardQuestion.setTranslateY(game.getPlayGround().getQuestions().get(Level.HARD).getY() * Constants.BLOCK_SIZE);
 		hardQuestion.setEffect(new DropShadow(5, Color.BLACK));
 		hardQuestion.setId("HARD");
-
 		appleImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.APPLE).getX() * Constants.BLOCK_SIZE);
 		appleImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.APPLE).getY() * Constants.BLOCK_SIZE);
 		appleImage.setEffect(new DropShadow(5, Color.BLACK));
@@ -109,7 +104,7 @@ public class GameSimulator extends Pane {
 		ivList.add(easyQuestionImage);
 		ivList.add(intermediateQuestionImage);
 		ivList.add(hardQuestion);
-		getChildren().addAll(ivList); // or each one separately , check this later
+		getChildren().addAll(ivList);
 
 	}
 
@@ -274,7 +269,7 @@ public class GameSimulator extends Pane {
 
 	}
 
-	public void showReady() {// can merge with showGo as the same function
+	public void showReady() {
 
 		ImageView Ready = new ImageView(Constants.READY_IMAGE);
 		getChildren().add(Ready);

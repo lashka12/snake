@@ -35,13 +35,16 @@ import view.GameSimulator;
  * methods with @FXML sign are the methods used to handle actions triggered by
  * the FXML File
  * 
- * @author Lawrence
+ * this class is a singleton because there is need to interact with this
+ * particular instance from other controllers during the game
+ * 
+ * @author Lawrence Ashkar
  *
  */
 
 public class MainPageController implements Initializable {
 
-	private static MainPageController instance;
+	private static MainPageController singleton;
 
 	@FXML
 	private AnchorPane gamePane;
@@ -86,9 +89,33 @@ public class MainPageController implements Initializable {
 	}
 
 	@FXML
+	void exit() {
+
+		Thread thread = new Thread(() -> {
+			try {
+
+				Platform.runLater(() -> {
+					SoundEffects.playButtonSound();
+				});
+				Thread.sleep(400);
+				Platform.runLater(() -> {
+					Stage stage = (Stage) gamePane.getScene().getWindow();
+					stage.close();
+
+				});
+
+			} catch (Exception exc) {
+				throw new Error("Unexpected interruption");
+			}
+		});
+		thread.start();
+
+	}
+
+	@FXML
 	void openRating() {
 		try {
-
+			SoundEffects.playButtonSound();
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RatingPage.fxml"));
 			RatingPageController rpc = new RatingPageController(false);
 			fxmlLoader.setController(rpc);
@@ -172,8 +199,8 @@ public class MainPageController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		if (instance == null)
-			instance = this;
+		if (singleton == null)
+			singleton = this;
 
 	}
 
@@ -212,7 +239,7 @@ public class MainPageController implements Initializable {
 	}
 
 	public static MainPageController getInstance() {
-		return instance;
+		return singleton;
 	}
 
 	@FXML

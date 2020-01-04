@@ -16,22 +16,36 @@ public class Mouse extends Block {
 
 	}
 
-	public boolean isEaten() {
-		return eaten;
+	public void moveUp() {
+
+		if (getY() > 4) {
+			setY(getY() - 1);
+		}
+
 	}
 
-	public void setEaten(boolean eaten) {
-		this.eaten = eaten;
+	public void moveDown() {
+
+		if (getY() < Constants.GAME_HIGHT - 9) {
+			setY(getY() + 1);
+		}
+
 	}
 
-	private static int stepsCount;
+	public void moveLeft() {
 
-	public Direction getDirection() {
-		return direction;
+		if (getX() > 4) {
+			setX(getX() - 1);
+		}
+
 	}
 
-	public void setDirection(Direction direction) {
-		this.direction = direction;
+	public void moveRight() {
+
+		if (getX() < Constants.GAME_WIDTH - 9) {
+			setX(getX() + 1);
+		}
+
 	}
 
 	public void update() {
@@ -142,36 +156,22 @@ public class Mouse extends Block {
 
 	}
 
-	public void moveUp() {
-
-		if (getY() > 4) {
-			setY(getY() - 1);
-		}
-
+	public boolean isEaten() {
+		return eaten;
 	}
 
-	public void moveDown() {
-
-		if (getY() < Constants.GAME_HIGHT - 9) {
-			setY(getY() + 1);
-		}
-
+	public void setEaten(boolean eaten) {
+		this.eaten = eaten;
 	}
 
-	public void moveLeft() {
+	private static int stepsCount;
 
-		if (getX() > 4) {
-			setX(getX() - 1);
-		}
-
+	public Direction getDirection() {
+		return direction;
 	}
 
-	public void moveRight() {
-
-		if (getX() < Constants.GAME_WIDTH - 9) {
-			setX(getX() + 1);
-		}
-
+	public void setDirection(Direction direction) {
+		this.direction = direction;
 	}
 
 	public static int getStepsCount() {

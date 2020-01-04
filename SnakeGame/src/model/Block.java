@@ -24,8 +24,5 @@ public abstract class Block {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
-	
-	
+
 }

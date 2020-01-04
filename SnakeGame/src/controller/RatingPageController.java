@@ -1,18 +1,22 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXButton;
-
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -24,27 +28,40 @@ import utilities.SoundEffects;
 
 public class RatingPageController implements Initializable {
 
+	// there is need to know from where this class was called in order to hide ,
+	// show buttons and animations as needed
+	private static boolean wasCalledFromGame;
+
+	private static ArrayList<Game> sortedGames;
+	@FXML
+	private ScrollPane scrollPane;
 	@FXML
 	private AnchorPane root;
-
 	@FXML
 	private GridPane scoreGrid;
-
 	@FXML
 	private JFXButton restartBtn;
 	@FXML
 	private JFXButton closeBtn;
 
-	private static boolean showRestartOption;
-
+	/**
+	 * controller constructor
+	 * 
+	 * @param b
+	 */
 	public RatingPageController(boolean b) {
-		showRestartOption = b;
+
+		wasCalledFromGame = b;
+		sortedGames = SysData.getGames();
+		Collections.sort(sortedGames, Game.getCompByName());
+
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		restartBtn.setVisible(showRestartOption);
-		closeBtn.setVisible(!showRestartOption);
+
+		restartBtn.setVisible(wasCalledFromGame);
+		closeBtn.setVisible(!wasCalledFromGame);
 
 		FadeTransition ft = new FadeTransition(Duration.millis(1000), root);
 		ft.setFromValue(0.0);
@@ -52,7 +69,8 @@ public class RatingPageController implements Initializable {
 		ft.play();
 
 		int i = 1;
-		for (Game game : SysData.getGames()) {
+
+		for (Game game : sortedGames) {
 
 			Text apple;
 			if (game.getEatenObjects().get("APPLE") != null) {
@@ -77,19 +95,35 @@ public class RatingPageController implements Initializable {
 			}
 			Text nickName = new Text(game.getNickName());
 			nickName.setFont(new Font("Snap ITC", 14));
-			nickName.setFill(Color.rgb(255, 94, 8));
 			Text score = new Text(game.getScore() + "");
 			score.setFont(new Font("Snap ITC", 14));
-			score.setFill(Color.rgb(255, 94, 8));
 			apple.setFont(new Font("Snap ITC", 14));
-			apple.setFill(Color.rgb(255, 94, 8));
 			banana.setFont(new Font("Snap ITC", 14));
-			banana.setFill(Color.rgb(255, 94, 8));
 			pear.setFont(new Font("Snap ITC", 14));
-			pear.setFill(Color.rgb(255, 94, 8));
+
+			if (Game.getInstance().getDate().toString().equals(game.getDate().toString())) {
+				nickName.setFill(Color.rgb(129, 152, 48));
+				score.setFill(Color.rgb(129, 152, 48));
+				apple.setFill(Color.rgb(129, 152, 48));
+				banana.setFill(Color.rgb(129, 152, 48));
+				pear.setFill(Color.rgb(129, 152, 48));
+			} else {
+
+				nickName.setFill(Color.rgb(255, 94, 8));
+				score.setFill(Color.rgb(255, 94, 8));
+				apple.setFill(Color.rgb(255, 94, 8));
+				banana.setFill(Color.rgb(255, 94, 8));
+				pear.setFill(Color.rgb(255, 94, 8));
+
+			}
+
 			scoreGrid.addRow(i++, nickName, score, apple, banana, pear);
 
 		}
+
+		if (wasCalledFromGame)
+			ScrollDownToRatio(scrollPane);
+
 	}
 
 	@FXML
@@ -153,6 +187,27 @@ public class RatingPageController implements Initializable {
 		});
 		thread.start();
 
+	}
+
+	/**
+	 * this method controls the scroll pane in the RatingPage , it scrolls down
+	 * automatically to show current game score
+	 * 
+	 * @param scrollPane
+	 */
+	static void ScrollDownToRatio(ScrollPane scrollPane) {
+
+		int index = 0;
+		for (Game game : sortedGames) {
+			if (Game.getInstance().getDate().toString().equals(game.getDate().toString()))
+				break;
+			index++;
+		}
+		double ratio = (double) index / sortedGames.size();
+
+		Animation animation = new Timeline(
+				new KeyFrame(Duration.seconds(2), new KeyValue(scrollPane.vvalueProperty(), ratio)));
+		animation.play();
 	}
 
 }

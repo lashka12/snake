@@ -14,16 +14,13 @@ public class Question extends Block {
 	private Level level;
 	private String team;
 
-
-	//to be used later in the view tables
+	// to be used later in the view tables
 	private String contentAsLines;
 	private String ans1AsLines;
 	private String ans2AsLines;
 	private String ans3AsLines;
 	private String ans4AsLines;
-	
-	
-	
+
 	private boolean eaten;
 
 	public Question(String content, Level level, ArrayList<String> answers, String correctAnswer, String team) {
@@ -38,17 +35,31 @@ public class Question extends Block {
 		this.correctAnswer = correctAnswer;
 		this.team = team;
 		this.eaten = false;
-		
-		
-		contentAsLines=makeAsLines(content);
-		ans1AsLines=makeAsLines(ans1);
-		ans2AsLines=makeAsLines(ans2);
-		ans3AsLines=makeAsLines(ans3);
-		ans4AsLines=makeAsLines(ans4);
 
-		
+		contentAsLines = makeAsLines(content);
+		ans1AsLines = makeAsLines(ans1);
+		ans2AsLines = makeAsLines(ans2);
+		ans3AsLines = makeAsLines(ans3);
+		ans4AsLines = makeAsLines(ans4);
+
 	}
-	
+
+	private String makeAsLines(String str) {
+
+		String[] wordsArray = str.split(" ");
+		int i = 0;
+		String StringAsLines = "";
+		for (String word : wordsArray) {
+			if (i == 4) {
+				StringAsLines = StringAsLines + "\n";
+				i = 0;
+			}
+			StringAsLines += " " + word;
+			i++;
+		}
+		return StringAsLines;
+	}
+
 	public String getContentAsLines() {
 		return contentAsLines;
 	}
@@ -68,6 +79,7 @@ public class Question extends Block {
 	public String getAns4AsLines() {
 		return ans4AsLines;
 	}
+
 	public String getCorrectAnswer() {
 		return correctAnswer;
 	}
@@ -75,36 +87,29 @@ public class Question extends Block {
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
-	private String makeAsLines(String str) {
 
-		String[] wordsArray = str.split(" ");
-		int i = 0;
-		String StringAsLines = "";
-		for (String word : wordsArray) {
-			if (i == 4) {
-				StringAsLines = StringAsLines + "\n";
-				i = 0;
-			}
-			StringAsLines += " " + word;
-			i++;
-		}
-		return StringAsLines;
+	public void setAns1(String ans1) {
+		this.ans1 = ans1;
 	}
-	
+
+	public void setAns2(String ans2) {
+		this.ans2 = ans2;
+	}
+
+	public void setAns3(String ans3) {
+		this.ans3 = ans3;
+	}
+
+	public void setAns4(String ans4) {
+		this.ans4 = ans4;
+	}
+
 	public boolean isEaten() {
 		return eaten;
 	}
 
 	public void setEaten(boolean eaten) {
 		this.eaten = eaten;
-	}
-
-	public String getcorrectAnswer() {
-		return correctAnswer;
-	}
-
-	public void setcorrectAnswer(String correct_ans) {
-		this.correctAnswer = correct_ans;
 	}
 
 	public String getContent() {

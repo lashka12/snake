@@ -40,12 +40,12 @@ public class AdminAuthenticationController implements Initializable {
 	void enter(ActionEvent event) {
 
 		if (password.getText().equals("abc123")) {
-			
+
 			Thread thread = new Thread(() -> {
 				try {
 
 					Platform.runLater(() -> {
-
+						SoundEffects.playButtonSound();
 						FadeTransition ft = new FadeTransition(Duration.millis(400), root);
 						ft.setFromValue(1.0);
 						ft.setToValue(0.0);
@@ -58,12 +58,13 @@ public class AdminAuthenticationController implements Initializable {
 						stage.close();
 						Parent root;
 						try {
-							root = FXMLLoader.load(getClass().getClassLoader().getResource("view/QuestionsManagmentPage.fxml"));
+							root = FXMLLoader
+									.load(getClass().getClassLoader().getResource("view/QuestionsManagmentPage.fxml"));
 							Scene scene = new Scene(root);
-							Stage stg=new Stage();
+							Stage stg = new Stage();
 							stg.setScene(scene);
 							stg.getIcons().add(Constants.STACK_IMAGE);
-							//stg.setFullScreen(true);
+							stg.setAlwaysOnTop(true);
 							stg.show();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -77,10 +78,9 @@ public class AdminAuthenticationController implements Initializable {
 				}
 			});
 			thread.start();
-		
-		}else {
-			System.out.println("wrong pass");
-			
+
+		} else {
+			SoundEffects.playNegativeSound();
 		}
 
 	}

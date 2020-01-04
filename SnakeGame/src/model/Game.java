@@ -1,14 +1,21 @@
 package model;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * this class represent a game while playing snake
+ * 
+ * @author L.A
+ *
+ */
 public class Game {
 
-	private static Game instance;
+	private static Game singleton;
 	private String nickName;
 	private Date date;
-	private int score;
+	private Integer score;
 	private int lives;
 	private double duration;
 	private HashMap<String, Integer> eatenObjects;
@@ -18,14 +25,18 @@ public class Game {
 
 	public Game() {
 
-		if (instance == null)
-			instance = this;
+		if (singleton == null)
+			singleton = this;
 		restart();
 
 	}
 
+	/**
+	 * this method restart the game when needed
+	 */
 	public void restart() {
 
+		singleton = this;
 		this.playGround = new PlayGround();
 		this.eatenObjects = new HashMap<String, Integer>();
 		this.date = new Date();
@@ -37,26 +48,15 @@ public class Game {
 
 	}
 
-	public boolean isPaused() {
-		return paused;
-	}
-
-	public void setPaused(boolean paused) {
-		this.paused = paused;
-	}
-
-	public static Game getInstance() {
-		return instance;
-	}
-
-	public HashMap<String, Integer> getEatenObjects() {
-		return eatenObjects;
-	}
-
-	public void setEatenObjects(HashMap<String, Integer> eatenObjects) {
-		this.eatenObjects = eatenObjects;
-	}
-
+	/**
+	 * full constructor of the class
+	 * 
+	 * @param nickName     : player nickName
+	 * @param date         : date and time of the game
+	 * @param score        : game final score
+	 * @param duration     : duration in sec
+	 * @param eatenObjects : things that were eaten during the game
+	 */
 	public Game(String nickName, Date date, int score, double duration, HashMap<String, Integer> eatenObjects) {
 		this.nickName = nickName;
 		this.date = date;
@@ -82,7 +82,7 @@ public class Game {
 		}
 
 		if (eatenObject instanceof Mouse)
-			toAdd = 20;
+			toAdd = 30;
 
 		if (!eatenObjects.containsKey(key))
 			eatenObjects.put(key, 1);
@@ -92,6 +92,43 @@ public class Game {
 
 		score = getScore() + toAdd;
 
+	}
+
+	/**
+	 * this comparator is used to compare between two games based on the score this
+	 * method is used whenever there is need to sort the games list
+	 * 
+	 * @return Comparator<Game>
+	 */
+
+	public static Comparator<Game> getCompByName() {
+		Comparator<Game> comp = new Comparator<Game>() {
+			@Override
+			public int compare(Game g1, Game g2) {
+				return g2.score.compareTo(g1.score);
+			}
+		};
+		return comp;
+	}
+
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
+	public static Game getInstance() {
+		return singleton;
+	}
+
+	public HashMap<String, Integer> getEatenObjects() {
+		return eatenObjects;
+	}
+
+	public void setEatenObjects(HashMap<String, Integer> eatenObjects) {
+		this.eatenObjects = eatenObjects;
 	}
 
 	public PlayGround getPlayGround() {
@@ -144,6 +181,31 @@ public class Game {
 
 	public void setOver(boolean over) {
 		this.over = over;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Game other = (Game) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		return true;
 	}
 
 	@Override

@@ -3,32 +3,22 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import utilities.JsonProcessor;
+
 import utilities.Level;
 
 public class SysData {
 
-	private static SysData instance;
+	private static SysData singleton;
 	private static ArrayList<Game> games;
 	private static HashMap<Level, ArrayList<Question>> questions;
+	private static DAO dataAccessObject;
 
 	public SysData() {
-		if (instance == null) {
-			instance = this;
+		if (singleton == null) {
 
-			questions = new HashMap<Level, ArrayList<Question>>();
-			ArrayList<Question> jsonResult = JsonProcessor.readQuestionsFile();
-
-			for (Level level : Level.values()) {
-				ArrayList<Question> questionsOfLevel = new ArrayList<Question>();
-				for (Question q : jsonResult) {
-					if (q.getLevel().equals(level))
-						questionsOfLevel.add(q);
-				}
-				questions.put(level, questionsOfLevel);
-			}
-
-			games = JsonProcessor.readGamesFile();
+			singleton = this;
+			dataAccessObject = new JsonDAO();
+			reset();
 
 		} else {
 			System.out.println("data class must be a singltone !");
@@ -36,19 +26,29 @@ public class SysData {
 
 	}
 
+	public static void reset() {
+		questions = new HashMap<Level, ArrayList<Question>>();
+		ArrayList<Question> result = dataAccessObject.getQuestions();
+
+		for (Level level : Level.values()) {
+			ArrayList<Question> questionsOfLevel = new ArrayList<Question>();
+			for (Question q : result) {
+				if (q.getLevel().equals(level))
+					questionsOfLevel.add(q);
+			}
+			questions.put(level, questionsOfLevel);
+		}
+
+		games = dataAccessObject.getGames();
+	}
+
 	public static ArrayList<Game> getGames() {
 		return games;
 	}
 
-	public static boolean addGame(Game game) {
-
-		if (game != null) {
-			if (!games.contains(game)) {
-				games.add(game);
-				return true;
-			}
-		}
-		return false;
+	public static void addGame(Game game) {
+		if (game != null)
+			games.add(game);
 	}
 
 	/**
@@ -115,12 +115,13 @@ public class SysData {
 	public static boolean Save() {
 
 		try {
-			JsonProcessor.writeGameHistory(games);
+			dataAccessObject.writeGames(games);
 			ArrayList<Question> allQuestions = new ArrayList<Question>();
 			for (ArrayList<Question> questionsOfLevel : questions.values())
 				allQuestions.addAll(questionsOfLevel);
-			JsonProcessor.writeQuestions(allQuestions);
+			dataAccessObject.writeQuestions(allQuestions);
 
+			reset();
 			return true;
 
 		} catch (Exception e) {

@@ -6,14 +6,15 @@ import java.util.HashMap;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
+import model.DAO;
 import model.Game;
+import model.JsonDAO;
 import model.Question;
 import model.Snake;
 import model.SysData;
-import utilities.JsonProcessor;
 import utilities.Level;
 
-public class UnitTest {
+public class UnitTest { // test all the methods in each class !!!
 
 	@Rule
 	public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
@@ -55,7 +56,7 @@ public class UnitTest {
 		Question q = new Question(content, l, answers, correct, team);
 		Assert.assertNotNull(q);
 		Assert.assertFalse(q.isEaten()); // we just make the question so its not eaten yet!
-		Assert.assertEquals(correct, q.getcorrectAnswer());
+		Assert.assertEquals(correct, q.getCorrectAnswer());
 	}
 
 	@Test
@@ -91,11 +92,17 @@ public class UnitTest {
 	}
 
 	@Test
-	public void JsonReaderClassTest() {
+	public void JsonReaderClassTest() { // change it and check all methods !!!
 
+		DAO datAccessObject= new JsonDAO();
 		ArrayList<Question> result = new ArrayList<Question>();
-		result = JsonProcessor.readQuestionsFile();
+		result = datAccessObject.getQuestions();
 		Assert.assertTrue(result.size() != 0);
+		
+		
+		
+		
+		
 	}
 
 }
