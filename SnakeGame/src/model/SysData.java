@@ -26,6 +26,7 @@ public class SysData {
 
 	}
 
+
 	public static void reset() {
 		questions = new HashMap<Level, ArrayList<Question>>();
 		ArrayList<Question> result = dataAccessObject.getQuestions();
@@ -40,8 +41,8 @@ public class SysData {
 		}
 
 		games = dataAccessObject.getGames();
-	}
 
+	}
 	public static ArrayList<Game> getGames() {
 		return games;
 	}
@@ -122,6 +123,7 @@ public class SysData {
 			dataAccessObject.writeQuestions(allQuestions);
 
 			reset();
+
 			return true;
 
 		} catch (Exception e) {

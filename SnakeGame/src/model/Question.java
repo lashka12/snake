@@ -11,6 +11,7 @@ public class Question extends Block {
 	private String ans3;
 	private String ans4;
 	private String correctAnswer;
+
 	private Level level;
 	private String team;
 

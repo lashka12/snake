@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"questions":[{"question":"What is this ??","level":"1","answers":["sdfdsfdf","Things"," dsfsdfsdf","Banana"],"team":"Piranha","correct_ans":"3"},{"question":"Q3 ?","level":"3","answers":["IDK","Food","Design Pattern","C# class"],"team":"Piranha","correct_ans":"1"},{"question":"Which of them is not a methology ?","level":"2","answers":["Agile","Waterflow","n-tire","non of them"],"team":"Piranha","correct_ans":"3"}]}
+=======
+{"questions":[{"question":"What is this ?","level":"1","answers":["sdfdsfdf","Things"," dsfsdfsdf","Banana"],"team":"Piranha","correct_ans":"3"},{"question":"Which of them is not a methology ?","level":"2","answers":["Agile","Waterflow","n-tire","non of them"],"team":"Piranha","correct_ans":"3"},{"question":"Q3 ?","level":"3","answers":["IDK","Food","Design Pattern","C# class"],"team":"Piranha","correct_ans":"1"}]}
+>>>>>>> branch 'master' of https://github.com/lashka12/snake
