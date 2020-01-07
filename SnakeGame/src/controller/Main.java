@@ -35,7 +35,6 @@ public class Main extends Application {
 		Game game = new Game(); // model
 		GameSimulator view = new GameSimulator(); // view
 		GameController gameController = new GameController(game, view); // controller
-
 		
 		
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainPage.fxml"));

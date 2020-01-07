@@ -113,7 +113,7 @@ public class PlayGround {
 	 * @return random corner position
 	 */
 
-	private Point getCornerPoint() {
+	public Point getCornerPoint() {
 
 		Point p0 = new Point(2, 2);
 		Point p1 = new Point(Constants.GAME_WIDTH - 4, 2);

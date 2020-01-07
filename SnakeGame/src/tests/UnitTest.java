@@ -1,5 +1,6 @@
 package tests;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -81,7 +82,6 @@ public class UnitTest { // test all the methods in each class !!!
 		
 		Assert.assertNotNull(game);
 		Assert.assertFalse(game.getNickName().equals(nickName));
-		Assert.assertTrue(game.getDate().equals(date));
 		Assert.assertFalse(game.getScore() == (scoreGame));
 		Assert.assertFalse(game.getDuration() == (duration));
 		game.setEatenObjects(hs);
@@ -143,12 +143,13 @@ public class UnitTest { // test all the methods in each class !!!
 		Mouse mouse = new Mouse(60, 60);
 		int prevScore = game.getScore();
 		game.addEatenObject(mouse);
+		
 		Assert.assertEquals(game.getScore(),prevScore+30 );
 	}
 	
 
 	@Test
-	public void AddObjectsToPlayground() {
+	public void AddObjectsToPlaygroundTest() {
 		
 		Game gm = new Game(); // model
 		
@@ -165,6 +166,103 @@ public class UnitTest { // test all the methods in each class !!!
 		
 	}
 	
+	@Test
+	public void GetEmptyPointTest() {
+		
+		SysData data = new SysData();
+		Game gm = new Game(); // model
+		
+		Point point = gm.getPlayGround().getEmptyPoint();
+		Point point2 = gm.getPlayGround().getEmptyPoint();
+
+		Assert.assertNotSame(point, point2);
+ 
+	}
+	
+	@Test
+	public void GetCornerPointTest() {
+		
+		SysData data = new SysData();
+		Game gm = new Game(); // model
+		
+		Point point = gm.getPlayGround().getCornerPoint();
+		Point point2 = gm.getPlayGround().getCornerPoint();
+
+		Assert.assertNotSame(point, point2);
+		
+	}
+	
+	@Test 
+	public void AddGameTest() {
+		
+		Game game = new Game("Bisharat", new Date(), 210, 2, new HashMap<>());
+		int games = SysData.getGames().size();
+		SysData.addGame(game);
+
+		Assert.assertNotEquals(games, SysData.getGames().size());
+	}
+	
+	@Test 
+	public void AddQuestionTest() {
+		
+		ArrayList<String> answers = new ArrayList<String>();
+		answers.add("George");
+		answers.add("Lorans");
+		answers.add("Natalie");
+		answers.add("Hadi");
+		Question question = new Question("Testing System Data", Level.INTERMEDIATE, answers, "Answer Content" ,"Piranha" );
+		int quesNo = SysData.getQuestions().size();
+		SysData.addQuestion(question);
+
+		Assert.assertNotEquals(quesNo, SysData.getQuestions().size());
+	}
+	
+	@Test 
+	public void PopRandomQuestionTest() {
+		
+		Question question = SysData.popRandomQuestion(Level.EASY);
+		Assert.assertNotNull(question);
+		
+	}
+		
+	@Test 
+	public void DeleteQuestionTest() {
+		
+		ArrayList<String> answers = new ArrayList<String>();
+		answers.add("George");
+		answers.add("Lorans");
+		answers.add("Natalie");
+		answers.add("Hadi");
+		Question question = new Question("Testing System Data", Level.INTERMEDIATE, answers, "Answer Content" ,"Piranha" );
+		SysData.addQuestion(question);
+		int quesNo = SysData.getQuestions().size();
+		SysData.deleteQuestion(question);
+
+		Assert.assertNotEquals(quesNo, SysData.getQuestions().size());
+	}
+	
+	@Test 
+	public void MouseSteeringTest() {
+		
+		Mouse mouse = new Mouse(80, 80);
+		
+		int prevUpY = mouse.getY();
+		mouse.moveUp();
+		Assert.assertNotEquals(prevUpY, mouse.getY());
+		
+		int prevRightX = mouse.getX();
+		mouse.moveRight();
+		Assert.assertNotEquals(prevRightX, mouse.getX());
+
+		int prevDownY = mouse.getY();
+		mouse.moveDown();
+		Assert.assertNotEquals(prevDownY, mouse.getX());
+		
+		int prevLeftX = mouse.getX();
+		mouse.moveLeft();
+		Assert.assertNotEquals(prevLeftX, mouse.getX());
+		
+	}
 
 
 
