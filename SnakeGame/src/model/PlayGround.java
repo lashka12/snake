@@ -31,7 +31,7 @@ public class PlayGround {
 			addQuestion(level);
 
 		addMouse();
-		addSecretGate();
+		addSecretGate(); 
 
 		setHit(false);
 

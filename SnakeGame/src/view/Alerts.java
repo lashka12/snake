@@ -52,6 +52,7 @@ public class Alerts {
 		alert.show();
 
 	}
+	
 	public static void warning(String content) {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);

@@ -61,7 +61,7 @@ public class GameController {
 
 	}
 
-	private boolean snakeHitWall() {
+	public boolean snakeHitWall() {
 		if ((game.getPlayGround().getSnake().getHead().getY() < 0)
 				|| (game.getPlayGround().getSnake().getHead().getY() > Constants.GAME_HIGHT - 2)
 				|| (game.getPlayGround().getSnake().getHead().getX() < 0)
@@ -71,7 +71,7 @@ public class GameController {
 		return false;
 	}
 
-	private boolean snakeHitBody() { // use abs | | between head and body segment
+	public boolean snakeHitBody() { // use abs | | between head and body segment
 		for (Segment s : game.getPlayGround().getSnake().getBody()) {
 			if ((game.getPlayGround().getSnake().getHead().getX() == s.getX())
 					&& (game.getPlayGround().getSnake().getHead().getY() == s.getY())

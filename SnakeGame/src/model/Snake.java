@@ -59,4 +59,5 @@ public class Snake {
 		return "Snake [body=" + body + ", head=" + head + "]";
 	}
 
+	
 }
