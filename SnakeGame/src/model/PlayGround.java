@@ -15,22 +15,34 @@ public class PlayGround {
 	private int lastPearPos;
 	private Snake snake;
 	private Mouse mouse;
+	private SecretGate secretGate;
 	private boolean hit;
 
 	public PlayGround() {
 
 		snake = new Snake(Constants.SNAKE_LENGTH);
 
-		fruits = new HashMap<FruiteType, Fruit>();
+		fruits = new HashMap<FruiteType, Fruit>(); // adding fruits
 		for (FruiteType type : FruiteType.values())
 			addFruit(type);
 
-		questions = new HashMap<Level, Question>();
+		questions = new HashMap<Level, Question>(); // adding questions
 		for (Level level : Level.values())
 			addQuestion(level);
 
 		addMouse();
+		addSecretGate();
+
 		setHit(false);
+
+	}
+
+	public void addSecretGate() {
+
+		Point enter = getEmptyPoint();
+		Point exit = getEmptyPoint();
+		SecretGate sg = new SecretGate(enter.x, enter.y, exit.x, exit.y);
+		secretGate = sg;
 
 	}
 
@@ -66,7 +78,8 @@ public class PlayGround {
 	 */
 	public Point getEmptyPoint() {
 
-		Point p = new Point((int) (Math.random() * (Constants.GAME_WIDTH-3)), (int) (Math.random() * (Constants.GAME_HIGHT-3)));
+		Point p = new Point((int) (Math.random() * (Constants.GAME_WIDTH - 3)),
+				(int) (Math.random() * (Constants.GAME_HIGHT - 3)));
 
 		// if point is not empty
 		// loop till finding an empty point
@@ -192,6 +205,14 @@ public class PlayGround {
 
 	public HashMap<Level, Question> getQuestions() {
 		return questions;
+	}
+
+	public SecretGate getSecretGate() {
+		return secretGate;
+	}
+
+	public void setSecretGate(SecretGate secretGate) {
+		this.secretGate = secretGate;
 	}
 
 	public boolean isHit() {

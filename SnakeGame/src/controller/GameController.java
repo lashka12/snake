@@ -35,6 +35,9 @@ public class GameController {
 	private int bananaTimer;
 	private int mouseTimer;
 
+	boolean exitlegal = true;
+	boolean enterLegal = true;
+
 	public GameController(Game game, GameSimulator view) {
 
 		if (instance == null) {
@@ -82,6 +85,7 @@ public class GameController {
 
 	public void update() {
 
+		updateSecretGate();
 		if (snakeHitBody() || snakeHitWall()) {
 
 			SoundEffects.playNegativeSound();
@@ -159,6 +163,8 @@ public class GameController {
 
 		for (Segment segment : game.getPlayGround().getSnake().getBody()) // update snake logical pos
 			segment.move();
+
+		updateSecretGateAfterMove();
 
 		if (!game.getPlayGround().getMouse().isEaten()) {
 			game.getPlayGround().getMouse().update(); // update mouse logical pos
@@ -264,6 +270,92 @@ public class GameController {
 		}
 		view.render(); // refresh view
 
+	}
+
+	private void updateSecretGateAfterMove() {
+		for (Segment s : game.getPlayGround().getSnake().getBody()) {
+
+			if ((Math.abs(game.getPlayGround().getSecretGate().getExitX() - s.getX()) >= 0
+					&& Math.abs(game.getPlayGround().getSecretGate().getExitX() - s.getX()) < 2)
+					&& (Math.abs(game.getPlayGround().getSecretGate().getExitY() - s.getY()) >= 0
+							&& Math.abs(game.getPlayGround().getSecretGate().getExitY() - s.getY()) < 2)) {
+				exitlegal = false;
+			}
+
+			if ((Math.abs(game.getPlayGround().getSecretGate().getEnterX() - s.getX()) >= 0
+					&& Math.abs(game.getPlayGround().getSecretGate().getEnterX() - s.getX()) < 2)
+					&& (Math.abs(game.getPlayGround().getSecretGate().getEnterY() - s.getY()) >= 0
+							&& Math.abs(game.getPlayGround().getSecretGate().getEnterY() - s.getY()) < 2)) {
+				enterLegal = false;
+			}
+
+		}
+	}
+
+	private void updateSecretGate() {
+		if ((Math
+				.abs(game.getPlayGround().getSecretGate().getExitX() - game.getPlayGround().getSnake().getBody()
+						.get(game.getPlayGround().getSnake().getBody().size() - 1).getX()) >= 0
+				&& Math.abs(game.getPlayGround().getSecretGate().getExitX() - game.getPlayGround().getSnake().getBody()
+						.get(game.getPlayGround().getSnake().getBody().size() - 1).getX()) < 2)
+				&& (Math.abs(game.getPlayGround().getSecretGate().getExitY() - game.getPlayGround().getSnake().getBody()
+						.get(game.getPlayGround().getSnake().getBody().size() - 1).getY()) >= 0
+						&& Math.abs(game.getPlayGround().getSecretGate().getExitY() - game.getPlayGround().getSnake()
+								.getBody().get(game.getPlayGround().getSnake().getBody().size() - 1).getY()) < 2)) {
+			exitlegal = true;
+			enterLegal = true;
+
+		}
+
+		if ((Math
+				.abs(game.getPlayGround().getSecretGate().getEnterX() - game.getPlayGround().getSnake().getBody()
+						.get(game.getPlayGround().getSnake().getBody().size() - 1).getX()) >= 0
+				&& Math.abs(game.getPlayGround().getSecretGate().getEnterX() - game.getPlayGround().getSnake().getBody()
+						.get(game.getPlayGround().getSnake().getBody().size() - 1).getX()) < 2)
+				&& (Math.abs(game.getPlayGround().getSecretGate().getEnterY() - game.getPlayGround().getSnake()
+						.getBody().get(game.getPlayGround().getSnake().getBody().size() - 1).getY()) >= 0
+						&& Math.abs(game.getPlayGround().getSecretGate().getEnterY() - game.getPlayGround().getSnake()
+								.getBody().get(game.getPlayGround().getSnake().getBody().size() - 1).getY()) < 2)) {
+			enterLegal = true;
+			exitlegal = true;
+
+		}
+
+		if ((Math
+				.abs(game.getPlayGround().getSecretGate().getEnterX()
+						- game.getPlayGround().getSnake().getHead().getX()) >= 0
+				&& Math.abs(game.getPlayGround().getSecretGate().getEnterX()
+						- game.getPlayGround().getSnake().getHead().getX()) < 2)
+				&& (Math.abs(game.getPlayGround().getSecretGate().getEnterY()
+						- game.getPlayGround().getSnake().getHead().getY()) >= 0
+						&& Math.abs(game.getPlayGround().getSecretGate().getEnterY()
+								- game.getPlayGround().getSnake().getHead().getY()) < 2)) {
+
+			if (exitlegal) {
+				game.getPlayGround().getSnake().getHead().setX(game.getPlayGround().getSecretGate().getExitX());
+				game.getPlayGround().getSnake().getHead().setY(game.getPlayGround().getSecretGate().getExitY());
+			}
+
+		} else {
+
+			if ((Math
+					.abs(game.getPlayGround().getSecretGate().getExitX()
+							- game.getPlayGround().getSnake().getHead().getX()) >= 0
+					&& Math.abs(game.getPlayGround().getSecretGate().getExitX()
+							- game.getPlayGround().getSnake().getHead().getX()) < 2)
+					&& (Math.abs(game.getPlayGround().getSecretGate().getExitY()
+							- game.getPlayGround().getSnake().getHead().getY()) >= 0
+							&& Math.abs(game.getPlayGround().getSecretGate().getExitY()
+									- game.getPlayGround().getSnake().getHead().getY()) < 2)) {
+
+				if (enterLegal) {
+					game.getPlayGround().getSnake().getHead().setX(game.getPlayGround().getSecretGate().getEnterX());
+					game.getPlayGround().getSnake().getHead().setY(game.getPlayGround().getSecretGate().getEnterY());
+
+				}
+			}
+
+		}
 	}
 
 	public void changeDiriction(Direction dir) {

@@ -13,6 +13,9 @@ public class Constants {
 	public static final int BLOCK_SIZE = 9;
 	public static int SNAKE_LENGTH = 10;
 
+	
+	public static final Image SECRET_ENTER = new Image(new File("resources/pics/30.gif").toURI().toString());
+	public static final Image SECRET_EXIT = new Image(new File("resources/pics/30.gif").toURI().toString());
 	public static final Image STACK_IMAGE = new Image(new File("resources/pics/Questionnaire_100px.png").toURI().toString());
 	public static final Image STOP_IMAGE = new Image(new File("resources/pics/stop.png").toURI().toString());
 	public static final Image SUCCESS_IMAGE = new Image(new File("resources/pics/success.png").toURI().toString());

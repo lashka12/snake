@@ -21,7 +21,7 @@ import utilities.Level;
 
 public class GameSimulator extends Pane {
 
-	public static GameSimulator instance;
+	public static GameSimulator singleton;
 	ArrayList<ImageView> ivList;
 	private Game game; // game reference
 	private int size;
@@ -29,8 +29,8 @@ public class GameSimulator extends Pane {
 
 	public GameSimulator() {
 
-		if (instance == null)
-			instance = this;
+		if (singleton == null)
+			singleton = this;
 		reset();
 
 	}
@@ -65,6 +65,13 @@ public class GameSimulator extends Pane {
 		ImageView easyQuestionImage = new ImageView(Constants.EASY_QUESTION);
 		ImageView intermediateQuestionImage = new ImageView(Constants.INTER_QUESTION);
 		ImageView hardQuestion = new ImageView(Constants.HARD_QUESTION);
+		
+		ImageView secretGateEnterance=new ImageView(Constants.SECRET_ENTER);
+		ImageView secretGateExit=new ImageView(Constants.SECRET_EXIT);
+
+		//secretGateEnterance.toFront();
+		//secretGateExit.toFront();
+		
 		easyQuestionImage
 				.setTranslateX(game.getPlayGround().getQuestions().get(Level.EASY).getX() * Constants.BLOCK_SIZE);
 		easyQuestionImage
@@ -97,6 +104,30 @@ public class GameSimulator extends Pane {
 		mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
 		mouseImage.setEffect(new DropShadow(5, Color.BLACK));
 		mouseImage.setId("mouse");
+		
+		
+		
+		
+		secretGateEnterance.setTranslateX(game.getPlayGround().getSecretGate().getEnterX() * Constants.BLOCK_SIZE);
+		secretGateEnterance.setTranslateY(game.getPlayGround().getSecretGate().getEnterY() * Constants.BLOCK_SIZE);
+		secretGateEnterance.setEffect(new DropShadow(5, Color.BLACK));
+		secretGateEnterance.setId("secretEnter");
+		
+		secretGateExit.setTranslateX(game.getPlayGround().getSecretGate().getExitX() * Constants.BLOCK_SIZE);
+		secretGateExit.setTranslateY(game.getPlayGround().getSecretGate().getExitY() * Constants.BLOCK_SIZE);
+		secretGateExit.setEffect(new DropShadow(5, Color.BLACK));
+		secretGateExit.setId("secretExit");
+		
+		
+		
+		
+		ivList.add(secretGateEnterance);
+		ivList.add(secretGateExit);
+		
+		
+		
+		
+		
 		ivList.add(appleImage);
 		ivList.add(banaImage);
 		ivList.add(pearImage);
@@ -150,8 +181,8 @@ public class GameSimulator extends Pane {
 					iv.setEffect(new DropShadow(10, Color.BLACK));
 					iv.setCache(true);
 					iv.setCacheHint(CacheHint.SPEED);
-
 					iv.setId(game.getPlayGround().getSnake().getBody().size() - i + "");
+					iv.toBack();
 					getChildren().add(iv); // adding snake part image to screen
 
 				}
@@ -397,7 +428,7 @@ public class GameSimulator extends Pane {
 
 	public static GameSimulator getInstance() {
 
-		return instance;
+		return singleton;
 
 	}
 
