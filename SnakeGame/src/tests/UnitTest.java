@@ -22,6 +22,7 @@ import model.Segment;
 import model.Snake;
 import model.SysData;
 import utilities.Constants;
+import utilities.Direction;
 import utilities.FruiteType;
 import utilities.Level;
 import view.GameSimulator;
@@ -264,6 +265,16 @@ public class UnitTest { // test all the methods in each class !!!
 		
 	}
 
-
+	@Test
+	public void MoveSegmentTest() {
+		Segment segment = new Segment(77, 100, null);
+		segment.move();
+		Direction dir = segment.getDirection();
+		if(dir.equals(Direction.LEFT) || dir.equals(Direction.RIGHT)) {
+			Assert.assertNotEquals(77, segment.getX());
+		}else {
+			Assert.assertNotEquals(100, segment.getY());
+		}
+	}
 
 }
