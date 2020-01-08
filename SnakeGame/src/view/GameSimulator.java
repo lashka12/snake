@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import model.Block;
 import model.Fruit;
 import model.Game;
 import model.Question;
@@ -19,18 +20,18 @@ import utilities.Constants;
 import utilities.FruiteType;
 import utilities.Level;
 
-public class GameSimulator extends Pane {
+public class GameSimulator extends Pane implements GameObserver {
 
 	public static GameSimulator singleton;
 	ArrayList<ImageView> ivList;
 	private Game game; // game reference
 	private int size;
 
-
 	public GameSimulator() {
 
 		if (singleton == null)
 			singleton = this;
+		
 		reset();
 
 	}
@@ -65,13 +66,13 @@ public class GameSimulator extends Pane {
 		ImageView easyQuestionImage = new ImageView(Constants.EASY_QUESTION);
 		ImageView intermediateQuestionImage = new ImageView(Constants.INTER_QUESTION);
 		ImageView hardQuestion = new ImageView(Constants.HARD_QUESTION);
-		
-		ImageView secretGateEnterance=new ImageView(Constants.SECRET_ENTER);
-		ImageView secretGateExit=new ImageView(Constants.SECRET_EXIT);
 
-		//secretGateEnterance.toFront();
-		//secretGateExit.toFront();
-		
+		ImageView secretGateEnterance = new ImageView(Constants.SECRET_ENTER);
+		ImageView secretGateExit = new ImageView(Constants.SECRET_EXIT);
+
+		// secretGateEnterance.toFront();
+		// secretGateExit.toFront();
+
 		easyQuestionImage
 				.setTranslateX(game.getPlayGround().getQuestions().get(Level.EASY).getX() * Constants.BLOCK_SIZE);
 		easyQuestionImage
@@ -104,30 +105,20 @@ public class GameSimulator extends Pane {
 		mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
 		mouseImage.setEffect(new DropShadow(5, Color.BLACK));
 		mouseImage.setId("mouse");
-		
-		
-		
-		
+
 		secretGateEnterance.setTranslateX(game.getPlayGround().getSecretGate().getEnterX() * Constants.BLOCK_SIZE);
 		secretGateEnterance.setTranslateY(game.getPlayGround().getSecretGate().getEnterY() * Constants.BLOCK_SIZE);
 		secretGateEnterance.setEffect(new DropShadow(5, Color.BLACK));
 		secretGateEnterance.setId("secretEnter");
-		
+
 		secretGateExit.setTranslateX(game.getPlayGround().getSecretGate().getExitX() * Constants.BLOCK_SIZE);
 		secretGateExit.setTranslateY(game.getPlayGround().getSecretGate().getExitY() * Constants.BLOCK_SIZE);
 		secretGateExit.setEffect(new DropShadow(5, Color.BLACK));
 		secretGateExit.setId("secretExit");
-		
-		
-		
-		
+
 		ivList.add(secretGateEnterance);
 		ivList.add(secretGateExit);
-		
-		
-		
-		
-		
+
 		ivList.add(appleImage);
 		ivList.add(banaImage);
 		ivList.add(pearImage);
@@ -241,7 +232,7 @@ public class GameSimulator extends Pane {
 				if (fruit.isEaten()) {
 					if (fruitImage.isVisible()) {
 						fruitImage.setVisible(false);
-						popPoints(fruit);
+						//popPoints(fruit);
 					}
 				} else {
 					if (!fruitImage.isVisible()) { // it means it was hidden and now is the time to show it again
@@ -376,20 +367,28 @@ public class GameSimulator extends Pane {
 		ft2.play();
 	}
 
-	public void popPoints(Fruit fruit) {
+	public void popPoints() {
 
 		Image image = null;
-		switch (fruit.getType().getPoints()) {
-		case 10:
-			image = Constants.POINTS10_IMAGE;
-			break;
-		case 15:
-			image = Constants.POINTS15_IMAGE;
-			break;
-		case 20:
-			image = Constants.POINTS20_IMAGE;
-			break;
+		Block b =game.getLastEatenBlock();
+		
+		if(b instanceof Fruit) {
+			switch (((Fruit) b).getType()) {
+			case APPLE:
+				image = Constants.POINTS10_IMAGE;
+				break;
+			case BANANA:
+				image = Constants.POINTS15_IMAGE;
+				break;
+			case PEAR:
+				image = Constants.POINTS20_IMAGE;
+				break;
+
+			}
+	
 		}
+		
+
 		ImageView iv = new ImageView(image);
 
 		Thread thread = new Thread(() -> {
@@ -397,8 +396,8 @@ public class GameSimulator extends Pane {
 			try {
 
 				Platform.runLater(() -> {
-					iv.setTranslateX(fruit.getX() * Constants.BLOCK_SIZE);
-					iv.setTranslateY(fruit.getY() * Constants.BLOCK_SIZE);
+					iv.setTranslateX(b.getX() * Constants.BLOCK_SIZE);
+					iv.setTranslateY(b.getY() * Constants.BLOCK_SIZE);
 
 					ScaleTransition st = new ScaleTransition(Duration.millis(500), iv);
 					st.setFromX(0.1);
@@ -429,6 +428,13 @@ public class GameSimulator extends Pane {
 	public static GameSimulator getInstance() {
 
 		return singleton;
+
+	}
+
+	@Override
+	public void update() {
+		 popPoints();
+
 
 	}
 

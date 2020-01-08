@@ -30,13 +30,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		
-		
 		Game game = new Game(); // model
 		GameSimulator view = new GameSimulator(); // view
 		GameController gameController = new GameController(game, view); // controller
-		
-		
+
+		SoundEffects soundEffects = new SoundEffects();
+		game.register(view);
+		game.register(soundEffects);
+
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainPage.fxml"));
 		Scene scene = new Scene(root);
 

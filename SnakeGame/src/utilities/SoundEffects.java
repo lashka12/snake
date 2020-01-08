@@ -4,8 +4,9 @@ import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import view.GameObserver;
 
-public class SoundEffects {
+public class SoundEffects implements GameObserver {
 
 	private static MediaPlayer mediaPlayer;
 	private static Media media;
@@ -104,6 +105,13 @@ public class SoundEffects {
 		media = new Media(new File(Constants.WRONG_ANSWER_SOUND).toURI().toString());
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
 		mediaPlayer1.setAutoPlay(true);
+	}
+
+
+	@Override
+	public void update() {
+		playBubbleSound();
+		
 	}
 
 }

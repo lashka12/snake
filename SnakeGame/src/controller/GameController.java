@@ -56,7 +56,7 @@ public class GameController {
 				}
 			};
 		} else {
-			System.out.println("this class is a singltone ! ");
+			System.out.println("this class is a singleton ! ");
 		}
 
 	}
@@ -221,7 +221,6 @@ public class GameController {
 				game.addEatenObject(fruit);
 				fruit.setEaten(true);
 				MainPageController.getInstance().updateScore(game.getScore());
-				SoundEffects.playBubbleSound();
 				game.getPlayGround().getSnake().addSegment();
 			}
 

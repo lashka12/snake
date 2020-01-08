@@ -1,8 +1,12 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
+import view.GameObserver;
 
 /**
  * this class represent a game while playing snake
@@ -13,6 +17,9 @@ import java.util.HashMap;
 public class Game {
 
 	private static Game singleton;
+
+	private List<GameObserver> observers;
+
 	private String nickName;
 	private Date date;
 	private Integer score;
@@ -22,11 +29,13 @@ public class Game {
 	private PlayGround playGround;
 	private boolean over;
 	private boolean paused;
+	private Block lastEatenBlock;
 
 	public Game() {
 
 		if (singleton == null)
 			singleton = this;
+		observers = new ArrayList<GameObserver>();
 		restart();
 
 	}
@@ -65,6 +74,23 @@ public class Game {
 		this.eatenObjects = eatenObjects;
 	}
 
+	public void register(GameObserver observer) {
+		observers.add(observer);
+	}
+
+	public void unRegister(GameObserver observer) {
+		observers.remove(observer);
+
+	}
+
+	private void notifyObservers() {
+
+		for (GameObserver gameObserver : observers) {
+			gameObserver.update();
+		}
+
+	}
+
 	/**
 	 * this method adds a eaten object to the game and update the score
 	 * 
@@ -91,6 +117,8 @@ public class Game {
 			eatenObjects.put(key, eatenObjects.get(key) + 1);
 
 		score = getScore() + toAdd;
+		setLastEatenBlock(eatenObject);
+		notifyObservers();
 
 	}
 
@@ -213,6 +241,14 @@ public class Game {
 		return "Game [nickName=" + nickName + ", date=" + date + ", score=" + score + ", lives=" + lives + ", duration="
 				+ duration + ", eatenObjects=" + eatenObjects + ", playGround=" + playGround + ", over=" + over
 				+ ", paused=" + paused + "]";
+	}
+
+	public Block getLastEatenBlock() {
+		return lastEatenBlock;
+	}
+
+	public void setLastEatenBlock(Block lastEatenBlock) {
+		this.lastEatenBlock = lastEatenBlock;
 	}
 
 }
