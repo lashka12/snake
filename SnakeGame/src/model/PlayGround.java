@@ -23,6 +23,7 @@ public class PlayGround {
 	private Snake snake;
 	private Mouse mouse;
 	private SecretGate secretGate;
+	private Shield shield;
 	private boolean hit;
 
 	/**
@@ -45,6 +46,16 @@ public class PlayGround {
 		setHit(false);
 
 	}
+	
+	
+	public void addShield() {
+
+		Point p = getEmptyPoint();
+		Shield s = new Shield(p.x, p.y);
+		setShield(s);
+
+	}
+	
 
 	/**
 	 * this method adds a secret gate to the playground
@@ -241,5 +252,15 @@ public class PlayGround {
 
 	public Mouse getMouse() {
 		return mouse;
+	}
+
+
+	public Shield getShield() {
+		return shield;
+	}
+
+
+	public void setShield(Shield shield) {
+		this.shield = shield;
 	}
 }

@@ -31,8 +31,15 @@ public class Constants {
 	public static final String NEGATIVE_SOUND = "resources/audio/negative3.mp3";
 	public static final String RIGHT_ANSWER_SOUND = "resources/audio/rightAnswer.mp3";
 	public static final String WRONG_ANSWER_SOUND = "resources/audio/negative.mp3";
+	public static final String swipe = "resources/audio/swipe.mp3";
+	public static final String magic1 = "resources/audio/magic1.mp3";
+	public static final String magic2 = "resources/audio/magic2.mp3";
+	public static final String warning = "resources/audio/warning.mp3";
+	public static final String enter = "resources/audio/enter.mp3";
+
+
 	
-	
+	public static final Image DEFENCE_ENTER = new Image(new File("resources/pics/defence22.png").toURI().toString());
 	public static final Image SECRET_ENTER = new Image(new File("resources/pics/30.gif").toURI().toString());
 	public static final Image SECRET_EXIT = new Image(new File("resources/pics/30.gif").toURI().toString());
 	public static final Image STACK_IMAGE = new Image(new File("resources/pics/Questionnaire_100px.png").toURI().toString());

@@ -3,6 +3,8 @@ package controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import model.Game;
 import model.Question;
 import model.Segment;
 import model.SegmentIterator;
+import model.Shield;
 import model.SysData;
 import utilities.Constants;
 import utilities.Direction;
@@ -44,6 +47,7 @@ public class GameController {
 	private int appleTimer;
 	private int bananaTimer;
 	private int mouseTimer;
+	private int shieldTimer;
 	boolean exitlegal = true;
 	boolean enterLegal = true;
 
@@ -82,82 +86,135 @@ public class GameController {
 	 */
 	public void update() {
 
-		initSecretGate();
-		if (snakeHitBody() || snakeHitWall()) {
+		int random = (int) (Math.random() * 1000 + 1);
+		if (random == 1 && game.getMode() == -1 && game.getPlayGround().getShield() == null) {
+			game.getPlayGround().addShield();
+			shieldTimer = 0;
+			game.setMode(0);
+			view.putShield();
+			SoundEffects.magic1();
+		}
+		if (game.getPlayGround().getShield() != null) {
+			if (snakeHit(game.getPlayGround().getShield())) {
+				game.getPlayGround().getShield().setX(-1000);
+				game.getPlayGround().getShield().setY(-1000);
+				game.getPlayGround().getShield().setEaten(true);
+				view.removeShield();
+				SoundEffects.playBubbleSound();
+				SoundEffects.magic2();
+			}
+		}
 
-			SoundEffects.playNegativeSound();
-			pauseGame();
-			game.setLives(game.getLives() - 1);
-			MainPageController.getInstance().updateLives(game.getLives());
-			game.getPlayGround().setHit(true);
-			game.getPlayGround().getSnake().setDirection(Direction.LEFT);
+		if (game.getMode() != -1 && game.getPlayGround().getShield().isEaten()) {
 
-			if (game.getLives() == 0) {
-				game.setDuration(calculateDuration(game.getDate(), new Date()));
-				game.setOver(true);
-				SoundEffects.stopSound();
-				SoundEffects.playGameOverSound();
-				SysData.addGame(game);
-				SysData.Save();
-				Thread thread = new Thread(() -> {
-					try {
+			if (shieldTimer == 0) {
+				game.setMode(1);
+				view.setShieldStatus(1);
+			}
+			shieldTimer++;
 
-						Thread.sleep(3 * 1000); // waiting
-						Platform.runLater(() -> {
-							try {
-
-								FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RatingPage.fxml"));
-								RatingPageController rpc = new RatingPageController(true);
-								fxmlLoader.setController(rpc);
-								Parent root = (Parent) fxmlLoader.load();
-								Stage stage = new Stage();
-								stage.initModality(Modality.APPLICATION_MODAL);
-								Scene scene = new Scene(root);
-								stage.setScene(scene);
-								stage.initStyle(StageStyle.TRANSPARENT);
-								scene.setFill(Color.TRANSPARENT);
-								stage.show();
-								SoundEffects.playRatingMusic();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-						});
-
-					} catch (Exception exc) {
-						throw new Error("Unexpected interruption");
-					}
-				});
-				thread.start();
+			if (shieldTimer == 200) {
+				SoundEffects.warning();
+				game.setMode(2);
+				view.setShieldStatus(2);
+			}
+			if (shieldTimer == 400) {
+				SoundEffects.warning();
+				game.setMode(3);
+				view.setShieldStatus(3);
+			}
+			if (shieldTimer == 600) {
+				SoundEffects.warning();
+				game.setMode(-1);
+				view.setShieldStatus(4);
+				game.setMode(-1);
+				game.getPlayGround().setShield(null);
+				shieldTimer = 0;
 
 			}
 
-			else {
+		}
 
-				Thread thread = new Thread(() -> {
-					try {
+		initSecretGate();
 
-						Thread.sleep(1000);
-						Platform.runLater(() -> {
-							game.getPlayGround().setHit(false);
-							int ipx = Constants.GAME_WIDTH / 2;
-							int ipy = Constants.GAME_HIGHT / 2;
+		if (game.getMode() < 1) {
+			if (snakeHitBody() || snakeHitWall()) {
 
-							SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
-							for (iterator.first(); !iterator.isDone(); iterator.next()) {
-								iterator.currentValue().setX(ipx++);
-								iterator.currentValue().setY(ipy);
-							}
+				SoundEffects.playNegativeSound();
+				pauseGame();
+				game.setLives(game.getLives() - 1);
+				MainPageController.getInstance().updateLives(game.getLives());
+				game.getPlayGround().setHit(true);
+				game.getPlayGround().getSnake().setDirection(Direction.LEFT);
 
-							resumeGame();
+				if (game.getLives() == 0) {
+					game.setDuration(calculateDuration(game.getDate(), new Date()));
+					game.setOver(true);
+					SoundEffects.stopSound();
+					SoundEffects.playGameOverSound();
+					SysData.addGame(game);
+					SysData.Save();
+					Thread thread = new Thread(() -> {
+						try {
 
-						});
+							Thread.sleep(3 * 1000); // waiting
+							Platform.runLater(() -> {
+								try {
 
-					} catch (Exception exc) {
-						throw new Error("Unexpected interruption");
-					}
-				});
-				thread.start();
+									FXMLLoader fxmlLoader = new FXMLLoader(
+											getClass().getResource("/view/RatingPage.fxml"));
+									RatingPageController rpc = new RatingPageController(true);
+									fxmlLoader.setController(rpc);
+									Parent root = (Parent) fxmlLoader.load();
+									Stage stage = new Stage();
+									stage.initModality(Modality.APPLICATION_MODAL);
+									Scene scene = new Scene(root);
+									stage.setScene(scene);
+									stage.initStyle(StageStyle.TRANSPARENT);
+									scene.setFill(Color.TRANSPARENT);
+									stage.show();
+									SoundEffects.playRatingMusic();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+							});
+
+						} catch (Exception exc) {
+							throw new Error("Unexpected interruption");
+						}
+					});
+					thread.start();
+
+				}
+
+				else {
+
+					Thread thread = new Thread(() -> {
+						try {
+
+							Thread.sleep(1000);
+							Platform.runLater(() -> {
+								game.getPlayGround().setHit(false);
+								int ipx = Constants.GAME_WIDTH / 2;
+								int ipy = Constants.GAME_HIGHT / 2;
+
+								SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
+								for (iterator.first(); !iterator.isDone(); iterator.next()) {
+									iterator.currentValue().setX(ipx++);
+									iterator.currentValue().setY(ipy);
+								}
+
+								resumeGame();
+
+							});
+
+						} catch (Exception exc) {
+							throw new Error("Unexpected interruption");
+						}
+					});
+					thread.start();
+				}
 			}
 		}
 
@@ -165,6 +222,27 @@ public class GameController {
 		SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
 		for (iterator.first(); !iterator.isDone(); iterator.next()) {
 			iterator.currentValue().move();
+			if (game.getMode() > 0) {
+
+				if (game.getPlayGround().getSnake().getHead().getY() < 0) {
+					game.getPlayGround().getSnake().getHead().setY(Constants.GAME_HIGHT - 1);
+					SoundEffects.swipe();
+				}
+				if (game.getPlayGround().getSnake().getHead().getY() >= Constants.GAME_HIGHT) {
+					game.getPlayGround().getSnake().getHead().setY(0);
+					SoundEffects.swipe();
+				}
+				if (game.getPlayGround().getSnake().getHead().getX() < 0) {
+					game.getPlayGround().getSnake().getHead().setX(Constants.GAME_WIDTH - 1);
+					SoundEffects.swipe();
+				}
+				if (game.getPlayGround().getSnake().getHead().getX() >= Constants.GAME_WIDTH) {
+					game.getPlayGround().getSnake().getHead().setX(0);
+					SoundEffects.swipe();
+				}
+
+			}
+
 		}
 
 		updateSecretGateAfterMove();
@@ -365,6 +443,7 @@ public class GameController {
 								- game.getPlayGround().getSnake().getHead().getY()) < 2)) {
 
 			if (exitlegal) {
+				SoundEffects.enter();
 				game.getPlayGround().getSnake().getHead().setX(game.getPlayGround().getSecretGate().getExitX());
 				game.getPlayGround().getSnake().getHead().setY(game.getPlayGround().getSecretGate().getExitY());
 			}
@@ -382,6 +461,7 @@ public class GameController {
 									- game.getPlayGround().getSnake().getHead().getY()) < 2)) {
 
 				if (enterLegal) {
+					SoundEffects.enter();
 					game.getPlayGround().getSnake().getHead().setX(game.getPlayGround().getSecretGate().getEnterX());
 					game.getPlayGround().getSnake().getHead().setY(game.getPlayGround().getSecretGate().getEnterY());
 

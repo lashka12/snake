@@ -68,6 +68,36 @@ public class SoundEffects implements GameObserver {
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
 		mediaPlayer1.play();
 	}
+	public static void magic1() {
+
+		media = new Media(new File(Constants.magic1).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.play();
+	}
+	public static void swipe() {
+
+		media = new Media(new File(Constants.swipe).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.play();
+	}
+	public static void enter() {
+
+		media = new Media(new File(Constants.enter).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.play();
+	}
+	public static void warning() {
+
+		media = new Media(new File(Constants.warning).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.play();
+	}
+	public static void magic2() {
+
+		media = new Media(new File(Constants.magic2).toURI().toString());
+		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
+		mediaPlayer1.play();
+	}
 
 	public static void playStartSound() {
 

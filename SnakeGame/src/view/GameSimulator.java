@@ -15,6 +15,7 @@ import model.Block;
 import model.Fruit;
 import model.Game;
 import model.GameObserver;
+import model.Mouse;
 import model.Question;
 import model.SegmentIterator;
 import utilities.Constants;
@@ -38,6 +39,7 @@ public class GameSimulator extends Pane implements GameObserver {
 	ArrayList<ImageView> ivList;
 	private Game game; // game reference
 	private int size;
+	Color Snakeshadow;
 
 	/**
 	 * this method returns the game simulator instance
@@ -84,14 +86,14 @@ public class GameSimulator extends Pane implements GameObserver {
 		setStyle("-fx-background-color: rgba(50, 50, 50, 0.5); -fx-border-color:rgba(255, 188, 43,0.7);");
 		setMinWidth(Constants.GAME_WIDTH * Constants.BLOCK_SIZE);
 		setMinHeight(Constants.GAME_HIGHT * Constants.BLOCK_SIZE);
-
+		Snakeshadow = Color.BLACK;
 		SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
 		for (iterator.first(); !iterator.isDone(); iterator.next()) { // updating snake on screen
 
 			ImageView snakePartImage = new ImageView(Constants.SNAKE_BODY_IMAGE);
 			snakePartImage.setTranslateX(iterator.currentValue().getX() * Constants.BLOCK_SIZE);
 			snakePartImage.setTranslateY(iterator.currentValue().getY() * Constants.BLOCK_SIZE);
-			snakePartImage.setEffect(new DropShadow(10, Color.BLACK));
+			snakePartImage.setEffect(new DropShadow(20, Color.BLACK));
 			snakePartImage.setCache(true);
 			snakePartImage.setCacheHint(CacheHint.SPEED);
 			snakePartImage.setId(iterator.currentValue().getId() + "");
@@ -106,52 +108,48 @@ public class GameSimulator extends Pane implements GameObserver {
 		ImageView easyQuestionImage = new ImageView(Constants.EASY_QUESTION);
 		ImageView intermediateQuestionImage = new ImageView(Constants.INTER_QUESTION);
 		ImageView hardQuestion = new ImageView(Constants.HARD_QUESTION);
-
 		ImageView secretGateEnterance = new ImageView(Constants.SECRET_ENTER);
 		ImageView secretGateExit = new ImageView(Constants.SECRET_EXIT);
-
-		// secretGateEnterance.toFront();
-		// secretGateExit.toFront();
 
 		easyQuestionImage
 				.setTranslateX(game.getPlayGround().getQuestions().get(Level.EASY).getX() * Constants.BLOCK_SIZE);
 		easyQuestionImage
 				.setTranslateY(game.getPlayGround().getQuestions().get(Level.EASY).getY() * Constants.BLOCK_SIZE);
-		easyQuestionImage.setEffect(new DropShadow(5, Color.BLACK));
+		easyQuestionImage.setEffect(new DropShadow(20, Color.BLACK));
 		easyQuestionImage.setId("EASY");
 		intermediateQuestionImage.setTranslateX(
 				game.getPlayGround().getQuestions().get(Level.INTERMEDIATE).getX() * Constants.BLOCK_SIZE);
 		intermediateQuestionImage.setTranslateY(
 				game.getPlayGround().getQuestions().get(Level.INTERMEDIATE).getY() * Constants.BLOCK_SIZE);
-		intermediateQuestionImage.setEffect(new DropShadow(5, Color.BLACK));
+		intermediateQuestionImage.setEffect(new DropShadow(20, Color.BLACK));
 		intermediateQuestionImage.setId("INTERMEDIATE");
 		hardQuestion.setTranslateX(game.getPlayGround().getQuestions().get(Level.HARD).getX() * Constants.BLOCK_SIZE);
 		hardQuestion.setTranslateY(game.getPlayGround().getQuestions().get(Level.HARD).getY() * Constants.BLOCK_SIZE);
-		hardQuestion.setEffect(new DropShadow(5, Color.BLACK));
+		hardQuestion.setEffect(new DropShadow(20, Color.BLACK));
 		hardQuestion.setId("HARD");
 		appleImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.APPLE).getX() * Constants.BLOCK_SIZE);
 		appleImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.APPLE).getY() * Constants.BLOCK_SIZE);
-		appleImage.setEffect(new DropShadow(5, Color.BLACK));
+		appleImage.setEffect(new DropShadow(20, Color.BLACK));
 		appleImage.setId("APPLE");
 		banaImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.BANANA).getX() * Constants.BLOCK_SIZE);
 		banaImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.BANANA).getY() * Constants.BLOCK_SIZE);
-		banaImage.setEffect(new DropShadow(5, Color.BLACK));
+		banaImage.setEffect(new DropShadow(20, Color.BLACK));
 		banaImage.setId("BANANA");
 		pearImage.setTranslateX(game.getPlayGround().getFruits().get(FruiteType.PEAR).getX() * Constants.BLOCK_SIZE);
 		pearImage.setTranslateY(game.getPlayGround().getFruits().get(FruiteType.PEAR).getY() * Constants.BLOCK_SIZE);
-		pearImage.setEffect(new DropShadow(5, Color.BLACK));
+		pearImage.setEffect(new DropShadow(20, Color.BLACK));
 		pearImage.setId("PEAR");
 		mouseImage.setTranslateX(game.getPlayGround().getMouse().getX() * Constants.BLOCK_SIZE);
 		mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
-		mouseImage.setEffect(new DropShadow(5, Color.BLACK));
+		mouseImage.setEffect(new DropShadow(20, Color.BLACK));
 		mouseImage.setId("mouse");
 		secretGateEnterance.setTranslateX(game.getPlayGround().getSecretGate().getEnterX() * Constants.BLOCK_SIZE);
 		secretGateEnterance.setTranslateY(game.getPlayGround().getSecretGate().getEnterY() * Constants.BLOCK_SIZE);
-		secretGateEnterance.setEffect(new DropShadow(5, Color.BLACK));
+		secretGateEnterance.setEffect(new DropShadow(20, Color.BLACK));
 		secretGateEnterance.setId("secretEnter");
 		secretGateExit.setTranslateX(game.getPlayGround().getSecretGate().getExitX() * Constants.BLOCK_SIZE);
 		secretGateExit.setTranslateY(game.getPlayGround().getSecretGate().getExitY() * Constants.BLOCK_SIZE);
-		secretGateExit.setEffect(new DropShadow(5, Color.BLACK));
+		secretGateExit.setEffect(new DropShadow(20, Color.BLACK));
 		secretGateExit.setId("secretExit");
 		ivList.add(secretGateEnterance);
 		ivList.add(secretGateExit);
@@ -163,6 +161,47 @@ public class GameSimulator extends Pane implements GameObserver {
 		ivList.add(intermediateQuestionImage);
 		ivList.add(hardQuestion);
 		getChildren().addAll(ivList);
+
+	}
+
+	public void putShield() {
+
+		ImageView shieldImage = new ImageView(Constants.DEFENCE_ENTER);
+		shieldImage.setTranslateX(game.getPlayGround().getShield().getX() * Constants.BLOCK_SIZE);
+		shieldImage.setTranslateY(game.getPlayGround().getShield().getY() * Constants.BLOCK_SIZE);
+		shieldImage.setEffect(new DropShadow(25, Color.GREEN));
+		shieldImage.setId("shield");
+		getChildren().add(shieldImage);
+	}
+
+	public void removeShield() {
+		ImageView shieldImage = (ImageView) lookup("#shield");
+		getChildren().remove(shieldImage);
+	}
+
+	public void setShieldStatus(int status) {
+
+		switch (status) {
+		case 1:
+			Snakeshadow = Color.GREEN;
+			break;
+		case 2:
+			Snakeshadow = Color.ORANGE;
+			break;
+		case 3:
+			Snakeshadow = Color.RED;
+			break;
+		case 4:
+			Snakeshadow = Color.BLACK;
+			break;
+		}
+
+		SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
+		for (iterator.first(); !iterator.isDone(); iterator.next()) {
+			ImageView tb = (ImageView) lookup("#" + iterator.currentValue().getId());
+			tb.setEffect(new DropShadow(20, Snakeshadow));
+
+		}
 
 	}
 
@@ -221,12 +260,13 @@ public class GameSimulator extends Pane implements GameObserver {
 				thread.start();
 			}
 
-			if (game.getPlayGround().getSnake().getBody().size() > size) { // check if there is need to add new block
+			if (game.getPlayGround().getSnake().getBody().size() > size) { // check if there is need to add new block on
+																			// the screen
 
 				for (int i = game.getPlayGround().getSnake().getBody().size() - size; i > 0; i--) {// view leftBehind
 																									// blocks
 					ImageView iv = new ImageView(Constants.SNAKE_BODY_IMAGE);
-					iv.setEffect(new DropShadow(10, Color.BLACK));
+					iv.setEffect(new DropShadow(20, Snakeshadow));
 					iv.setCache(true);
 					iv.setCacheHint(CacheHint.SPEED);
 					iv.setId(game.getPlayGround().getSnake().getBody().size() - i + "");
@@ -457,6 +497,10 @@ public class GameSimulator extends Pane implements GameObserver {
 				break;
 
 			}
+
+		}
+		if (b instanceof Mouse) {
+			// image = Constants.POINTS30_IMAGE;
 
 		}
 

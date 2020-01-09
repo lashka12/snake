@@ -26,6 +26,7 @@ public class Game {
 	private boolean over;
 	private boolean paused;
 	private Block lastEatenBlock;
+	private int mode;
 
 	/**
 	 * constructor
@@ -51,8 +52,10 @@ public class Game {
 		this.duration = 0;
 		this.score = 0;
 		this.lives = 3;
+		this.setMode(-1);
 		this.over = false;
 		this.paused = false;
+	
 
 	}
 
@@ -262,6 +265,14 @@ public class Game {
 		return "Game [nickName=" + nickName + ", date=" + date + ", score=" + score + ", lives=" + lives + ", duration="
 				+ duration + ", eatenObjects=" + eatenObjects + ", playGround=" + playGround + ", over=" + over
 				+ ", paused=" + paused + "]";
+	}
+
+	public int getMode() {
+		return mode;
+	}
+
+	public void setMode(int mode) {
+		this.mode = mode;
 	}
 
 }
