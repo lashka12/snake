@@ -4,15 +4,34 @@ import java.io.File;
 
 import javafx.scene.image.Image;
 
-// thinking to move the pics to a 
+/**
+ * Constants variables of the game guy told us there is no need to make another
+ * Constants file for the images in the view
+ * 
+ * @author L.A
+ *
+ */
 
 public class Constants {
 
-	public static int GAME_HIGHT = 53; // in pixels
+	public static int GAME_HIGHT = 53; 
 	public static int GAME_WIDTH = 104;
 	public static final int BLOCK_SIZE = 9;
 	public static int SNAKE_LENGTH = 10;
-
+	
+	
+	public static final String GAME_SOUND = "resources/audio/funny.mp3";
+	public static final String BUBBLE_SOUND = "resources/audio/Bubble.mp3";
+	public static final String BUTTON_SOUND = "resources/audio/buttonClick.mp3";
+	public static final String CHIME_SOUND = "resources/audio/chime.mp3";
+	public static final String START_SOUND = "resources/audio/start.mp3";
+	public static final String END_SOUND = "resources/audio/gameOver.mp3";
+	public static final String RATING_SOUND = "resources/audio/ratingSound.mp3";
+	public static final String QUESTION_OPEN_SOUND = "resources/audio/openQuestion.mp3";
+	public static final String NEGATIVE_SOUND = "resources/audio/negative3.mp3";
+	public static final String RIGHT_ANSWER_SOUND = "resources/audio/rightAnswer.mp3";
+	public static final String WRONG_ANSWER_SOUND = "resources/audio/negative.mp3";
+	
 	
 	public static final Image SECRET_ENTER = new Image(new File("resources/pics/30.gif").toURI().toString());
 	public static final Image SECRET_EXIT = new Image(new File("resources/pics/30.gif").toURI().toString());
@@ -28,6 +47,10 @@ public class Constants {
 	public static final Image MOUSE_RIGHT_IMAGE = new Image(new File("resources/pics/mouseRight.gif").toURI().toString());
 	public static final Image MOUSE_UP_IMAGE = new Image(new File("resources/pics/mouseUp.gif").toURI().toString());
 	public static final Image MOUSE_DOWN_IMAGE = new Image(new File("resources/pics/mouseDown.gif").toURI().toString());
+	public static final Image MOUSE_LEFT_STABLE_IMAGE = new Image(new File("resources/pics/mouseLeftStable.gif").toURI().toString());
+	public static final Image MOUSE_RIGHT_STABLE_IMAGE = new Image(new File("resources/pics/mouseRightStable.gif").toURI().toString());
+	public static final Image MOUSE_UP_STABLE_IMAGE = new Image(new File("resources/pics/mouseUpStable.gif").toURI().toString());
+	public static final Image MOUSE_DOWN_STABLE_IMAGE = new Image(new File("resources/pics/mouseDownStable.gif").toURI().toString());
 	public static final Image QUESTION_IMAGE = new Image(new File("resources/pics/question22.png").toURI().toString());
 	public static final Image FIRE_IMAGE = new Image(new File("resources/pics/bum.gif").toURI().toString());
 	public static final Image POINTS20_IMAGE = new Image(new File("resources/pics/20.png").toURI().toString());
@@ -43,19 +66,6 @@ public class Constants {
 	public static final Image INTER_QUESTION = new Image(new File("resources/pics/yellowQuestion22.png").toURI().toString());
 	public static final Image HARD_QUESTION = new Image(new File("resources/pics/redQuestion22.png").toURI().toString());
 	public static final Image SNAKE_ICON = new Image(new File("resources/pics/snakePic.png").toURI().toString());
-
-	public static final String GAME_SOUND = "resources/audio/funny.mp3";
-	public static final String BUBBLE_SOUND = "resources/audio/Bubble.mp3";
-	public static final String BUTTON_SOUND = "resources/audio/buttonClick.mp3";
-	public static final String CHIME_SOUND = "resources/audio/chime.mp3";
-	public static final String START_SOUND = "resources/audio/start.mp3";
-	public static final String END_SOUND = "resources/audio/gameOver.mp3";
-	public static final String RATING_SOUND = "resources/audio/ratingSound.mp3";
-	public static final String QUESTION_OPEN_SOUND = "resources/audio/openQuestion.mp3";
-	public static final String NEGATIVE_SOUND = "resources/audio/negative3.mp3";
-	public static final String RIGHT_ANSWER_SOUND = "resources/audio/rightAnswer.mp3";
-	public static final String WRONG_ANSWER_SOUND = "resources/audio/negative.mp3";
-
 
 	public static int getGAME_HIGHT() {
 		return GAME_HIGHT;

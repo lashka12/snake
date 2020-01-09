@@ -1,11 +1,26 @@
 package model;
 
+/**
+ * this class is a bonus feature it used to move the snake from one point to
+ * another - still not done yet there is no java doc
+ * 
+ * @author L.A
+ *
+ */
 public class SecretGate {
 
 	int enterX, enterY, exitX, exitY;
 
+	/**
+	 * full constructor
+	 * 
+	 * @param enterX
+	 * @param enterY
+	 * @param exitX
+	 * @param exitY
+	 */
 	public SecretGate(int enterX, int enterY, int exitX, int exitY) {
-		
+
 		this.enterX = enterX;
 		this.enterY = enterY;
 		this.exitX = exitX;

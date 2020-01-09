@@ -16,6 +16,19 @@ import model.Game;
 import model.Question;
 import utilities.SoundEffects;
 
+/**
+ * this class controls the PausePage.MainPage.FXML page , initialize it and
+ * handle it's actions
+ * 
+ * objects with @FXML sign are references to the graphic components of the FXML
+ * file
+ * 
+ * methods with @FXML sign are the methods used to handle actions triggered by
+ * the FXML File
+ * 
+ * @author Lawrence Ashkar
+ *
+ */
 public class QuestionPageController implements Initializable {
 
 	private static Question curQuestion;
@@ -24,19 +37,14 @@ public class QuestionPageController implements Initializable {
 	private StackPane root;
 	@FXML
 	private Text content;
-
 	@FXML
 	private Text ans1;
-
 	@FXML
 	private Text ans2;
-
 	@FXML
 	private Text ans3;
-
 	@FXML
 	private Text ans4;
-
 	@FXML
 	private RadioButton choose1;
 	@FXML
@@ -63,14 +71,14 @@ public class QuestionPageController implements Initializable {
 	}
 
 	private boolean answeredRight() {
-		
+
 		if ((choose1.isSelected() && curQuestion.getCorrectAnswer().equals("1"))
 				|| (choose2.isSelected() && curQuestion.getCorrectAnswer().equals("2"))
 				|| (choose3.isSelected() && curQuestion.getCorrectAnswer().equals("3"))
 				|| (choose4.isSelected() && curQuestion.getCorrectAnswer().equals("4"))) {
 			return true;
 		}
-		
+
 		return false;
 
 	}

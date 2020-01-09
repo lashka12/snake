@@ -30,55 +30,54 @@ import model.SysData;
 import utilities.Level;
 import view.Alerts;
 
+/**
+ * this class controls the PausePage.MainPage.FXML page , initialize it and
+ * handle it's actions
+ * 
+ * objects with @FXML sign are references to the graphic components of the FXML
+ * file
+ * 
+ * methods with @FXML sign are the methods used to handle actions triggered by
+ * the FXML File
+ * 
+ * @author Lawrence Ashkar
+ *
+ */
+
 public class QuestionsManagmentController implements Initializable {
 
 	@FXML
 	private StackPane root;
-
 	@FXML
 	private TextArea newContent;
-
 	@FXML
 	private TextArea newAns1;
-
 	@FXML
 	private TextArea newAns2;
-
 	@FXML
 	private TextArea newAns3;
-
 	@FXML
 	private TextArea newAns4;
-
 	@FXML
 	private ComboBox<Integer> newCorrectAnswer;
-
 	@FXML
 	private ComboBox<String> newLevel;
-
 	@FXML
 	private TableView<Question> questionsTbl;
 	@FXML
 	private TableColumn<Question, String> theAnswer;
-
 	@FXML
 	private TableColumn<Question, String> content;
-
 	@FXML
 	private TableColumn<Question, String> ans1;
-
 	@FXML
 	private TableColumn<Question, String> ans2;
-
 	@FXML
 	private TableColumn<Question, String> ans3;
-
 	@FXML
 	private TableColumn<Question, String> ans4;
-
 	@FXML
 	private TableColumn<Question, String> level;
-
 	@FXML
 	private TableColumn<Question, String> team;
 

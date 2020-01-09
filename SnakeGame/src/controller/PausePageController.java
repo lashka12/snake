@@ -13,12 +13,28 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.SoundEffects;
 
+/**
+ * this class controls the PausePage.MainPage.FXML page , initialize it and
+ * handle it's actions
+ * 
+ * objects with @FXML sign are references to the graphic components of the FXML
+ * file
+ * 
+ * methods with @FXML sign are the methods used to handle actions triggered by
+ * the FXML File
+ * 
+ * this class is a singleton because there is need to interact with this
+ * particular instance from other controllers during the game
+ * 
+ * @author Lawrence Ashkar
+ *
+ */
 public class PausePageController implements Initializable {
+	
+	public static PausePageController instance;
 
 	@FXML
 	private StackPane root;
-
-	public static PausePageController instance;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -62,10 +78,10 @@ public class PausePageController implements Initializable {
 		thread.start();
 
 	}
+
 	@FXML
 	void leaveGame() {
-		
-		
+
 		Thread thread = new Thread(() -> {
 			try {
 
@@ -92,13 +108,7 @@ public class PausePageController implements Initializable {
 			}
 		});
 		thread.start();
-		
-		
-		
-		
-		
 
-		
 	}
 
 	@FXML

@@ -14,12 +14,24 @@ import javafx.util.Duration;
 import model.Block;
 import model.Fruit;
 import model.Game;
+import model.GameObserver;
 import model.Question;
-import model.Segment;
+import model.SegmentIterator;
 import utilities.Constants;
 import utilities.FruiteType;
 import utilities.Level;
 
+/**
+ * this class extends javafx.scene.layout.Pane and it is used to simulate the
+ * game at the run time , the game logic will also run without this view class
+ * 
+ * it implements game observer in order to pop points when ever snake eats a
+ * object automatically
+ * 
+ * @see GameObserver.java
+ * @see design patterns.PDF fro more information
+ * 
+ */
 public class GameSimulator extends Pane implements GameObserver {
 
 	public static GameSimulator singleton;
@@ -27,15 +39,42 @@ public class GameSimulator extends Pane implements GameObserver {
 	private Game game; // game reference
 	private int size;
 
+	/**
+	 * this method returns the game simulator instance
+	 * 
+	 * @return the singleton
+	 */
+	public static GameSimulator getInstance() {
+
+		return singleton;
+
+	}
+
+	/**
+	 * full constructor
+	 */
 	public GameSimulator() {
 
 		if (singleton == null)
 			singleton = this;
-		
+
 		reset();
 
 	}
 
+	/**
+	 * @see GameObserver.java
+	 * @see design patterns.PDF
+	 */
+	@Override
+	public void update() {
+		popPoints();
+
+	}
+
+	/**
+	 * this method reset the view of the game
+	 */
 	public void reset() {
 
 		getChildren().clear();
@@ -46,15 +85,16 @@ public class GameSimulator extends Pane implements GameObserver {
 		setMinWidth(Constants.GAME_WIDTH * Constants.BLOCK_SIZE);
 		setMinHeight(Constants.GAME_HIGHT * Constants.BLOCK_SIZE);
 
-		for (Segment s : game.getPlayGround().getSnake().getBody()) { // updating snake on screen
+		SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
+		for (iterator.first(); !iterator.isDone(); iterator.next()) { // updating snake on screen
 
 			ImageView snakePartImage = new ImageView(Constants.SNAKE_BODY_IMAGE);
-			snakePartImage.setTranslateX(s.getX() * Constants.BLOCK_SIZE);
-			snakePartImage.setTranslateY(s.getY() * Constants.BLOCK_SIZE);
+			snakePartImage.setTranslateX(iterator.currentValue().getX() * Constants.BLOCK_SIZE);
+			snakePartImage.setTranslateY(iterator.currentValue().getY() * Constants.BLOCK_SIZE);
 			snakePartImage.setEffect(new DropShadow(10, Color.BLACK));
 			snakePartImage.setCache(true);
 			snakePartImage.setCacheHint(CacheHint.SPEED);
-			snakePartImage.setId(s.getId() + "");
+			snakePartImage.setId(iterator.currentValue().getId() + "");
 			ivList.add(snakePartImage);
 
 		}
@@ -62,7 +102,7 @@ public class GameSimulator extends Pane implements GameObserver {
 		ImageView appleImage = new ImageView(Constants.APPLE_IMAGE);
 		ImageView banaImage = new ImageView(Constants.BANANA_IMAGE);
 		ImageView pearImage = new ImageView(Constants.PEAR_IMAGE);
-		ImageView mouseImage = new ImageView(Constants.MOUSE_RIGHT_IMAGE);
+		ImageView mouseImage = new ImageView(Constants.MOUSE_RIGHT_STABLE_IMAGE);
 		ImageView easyQuestionImage = new ImageView(Constants.EASY_QUESTION);
 		ImageView intermediateQuestionImage = new ImageView(Constants.INTER_QUESTION);
 		ImageView hardQuestion = new ImageView(Constants.HARD_QUESTION);
@@ -105,20 +145,16 @@ public class GameSimulator extends Pane implements GameObserver {
 		mouseImage.setTranslateY(game.getPlayGround().getMouse().getY() * Constants.BLOCK_SIZE);
 		mouseImage.setEffect(new DropShadow(5, Color.BLACK));
 		mouseImage.setId("mouse");
-
 		secretGateEnterance.setTranslateX(game.getPlayGround().getSecretGate().getEnterX() * Constants.BLOCK_SIZE);
 		secretGateEnterance.setTranslateY(game.getPlayGround().getSecretGate().getEnterY() * Constants.BLOCK_SIZE);
 		secretGateEnterance.setEffect(new DropShadow(5, Color.BLACK));
 		secretGateEnterance.setId("secretEnter");
-
 		secretGateExit.setTranslateX(game.getPlayGround().getSecretGate().getExitX() * Constants.BLOCK_SIZE);
 		secretGateExit.setTranslateY(game.getPlayGround().getSecretGate().getExitY() * Constants.BLOCK_SIZE);
 		secretGateExit.setEffect(new DropShadow(5, Color.BLACK));
 		secretGateExit.setId("secretExit");
-
 		ivList.add(secretGateEnterance);
 		ivList.add(secretGateExit);
-
 		ivList.add(appleImage);
 		ivList.add(banaImage);
 		ivList.add(pearImage);
@@ -130,10 +166,31 @@ public class GameSimulator extends Pane implements GameObserver {
 
 	}
 
+	/**
+	 * this is the main method that is called from the GameController.java each time
+	 * the model is updated
+	 */
 	public void render() {
 
 		if (game.isOver()) {
 			// stopmouse
+			ImageView mouseImage = (ImageView) lookup("#mouse");
+			switch (game.getPlayGround().getMouse().getDirection()) {
+			case LEFT:
+				mouseImage.setImage(Constants.MOUSE_LEFT_STABLE_IMAGE);
+				break;
+			case RIGHT:
+				mouseImage.setImage(Constants.MOUSE_RIGHT_STABLE_IMAGE);
+				break;
+			case UP:
+				mouseImage.setImage(Constants.MOUSE_UP_STABLE_IMAGE);
+				break;
+			case DOWN:
+				mouseImage.setImage(Constants.MOUSE_DOWN_STABLE_IMAGE);
+				break;
+
+			}
+
 			Thread thread = new Thread(() -> {
 				try {
 
@@ -180,15 +237,16 @@ public class GameSimulator extends Pane implements GameObserver {
 
 			}
 
-			for (Segment segmentToUpdate : game.getPlayGround().getSnake().getBody()) { // updating the position of
-																						// snake on
-																						// screen
-				ImageView tb = (ImageView) lookup("#" + segmentToUpdate.getId());
-				tb.setTranslateX(segmentToUpdate.getX() * Constants.BLOCK_SIZE);
-				tb.setTranslateY(segmentToUpdate.getY() * Constants.BLOCK_SIZE);
+			// updating the position of snake on screen
+			SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
+			for (iterator.first(); !iterator.isDone(); iterator.next()) {
+				ImageView tb = (ImageView) lookup("#" + iterator.currentValue().getId());
+				tb.setTranslateX(iterator.currentValue().getX() * Constants.BLOCK_SIZE);
+				tb.setTranslateY(iterator.currentValue().getY() * Constants.BLOCK_SIZE);
 				tb.setVisible(true);
 
 			}
+
 			if (game.isPaused()) {
 				ImageView tb = (ImageView) lookup("#" + (game.getPlayGround().getSnake().getBody().size() - 1));
 				tb.setVisible(false);
@@ -232,7 +290,7 @@ public class GameSimulator extends Pane implements GameObserver {
 				if (fruit.isEaten()) {
 					if (fruitImage.isVisible()) {
 						fruitImage.setVisible(false);
-						//popPoints(fruit);
+						// popPoints(fruit);
 					}
 				} else {
 					if (!fruitImage.isVisible()) { // it means it was hidden and now is the time to show it again
@@ -265,6 +323,11 @@ public class GameSimulator extends Pane implements GameObserver {
 		}
 	}
 
+	// ---------------------------------------Animation_methods--------------------------------------------
+
+	/**
+	 * this method shows a fire animation
+	 */
 	private void showFire() {
 
 		ImageView fire = new ImageView(Constants.FIRE_IMAGE);
@@ -348,6 +411,11 @@ public class GameSimulator extends Pane implements GameObserver {
 		ft2.play();
 	}
 
+	/**
+	 * this method pops a game over animation on the screen when game is done in the
+	 * model
+	 * 
+	 */
 	public void showGameOver() {
 
 		ImageView Go = new ImageView(Constants.GAME_OVER_IMAGE);
@@ -367,12 +435,16 @@ public class GameSimulator extends Pane implements GameObserver {
 		ft2.play();
 	}
 
+	/**
+	 * this method pops a points animation on the screen when object is eaten on the
+	 * model
+	 */
 	public void popPoints() {
 
 		Image image = null;
-		Block b =game.getLastEatenBlock();
-		
-		if(b instanceof Fruit) {
+		Block b = game.getLastEatenBlock();
+
+		if (b instanceof Fruit) {
 			switch (((Fruit) b).getType()) {
 			case APPLE:
 				image = Constants.POINTS10_IMAGE;
@@ -385,9 +457,8 @@ public class GameSimulator extends Pane implements GameObserver {
 				break;
 
 			}
-	
+
 		}
-		
 
 		ImageView iv = new ImageView(image);
 
@@ -422,19 +493,6 @@ public class GameSimulator extends Pane implements GameObserver {
 			}
 		});
 		thread.start();
-
-	}
-
-	public static GameSimulator getInstance() {
-
-		return singleton;
-
-	}
-
-	@Override
-	public void update() {
-		 popPoints();
-
 
 	}
 

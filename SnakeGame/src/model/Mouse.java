@@ -4,11 +4,24 @@ import java.util.Random;
 import utilities.Constants;
 import utilities.Direction;
 
+/**
+ * this class represents a mouse in the game that move randomly on the play
+ * ground
+ * 
+ * @author L.A
+ *
+ */
 public class Mouse extends Block {
 
 	private Direction direction;
 	private boolean eaten;
 
+	/**
+	 * full constructor
+	 * 
+	 * @param x - x position
+	 * @param y - y position
+	 */
 	public Mouse(int x, int y) {
 		super(x, y);
 		stepsCount = 0;
@@ -16,38 +29,54 @@ public class Mouse extends Block {
 
 	}
 
+	/**
+	 * moving the mouse one step up
+	 */
 	public void moveUp() {
 
-		if (getY() > 4) {
+		if (getY() > 0) {
 			setY(getY() - 1);
 		}
 
 	}
 
+	/**
+	 * moving the mouse one step down
+	 */
 	public void moveDown() {
 
-		if (getY() < Constants.GAME_HIGHT - 9) {
+		if (getY() < Constants.GAME_HIGHT - 7) {
 			setY(getY() + 1);
 		}
 
 	}
 
+	/**
+	 * moving the mouse one step left
+	 */
 	public void moveLeft() {
 
-		if (getX() > 4) {
+		if (getX() > 0) {
 			setX(getX() - 1);
 		}
 
 	}
 
+	/**
+	 * moving the mouse one step right
+	 */
 	public void moveRight() {
 
-		if (getX() < Constants.GAME_WIDTH - 9) {
+		if (getX() < Constants.GAME_WIDTH - 7) {
 			setX(getX() + 1);
 		}
 
 	}
 
+	/**
+	 * this method is called when ever the main timer of the game asks to , it
+	 * updates the mouse position step at a time according to a specific algorithm
+	 */
 	public void update() {
 
 		if (stepsCount == 0) {
@@ -108,7 +137,7 @@ public class Mouse extends Block {
 				break;
 			}
 
-			if (stepsCount == 30) { // keep walking in the same direction 30 steps before changing direction
+			if (stepsCount == 20) { // keep walking in the same direction 30 steps before changing direction
 
 				Random rand = new Random();
 				int randomNum = rand.nextInt(4) + 1;

@@ -3,6 +3,12 @@ package model;
 import java.util.ArrayList;
 import utilities.Level;
 
+/**
+ * this class represents a question's logic in the game
+ * 
+ * @author L.A
+ *
+ */
 public class Question extends Block {
 
 	private String content;
@@ -11,7 +17,6 @@ public class Question extends Block {
 	private String ans3;
 	private String ans4;
 	private String correctAnswer;
-
 	private Level level;
 	private String team;
 
@@ -24,6 +29,15 @@ public class Question extends Block {
 
 	private boolean eaten;
 
+	/**
+	 * full constructor
+	 * 
+	 * @param content       - question's content
+	 * @param level         - question's level
+	 * @param answers       - question's answers
+	 * @param correctAnswer - question's right answer
+	 * @param team          - the team who wrote the question
+	 */
 	public Question(String content, Level level, ArrayList<String> answers, String correctAnswer, String team) {
 
 		super(0, 0);
@@ -45,6 +59,13 @@ public class Question extends Block {
 
 	}
 
+	/**
+	 * this method generate string as lines , it was used to make the text in the
+	 * table more human friendly
+	 * 
+	 * @param str string we wish to manipulate
+	 * @return string as lines (4 words a line)
+	 */
 	private String makeAsLines(String str) {
 
 		String[] wordsArray = str.split(" ");

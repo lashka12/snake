@@ -26,10 +26,24 @@ import model.Game;
 import model.SysData;
 import utilities.SoundEffects;
 
+/**
+ * this class controls the PausePage.MainPage.FXML page , initialize it and
+ * handle it's actions
+ * 
+ * objects with @FXML sign are references to the graphic components of the FXML
+ * file
+ * 
+ * methods with @FXML sign are the methods used to handle actions triggered by
+ * the FXML File
+ * 
+ * @author Lawrence Ashkar
+ *
+ */
+
 public class RatingPageController implements Initializable {
 
 	// there is need to know from where this class was called in order to hide ,
-	// show buttons and animations as needed
+	// show buttons as needed
 	private static boolean wasCalledFromGame;
 
 	private static ArrayList<Game> sortedGames;
@@ -47,11 +61,11 @@ public class RatingPageController implements Initializable {
 	/**
 	 * controller constructor
 	 * 
-	 * @param b
+	 * @param gameCall - was called from the game or from the main page
 	 */
-	public RatingPageController(boolean b) {
+	public RatingPageController(boolean gameCall) {
 
-		wasCalledFromGame = b;
+		wasCalledFromGame = gameCall;
 		sortedGames = SysData.getGames();
 		Collections.sort(sortedGames, Game.getCompByName());
 

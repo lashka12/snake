@@ -6,16 +6,25 @@ import java.util.Random;
 
 import utilities.Level;
 
+/**
+ * this class is the main data class of the game , in the beginning of the game
+ * we create an instance of it and it serves the application during the run time
+ * 
+ * @author L.A
+ *
+ */
 public class SysData {
 
 	private static SysData singleton;
 	private static ArrayList<Game> games;
-	private static HashMap<Level, ArrayList<Question>> questions;
-	private static DAO dataAccessObject;
+	private static HashMap<Level, ArrayList<Question>> questions; // questions are saved according to the level
+	private static DAO dataAccessObject; // @see design patterns .PDF
 
+	/**
+	 * full constructor
+	 */
 	public SysData() {
 		if (singleton == null) {
-
 			singleton = this;
 			dataAccessObject = new JsonDAO();
 			reset();
@@ -26,7 +35,9 @@ public class SysData {
 
 	}
 
-
+	/**
+	 * this method reset the state of the data
+	 */
 	public static void reset() {
 		questions = new HashMap<Level, ArrayList<Question>>();
 		ArrayList<Question> result = dataAccessObject.getQuestions();
@@ -43,10 +54,16 @@ public class SysData {
 		games = dataAccessObject.getGames();
 
 	}
+
 	public static ArrayList<Game> getGames() {
 		return games;
 	}
 
+	/**
+	 * this method adds a game to the database
+	 * 
+	 * @param game
+	 */
 	public static void addGame(Game game) {
 		if (game != null)
 			games.add(game);
@@ -69,6 +86,11 @@ public class SysData {
 		return false;
 	}
 
+	/**
+	 * this method update a question
+	 * 
+	 * @param question the question that needs to be updated
+	 */
 	public static void updateQuestion(Question question) {
 
 		if (question != null) {
@@ -79,6 +101,11 @@ public class SysData {
 
 	}
 
+	/**
+	 * this method deletes a question from database
+	 * 
+	 * @param question the question that needs to be deleted
+	 */
 	public static void deleteQuestion(Question question) {
 		if (question != null) {
 			questions.get(question.getLevel()).remove(question);
@@ -98,6 +125,11 @@ public class SysData {
 
 	}
 
+	/**
+	 * this method gets all of the questions from database
+	 * 
+	 * @return
+	 */
 	public static ArrayList<Question> getQuestions() {
 
 		ArrayList<Question> allQuestions = new ArrayList<Question>();

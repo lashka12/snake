@@ -14,6 +14,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import utilities.Level;
 
+/**
+ * this class implements DAO interface it is used to process the data if the
+ * given database is a Json file
+ * 
+ * @see DAO.java
+ * @author L.A
+ *
+ */
 public class JsonDAO implements DAO {
 
 	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -106,7 +114,7 @@ public class JsonDAO implements DAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public ArrayList<Game> getGames() {
 		ArrayList<Game> games = new ArrayList<Game>();
@@ -182,5 +190,4 @@ public class JsonDAO implements DAO {
 		}
 	}
 
-	
 }

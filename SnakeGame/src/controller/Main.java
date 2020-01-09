@@ -30,17 +30,18 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		// MVC design pattern
+
 		Game game = new Game(); // model
 		GameSimulator view = new GameSimulator(); // view
 		GameController gameController = new GameController(game, view); // controller
-
 		SoundEffects soundEffects = new SoundEffects();
+
 		game.register(view);
 		game.register(soundEffects);
 
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainPage.fxml"));
 		Scene scene = new Scene(root);
-
 		scene.setOnKeyPressed(e -> {
 
 			if (!game.isPaused()) {
@@ -99,7 +100,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 
 		@SuppressWarnings("unused")
-		SysData data = new SysData();
+		SysData data = new SysData(); // initializing the data
 		SoundEffects.playStartSound();
 		launch(args);
 

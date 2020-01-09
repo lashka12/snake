@@ -17,6 +17,7 @@ import model.Fruit;
 import model.Game;
 import model.Question;
 import model.Segment;
+import model.SegmentIterator;
 import model.SysData;
 import utilities.Constants;
 import utilities.Direction;
@@ -24,6 +25,15 @@ import utilities.FruiteType;
 import utilities.SoundEffects;
 import view.GameSimulator;
 
+/**
+ * this class is the game controller it changes the model state according to the
+ * user input and then update the view with the new game state (view.render())
+ * 
+ * @see update()
+ * 
+ * @author Lawrence Ashkar
+ *
+ */
 public class GameController {
 
 	private static GameController instance = null;
@@ -34,10 +44,15 @@ public class GameController {
 	private int appleTimer;
 	private int bananaTimer;
 	private int mouseTimer;
-
 	boolean exitlegal = true;
 	boolean enterLegal = true;
 
+	/**
+	 * full constructor
+	 * 
+	 * @param game - the model object
+	 * @param view - the view object
+	 */
 	public GameController(Game game, GameSimulator view) {
 
 		if (instance == null) {
@@ -61,31 +76,13 @@ public class GameController {
 
 	}
 
-	public boolean snakeHitWall() {
-		if ((game.getPlayGround().getSnake().getHead().getY() < 0)
-				|| (game.getPlayGround().getSnake().getHead().getY() > Constants.GAME_HIGHT - 2)
-				|| (game.getPlayGround().getSnake().getHead().getX() < 0)
-				|| (game.getPlayGround().getSnake().getHead().getX() >= Constants.GAME_WIDTH - 2)) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean snakeHitBody() { // use abs | | between head and body segment
-		for (Segment s : game.getPlayGround().getSnake().getBody()) {
-			if ((game.getPlayGround().getSnake().getHead().getX() == s.getX())
-					&& (game.getPlayGround().getSnake().getHead().getY() == s.getY())
-					&& !s.equals(game.getPlayGround().getSnake().getHead())) {
-				return true;
-			}
-
-		}
-		return false;
-	}
-
+	/**
+	 * this method update the model object and the view object according to the user
+	 * input
+	 */
 	public void update() {
 
-		updateSecretGate();
+		initSecretGate();
 		if (snakeHitBody() || snakeHitWall()) {
 
 			SoundEffects.playNegativeSound();
@@ -145,10 +142,13 @@ public class GameController {
 							game.getPlayGround().setHit(false);
 							int ipx = Constants.GAME_WIDTH / 2;
 							int ipy = Constants.GAME_HIGHT / 2;
-							for (Segment s : game.getPlayGround().getSnake().getBody()) {
-								s.setX(ipx++);
-								s.setY(ipy);
+
+							SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
+							for (iterator.first(); !iterator.isDone(); iterator.next()) {
+								iterator.currentValue().setX(ipx++);
+								iterator.currentValue().setY(ipy);
 							}
+
 							resumeGame();
 
 						});
@@ -161,8 +161,11 @@ public class GameController {
 			}
 		}
 
-		for (Segment segment : game.getPlayGround().getSnake().getBody()) // update snake logical pos
-			segment.move();
+		// move each segment logically
+		SegmentIterator iterator = game.getPlayGround().getSnake().getIterator();
+		for (iterator.first(); !iterator.isDone(); iterator.next()) {
+			iterator.currentValue().move();
+		}
 
 		updateSecretGateAfterMove();
 
@@ -170,8 +173,7 @@ public class GameController {
 			game.getPlayGround().getMouse().update(); // update mouse logical pos
 		} else {
 			mouseTimer++;
-			if (mouseTimer == 1920) { // 1920 iteration = 1 min
-				game.addEatenObject(game.getPlayGround().getMouse());
+			if (mouseTimer == 1920) {
 				game.getPlayGround().addMouse();
 				mouseTimer = 0;
 			}
@@ -179,7 +181,6 @@ public class GameController {
 		}
 
 		if (mouseWasEaten()) {
-			SoundEffects.playBubbleSound();
 			game.getPlayGround().getMouse().setEaten(true);
 			game.addEatenObject(game.getPlayGround().getMouse());
 			MainPageController.getInstance().updateScore(game.getScore());
@@ -203,7 +204,7 @@ public class GameController {
 		}
 		if (game.getPlayGround().getFruits().get(FruiteType.BANANA).isEaten()) {
 			bananaTimer++;
-			if (bananaTimer == 320) { // updating the animation timer 320 times = 10 seconds delay
+			if (bananaTimer == 320) { // updating the animation timer 320 times = 10 seconds delay @see timer field
 
 				game.getPlayGround().addFruit(game.getPlayGround().getFruits().get(FruiteType.BANANA).getType());
 				bananaTimer = 0;
@@ -271,6 +272,36 @@ public class GameController {
 
 	}
 
+	public boolean snakeHitWall() {
+		if ((game.getPlayGround().getSnake().getHead().getY() < 0)
+				|| (game.getPlayGround().getSnake().getHead().getY() > Constants.GAME_HIGHT - 2)
+				|| (game.getPlayGround().getSnake().getHead().getX() < 0)
+				|| (game.getPlayGround().getSnake().getHead().getX() >= Constants.GAME_WIDTH - 2)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * this method checks if snake hit it's body
+	 * 
+	 * @return true if that's right false otherwise
+	 */
+	public boolean snakeHitBody() {
+		for (Segment s : game.getPlayGround().getSnake().getBody()) {
+			if ((game.getPlayGround().getSnake().getHead().getX() == s.getX())
+					&& (game.getPlayGround().getSnake().getHead().getY() == s.getY())
+					&& !s.equals(game.getPlayGround().getSnake().getHead())) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+	/**
+	 * this method update the secret gate state after moving the snake
+	 */
 	private void updateSecretGateAfterMove() {
 		for (Segment s : game.getPlayGround().getSnake().getBody()) {
 
@@ -291,7 +322,10 @@ public class GameController {
 		}
 	}
 
-	private void updateSecretGate() {
+	/**
+	 * this method initialize the state of the secret gate
+	 */
+	private void initSecretGate() {
 		if ((Math
 				.abs(game.getPlayGround().getSecretGate().getExitX() - game.getPlayGround().getSnake().getBody()
 						.get(game.getPlayGround().getSnake().getBody().size() - 1).getX()) >= 0
@@ -357,12 +391,23 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * this method changes the snake direction
+	 * 
+	 * @param dir the direction
+	 */
 	public void changeDiriction(Direction dir) {
 
 		game.getPlayGround().getSnake().setDirection(dir);
 
 	}
 
+	/**
+	 * this method checks if snake hit a specific block on the play ground
+	 * 
+	 * @param block
+	 * @return true - if block was hit fasle otherwise
+	 */
 	public Boolean snakeHit(Block block) {
 
 		if ((Math.abs(block.getX() - game.getPlayGround().getSnake().getHead().getX()) >= 0
@@ -376,16 +421,21 @@ public class GameController {
 
 	}
 
+	/**
+	 * this method checks if snake ate mouse
+	 * 
+	 * @return true if mouse was eaten , false otherwise
+	 */
 	public boolean mouseWasEaten() {
 
 		if (!game.getPlayGround().getMouse().isEaten() && ((Math
 				.abs(game.getPlayGround().getMouse().getX() - game.getPlayGround().getSnake().getHead().getX()) >= 0
 				&& Math.abs(
-						game.getPlayGround().getMouse().getX() - game.getPlayGround().getSnake().getHead().getX()) < 2)
+						game.getPlayGround().getMouse().getX() - game.getPlayGround().getSnake().getHead().getX()) < 3)
 				&& (Math.abs(
 						game.getPlayGround().getMouse().getY() - game.getPlayGround().getSnake().getHead().getY()) >= 0
 						&& Math.abs(game.getPlayGround().getMouse().getY()
-								- game.getPlayGround().getSnake().getHead().getY()) < 2)))
+								- game.getPlayGround().getSnake().getHead().getY()) < 3)))
 
 			return true;
 
@@ -393,16 +443,25 @@ public class GameController {
 
 	}
 
+	/**
+	 * this method pauses the game
+	 */
 	public void pauseGame() {
 		game.setPaused(true);
 		timer.stop();
 	}
 
+	/**
+	 * this method resume the game after it was paused
+	 */
 	public void resumeGame() {
 		game.setPaused(false);
 		timer.start();
 	}
 
+	/**
+	 * this method start the game timer
+	 */
 	public void startTimer() {
 
 		game.setPaused(true);
@@ -426,10 +485,22 @@ public class GameController {
 		thread.start();
 	}
 
+	/**
+	 * this method gets the gameController singleton
+	 * 
+	 * @return the singleton
+	 */
 	public static GameController getInstance() {
 		return instance;
 	}
 
+	/**
+	 * this method calculate game duration in seconds
+	 * 
+	 * @param start - game start Date
+	 * @param end   - game end Date
+	 * @return the game duration
+	 */
 	public double calculateDuration(Date start, Date end) {
 
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -458,6 +529,9 @@ public class GameController {
 
 	}
 
+	/**
+	 * this method restart the game
+	 */
 	public void restartGame() {
 
 		appleTimer = 0;

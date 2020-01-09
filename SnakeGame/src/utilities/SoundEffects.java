@@ -4,17 +4,31 @@ import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import view.GameObserver;
+import model.GameObserver;
 
+/**
+ * this class is used to make sound effects , it implements game observer in
+ * order to give a sound feedback when ever snake eats a object automatically
+ * 
+ * @see GameObserver.java
+ * @see design patterns.PDF fro more information
+ * @author L.A
+ *
+ */
 public class SoundEffects implements GameObserver {
 
 	private static MediaPlayer mediaPlayer;
 	private static Media media;
 
+	@Override
+	public void update() {
+		playBubbleSound();
+
+	}
+
 	public static void stopSound() {
 		mediaPlayer.stop();
 	}
-
 
 	public static void playGameBoardMusic() {
 
@@ -105,13 +119,6 @@ public class SoundEffects implements GameObserver {
 		media = new Media(new File(Constants.WRONG_ANSWER_SOUND).toURI().toString());
 		MediaPlayer mediaPlayer1 = new MediaPlayer(media);
 		mediaPlayer1.setAutoPlay(true);
-	}
-
-
-	@Override
-	public void update() {
-		playBubbleSound();
-		
 	}
 
 }

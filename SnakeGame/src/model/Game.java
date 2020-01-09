@@ -6,20 +6,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import view.GameObserver;
-
 /**
  * this class represent a game while playing snake
  * 
- * @author L.A
+ * @author Lawrence Ashkar
  *
  */
 public class Game {
 
 	private static Game singleton;
-
 	private List<GameObserver> observers;
-
 	private String nickName;
 	private Date date;
 	private Integer score;
@@ -31,6 +27,9 @@ public class Game {
 	private boolean paused;
 	private Block lastEatenBlock;
 
+	/**
+	 * constructor
+	 */
 	public Game() {
 
 		if (singleton == null)
@@ -74,15 +73,29 @@ public class Game {
 		this.eatenObjects = eatenObjects;
 	}
 
+	/**
+	 * this method is used to register a observer to the game
+	 * 
+	 * @param observer - the observer we wish to add
+	 */
 	public void register(GameObserver observer) {
 		observers.add(observer);
 	}
 
+	/**
+	 * this method is used to unRegister a observer to the game
+	 * 
+	 * @param observer - the observer we wish to remove
+	 */
 	public void unRegister(GameObserver observer) {
 		observers.remove(observer);
 
 	}
 
+	/**
+	 * notify all the observers of the game about a change in state when there is
+	 * need
+	 */
 	private void notifyObservers() {
 
 		for (GameObserver gameObserver : observers) {
@@ -211,6 +224,14 @@ public class Game {
 		this.over = over;
 	}
 
+	public Block getLastEatenBlock() {
+		return lastEatenBlock;
+	}
+
+	public void setLastEatenBlock(Block lastEatenBlock) {
+		this.lastEatenBlock = lastEatenBlock;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -241,14 +262,6 @@ public class Game {
 		return "Game [nickName=" + nickName + ", date=" + date + ", score=" + score + ", lives=" + lives + ", duration="
 				+ duration + ", eatenObjects=" + eatenObjects + ", playGround=" + playGround + ", over=" + over
 				+ ", paused=" + paused + "]";
-	}
-
-	public Block getLastEatenBlock() {
-		return lastEatenBlock;
-	}
-
-	public void setLastEatenBlock(Block lastEatenBlock) {
-		this.lastEatenBlock = lastEatenBlock;
 	}
 
 }

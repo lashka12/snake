@@ -8,6 +8,13 @@ import utilities.Constants;
 import utilities.FruiteType;
 import utilities.Level;
 
+/**
+ * play ground is the class that include all of the game objects and managing
+ * them
+ * 
+ * @author L.A
+ *
+ */
 public class PlayGround {
 
 	private HashMap<FruiteType, Fruit> fruits;
@@ -18,9 +25,12 @@ public class PlayGround {
 	private SecretGate secretGate;
 	private boolean hit;
 
+	/**
+	 * full constructor
+	 */
 	public PlayGround() {
 
-		snake = new Snake(Constants.SNAKE_LENGTH);
+		snake = new Snake(Constants.SNAKE_LENGTH); // initializing snake
 
 		fruits = new HashMap<FruiteType, Fruit>(); // adding fruits
 		for (FruiteType type : FruiteType.values())
@@ -30,13 +40,15 @@ public class PlayGround {
 		for (Level level : Level.values())
 			addQuestion(level);
 
-		addMouse();
-		addSecretGate(); 
-
+		addMouse(); // adding the mouse
+		addSecretGate(); // adding a secret gate
 		setHit(false);
 
 	}
 
+	/**
+	 * this method adds a secret gate to the playground
+	 */
 	public void addSecretGate() {
 
 		Point enter = getEmptyPoint();
@@ -80,7 +92,7 @@ public class PlayGround {
 
 		Point p = new Point((int) (Math.random() * (Constants.GAME_WIDTH - 3)),
 				(int) (Math.random() * (Constants.GAME_HIGHT - 3)));
-
+		// TODO
 		// if point is not empty
 		// loop till finding an empty point
 

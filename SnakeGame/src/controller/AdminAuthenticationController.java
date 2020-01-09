@@ -20,11 +20,27 @@ import javafx.util.Duration;
 import utilities.Constants;
 import utilities.SoundEffects;
 
+/**
+ * this class controls the view.MainPage.FXML page , initialize it and handle
+ * it's actions
+ * 
+ * objects with @FXML sign are references to the graphic components of the FXML
+ * file
+ * 
+ * methods with @FXML sign are the methods used to handle actions triggered by
+ * the FXML File
+ * 
+ * this class is a singleton because there is need to interact with this
+ * particular instance from other controllers during the game
+ * 
+ * @author Lawrence Ashkar
+ *
+ */
+
 public class AdminAuthenticationController implements Initializable {
 
 	@FXML
 	private StackPane root;
-
 	@FXML
 	private JFXPasswordField password;
 
