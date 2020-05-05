@@ -50,6 +50,8 @@ public class AdminAuthenticationController implements Initializable {
 		ft.setFromValue(0.0);
 		ft.setToValue(1.0);
 		ft.play();
+		// delete this later
+		password.setText("abc123");
 	}
 
 	@FXML
